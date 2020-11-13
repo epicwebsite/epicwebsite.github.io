@@ -1,5 +1,7 @@
 # Welcome to the site
 
+[Visit](https://darccman.github.io/website)
+
 ## Contributing:
 
 ```bash
