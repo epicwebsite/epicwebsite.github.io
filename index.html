@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello</title>
-    <script type="text/javascript" src="jquery.js"></script>
-    <script type="text/javascript" src="https://darccman.github.io/fnct/index.js"></script>
+    <title>Site</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="C:/Users/darcy/OneDrive/Documents/__THINGS/code/js//functions/index.js"></script>
     <script type="text/javascript" src="data/links.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="css/base.css">
+    <link id="stylesheet" rel="stylesheet" href="css/dark.css">
   </head>
-  <body onload="init()">
-    <h1>Hello</h1>
+  <body onload="init()" style="visibility:hidden;">
+    <section class="lightmode_contain">
+      <label class="label">Light mode</label>
+      <label class="switch">
+        <input type="checkbox" id="lightmode" onchange="changeStyle()">
+        <span class="slider round"></span>
+      </label>
+    </section>
+    <h1>Hello welcome to the site</h1>
     <section id="links">
     </section>
+    <button onclick="while(true){}" title="DO NOT PRESS!">Crash</button>
   </body>
 </html>
