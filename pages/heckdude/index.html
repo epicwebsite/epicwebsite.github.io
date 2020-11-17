@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heckdude</title>
+    <link rel="stylesheet"  type="text/css" href="style1.css">
+    <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="shortcut icon" type="image/png" href="image/favicon.ico" id="favicon">
+  </head>
+  <body>
+    <div id="canvas_contain"></div>
+    <section>
+      <input type="range" id="y" min="-200" max="200" value="0" step="1">
+      <input type="range" id="x" min="-200" max="200" value="0" step="1">
+      <input type="range" id="z" min="10" max="300" value="100" step="1">
+      <br><br>
+      <div id="speed">
+        <input type="range" id="jump" min="0" max="2000" value="600" step="1">
+        <label>Jump</label>
+        <br><br>
+        <input type="range" id="fall" min="0" max="100" value="20" step="1">
+        <label>Fall</label>
+        <br><br>
+        <input type="range" id="move" min="0" max="300" value="70" step="1">
+        <label>Move</label>
+        <br><br>
+        <input type="range" id="slow" min="0" max="200" value="80" step="1">
+        <label>Slow</label>
+        <br><br>
+        <input type="range" id="move_max" min="0" max="60" value="10" step="1">
+        <label>Move Max</label>
+        <br><br>
+        <input type="range" id="fall_max" min="0" max="200" value="10" step="1">
+        <label>Fall Max</label>
+      </div>
+    </section>
+    <script type="text/javascript" src="C:/Users/darcy/OneDrive/Documents/__THINGS/code/js/functions/index.js"></script>
+    <script type="text/javascript" src="data/data.js"></script>
+    <script type="text/javascript" src="data/levels.js"></script>
+    <script type="text/javascript" src="data/controls.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+  </body>
+</html>

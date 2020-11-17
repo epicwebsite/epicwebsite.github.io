@@ -7,4 +7,8 @@ var links = [
     id: "custom-tab",
     name: "NewTab",
   },
+  {
+    id: "heckdude",
+    name: "Heckdude",
+  },
 ];

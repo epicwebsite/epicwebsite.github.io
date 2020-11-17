@@ -835,7 +835,7 @@ f.data.browser = {
   1: "Opera",
   2: "Safari",
   3: "Firefox",
-  4: "IE",
+  4: "Internet Explorer",
 }
 f.browser = function() {
   if (navigator.userAgent.indexOf("Chrome") != -1) {
