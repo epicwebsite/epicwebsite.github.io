@@ -9,7 +9,7 @@ var data = {
       h: 1.5,
       flip: false,
       speed: {
-        jump: 600,
+        jump: 580,
         fall: 20,
         move: 70,
         slow: 80,
