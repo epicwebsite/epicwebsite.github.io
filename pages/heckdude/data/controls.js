@@ -26,6 +26,9 @@ var controls = {
     title_pass: [
       32,
     ],
+    pause: [
+      27,
+    ],
     debug_main: [
       16,
     ],

@@ -1,13 +1,13 @@
 var canvas = doc.createElement("canvas");
 canvas.id = "canvas";
-canvas.width = 512;
+canvas.width = 768;
 canvas.height = 512;
 canvas.setAttribute("oncontextmenu", "return(false);");
 doc.id("canvas_contain").appendChild(canvas);
 var ctx = canvas.getContext("2d");
 
 var gameState = "title";
-var lvl = -1;
+var lvl = 0;
 var cam = {
   x: 0,
   y: 0,
@@ -19,10 +19,15 @@ var egg = {
   title: F.randomInt(0, 10) != 0,
 };
 var bg = {};
+var timer = {
+  value: 0,
+};
+var overlay = {
+  a: 0,
+  type: null,
+};
 
 function reset() {
-  lvl++;
-
   p = lvls[lvl].player;
   if (!p) {
     p = data.player.default;
@@ -32,16 +37,24 @@ function reset() {
     y: p.y,
     w: p.w,
     h: p.h,
+    size: p.size,
   };
   for (v = 0; v < player.keys().length; v++) {
     if ((!player.values()[v] && player.values()[v] != 0) || player.values()[v].constructor != Number) {
       player[player.keys()[v]] = data.player.default[player.keys()[v]];
     }
   }
+  if (!p.speed) {
+    p.speed = data.player.default.speed;
+  }
   for (v = 0; v < p.speed.keys().length; v++) {
     if ((!p.speed.values()[v] && p.speed.values()[v] != 0) || p.speed.values()[v].constructor != Number) {
       p.speed[p.speed.keys()[v]] = data.player.default.speed[p.speed.keys()[v]];
     }
+    p.speed[p.speed.keys()[v]] *= player.size;
+  }
+  if (!p.vel) {
+    p.vel = data.player.default.vel;
   }
   for (v = 0; v < p.vel.keys().length; v++) {
     if ((!p.vel.values()[v] && p.vel.values()[v] != 0) || p.vel.values()[v].constructor != Number) {
@@ -51,8 +64,8 @@ function reset() {
   player = {
     x: player.x,
     y: player.y,
-    w: player.w * data.player.w,
-    h: player.h * data.player.h,
+    w: player.size * data.player.w,
+    h: player.size * data.player.h,
     speed: p.speed,
     vel: p.vel,
   };
@@ -66,6 +79,7 @@ function reset() {
   bg = {
     img: b.img,
     type: b.img,
+    fallDeath: b.fallDeath,
   };
   for (v = 0; v < bg.keys().length; v++) {
     if ((!bg.values()[v] && bg.values()[v] != 0) || bg.values()[v].constructor != Number) {
@@ -74,12 +88,13 @@ function reset() {
   }
   for (v = 0; v < b.cam.keys().length; v++) {
     if ((!b.cam.values()[v] && b.cam.values()[v] != 0) || b.cam.values()[v].constructor != Number) {
-      b.cam[b.cam.keys()[v]] = data.bg.default[b.cam.keys()[v]];
+      b.cam[b.cam.keys()[v]] = data.bg.default.cam[b.cam.keys()[v]];
     }
   }
   bg = {
     img: bg.img,
-    type: bg.img,
+    type: bg.type,
+    fallDeath: bg.fallDeath,
     cam: b.cam,
   };
 
@@ -103,6 +118,9 @@ function reset() {
     }
     if (!blocks[b].h && blocks[b].h != 0) {
       blocks[b].h = 100;
+    }
+    if (!data.blocks.types[blocks[b].type]) {
+      blocks[b].type = "solid";
     }
   }
 
@@ -137,7 +155,8 @@ function render() {
     ctx.scale(-1, 1);
     ctx.drawImage(
       player.img,
-      0 - p.w / 2,
+      // 0 - p.w / 2,
+      0 - p.w,
       0,
       p.w,
       p.h,
@@ -178,6 +197,25 @@ function render() {
     }
   }
 
+  if (gameState != "complete") {
+    ctx.fillStyle = F.getColor(250);
+    ctx.font = "24px Cubic";
+    ctx.textAlign = "right";
+    ctx.fillText(
+      (lvl + 1).toString().fill(),
+      canvas.width - 10,
+      40,
+    );
+    ctx.fillStyle = F.getColor(250);
+    ctx.font = "24px Cubic";
+    ctx.textAlign = "left";
+    ctx.fillText(
+      (timer.value / 100).round(2),
+      10,
+      40,
+    );
+  }
+
   switch (gameState) {
     case ("title"): {
       ctx.fillCanvas(F.getColor([20, 20, 20, 0.5]));
@@ -188,37 +226,123 @@ function render() {
       ctx.fillText(
         egg.title ? "Heckdude v2" : "Deckhude v2",
         canvas.width / 2,
+        canvas.height / 2,
+      );
+
+      ctx.fillStyle = F.getColor(170);
+      ctx.font = "16px Cubic";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        "By Darcy",
         canvas.width / 2,
+        canvas.height - 30,
       );
     }; break;
+    case ("level"): {
+      ctx.fillCanvas(F.getColor([20, 20, 20, 0.5]));
+
+      ctx.fillStyle = F.getColor(250);
+      ctx.font = "48px Cubic";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        "Level {0}".format(lvl + 1),
+        canvas.width / 2,
+        canvas.height / 2.3,
+      );
+
+      ctx.font = "32px Cubic";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        (lvls[lvl].name ? lvls[lvl].name : "Unknown").truncate(19, "..."),
+        canvas.width / 2,
+        canvas.height / 1.5,
+      );
+    }; break;
+    case ("pause"): {
+      ctx.fillCanvas(F.getColor([20, 20, 20, 0.5]));
+
+      ctx.fillStyle = F.getColor(250);
+      ctx.font = "48px Cubic";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        "Paused",
+        canvas.width / 2,
+        canvas.height / 2.3,
+      );
+
+      ctx.fillStyle = F.getColor(220);
+      ctx.font = "24px Cubic";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        "Press ESC to continue",
+        canvas.width / 2,
+        canvas.height / 1.5,
+      );
+    }; break;
+    case ("complete"): {
+    ctx.fillCanvas(F.getColor([20, 20, 20, 0.5]));
+
+    ctx.fillStyle = F.getColor(250);
+    ctx.font = "48px Cubic";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "Completed",
+      canvas.width / 2,
+      canvas.height / 2.3,
+    );
+
+    ctx.fillStyle = F.getColor(220);
+    ctx.font = "24px Cubic";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "Time: {0}".format((timer.value / 100).round(2)),
+      canvas.width / 2,
+      canvas.height / 1.5,
+    );
+  }; break;
+}
+
+  if (overlay.type && overlay.a > 0) {
+    img = new Image();
+    img.src = "./image/game/{0}-overlay.png".format(overlay.type);
+    ctx.globalAlpha = overlay.a / 100;
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+    );
+    ctx.globalAlpha = 1.0;
   }
+
+  img = new Image();
+  img.src = "./image/game/overlay.png";
+  ctx.drawImage(
+    img,
+    0,
+    0,
+    canvas.width,
+    canvas.height,
+  );
 }
 
 function main() {
   render();
-  update((Date.now() - then) / 1000);
-  then = Date.now();
+  update((performance.now() - then) / 1000);
+  then = performance.now();
   requestAnimationFrame(main);
 }
 
-var zoomIn = true;
+var val = {
+  pass: false,
+  pause: false,
+};
 function update(mod) {
   var keysDown = F.getKeyCodes(controls);
 
   switch (gameState) {
     case ("play"): {
-      els = [
-        "jump",
-        "fall",
-        "move",
-        "slow",
-        "move_max",
-        "fall_max",
-      ];
-      for (i = 0; i < els.length; i++) {
-        player.speed[els[i]] = parseFloat(doc.id(els[i]).value);
-      }
-
       cam.x = parseFloat(doc.id("x").value);
       cam.y = parseFloat(doc.id("y").value);
       cam.z = parseFloat(doc.id("z").value);
@@ -237,26 +361,35 @@ function update(mod) {
         }; break;
         default: {
           player.src = "idle";
-          player.vel.x -= (player.speed.slow * mod) * (0 - F.toOne(player.vel.x));
+          player.vel.x -= (player.speed.move_decel * mod) * (0 - F.toOne(player.vel.x));
           if (F.diff(0, player.vel.x) <= 1) {
             player.vel.x = 0;
           }
         }
       }
-      player.vel.x += (player.speed.move * mod) * mult;
+      player.vel.x += (player.speed.move_acel * mod) * mult;
 
-      if (player.jumpVal) {
-        if (keysDown.includes("player_up")) {
-          player.vel.y -= player.speed.jump * mod;
+      if (keysDown.includes("player_up")) {
+        if (player.jumpVal && val.pass) {
           player.jumpVal = false;
+          player.vel.y -= player.speed.jump;
+        }
+      } else {
+        val.pass = true;
+        if (keysDown.includes("player_down")) {
+          if (player.vel.y + (player.speed.fall_acel * mod) < player.speed.fall_max) {
+            player.vel.y += player.speed.fall_acel * mod;
+          } else {
+            player.vel.y = player.speed.fall_max;
+          }
         }
       }
       if (player.vel.y <= -1) {
         player.src = "jump";
       }
 
-      if (player.vel.y + (player.speed.fall * mod) < player.speed.fall_max) {
-        player.vel.y += player.speed.fall * mod;
+      if (player.vel.y + (player.speed.fall_acel * mod) < player.speed.fall_max) {
+        player.vel.y += player.speed.fall_acel * mod;
       } else {
         player.vel.y = player.speed.fall_max;
       }
@@ -308,10 +441,96 @@ function update(mod) {
       } else {
         player.vel.x = 0;
       }
+
+      for (b = 0; b < blocks.length; b++) {
+        if (!data.blocks.types[blocks[b].type].goal) {
+          continue;
+        }
+        if (F.collide({
+          x: player.x + player.vel.x,
+          y: player.y,
+          w: player.w,
+          h: player.h,
+        }, blocks[b])) {
+          goal();
+          break;
+        }
+      }
+
+      for (b = 0; b < blocks.length; b++) {
+        if (!data.blocks.types[blocks[b].type].death) {
+          continue;
+        }
+        if (F.collide({
+          x: player.x + player.vel.x,
+          y: player.y,
+          w: player.w,
+          h: player.h,
+        }, blocks[b])) {
+          death();
+          break;
+        }
+      }
+
+      if (bg.fallDeath) {
+        if (F.getCamPos(player, cam).y > canvas.height) {
+          death();
+        }
+      }
+
+      if (keysDown.includes("pause")) {
+        if (val.pause) {
+          gameState = "pause";
+          timer.stop();
+          val.pause = false;
+        }
+      } else {
+        val.pause = true;
+      }
     }; break;
     case ("title"): {
       if (keysDown.includes("title_pass")) {
-        gameState = "play";
+        if (val.pass) {
+          gameState = "level";
+          val.pass = false;
+        }
+      } else {
+        val.pass = true;
+      }
+    }; break;
+    case ("level"): {
+      if (keysDown.includes("title_pass")) {
+        if (val.pass) {
+          gameState = "play";
+          val.pass = false;
+          if (lvl <= 0) {
+            timer.reset();
+            timer.play();
+          }
+        }
+      } else {
+        val.pass = true;
+      }
+    }; break;
+    case ("pause"): {
+      if (keysDown.includes("pause")) {
+        if (val.pause) {
+          gameState = "play";
+          timer.play();
+          val.pause = false;
+        }
+      } else {
+        val.pause = true;
+      }
+    }; break;
+    case ("complete"): {
+      if (keysDown.includes("title_pass")) {
+        if (val.pass) {
+          reset();
+          val.pass = false;
+        }
+      } else {
+        val.pass = true;
       }
     }; break;
   }
@@ -324,6 +543,78 @@ function update(mod) {
   }
 }
 
-var then = Date.now();
+async function goal() {
+  gameState = "goal";
+  overlay.a = 0;
+  overlay.type = "goal";
+  F.interval("goal_fadeOut", (i, m) => {
+    overlay.a = i * (100 / m);
+  }, 50, 1, () => {
+    lvl++;
+    val.pass = false;
+    if (lvl >= lvls.keys().length) {
+      timer.stop();
+      complete();
+    } else {
+      reset();
+    }
+    overlay.a = 100;
+    setTimeout(() => {
+      F.interval("goal_fadeIn", (i, m) => {
+        overlay.a = 100 - (i * (100 / m));
+      }, 30, 1, () => {
+        overlay.a = 0;
+      });
+    }, 80);
+  });
+}
+
+async function death() {
+  gameState = "death";
+  overlay.a = 100;
+  overlay.type = "death";
+  reset();
+  val.pass = false;
+  setTimeout(() => {
+    F.interval("death_fade", (i, m) => {
+      overlay.a = 100 - (i * (100 / m));
+    }, 100, 1, () => {
+      overlay.a = 0;
+    });
+  }, 200);
+}
+
+async function complete() {
+  gameState = "complete";
+  lvl = 0;
+  console.log("Completed in {0}s".format((timer.value / 100).round(2)));
+}
+
+timer.play = function () {
+  timer.updater = setInterval(timer.update, 10);
+  timer.setLast();
+}
+timer.update = function () {
+  timer.value += data.timer.unfocused ? (Date.now() - timer.last) / 10 : 1;
+  timer.setLast();
+}
+timer.stop = function () {
+  clearInterval(timer.updater);
+  timer.setLast();
+}
+timer.reset = function () {
+  timer.value = 0;
+  timer.setLast();
+}
+timer.last = 0;
+timer.setLast = function () {
+  timer.last = Date.now();
+}
+
+function showSpeed() {
+  doc.id("speed").style.display = doc.id("show_speed").checked ? "block" : "none";
+}
+
+var then = performance.now();
 reset();
 main();

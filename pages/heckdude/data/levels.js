@@ -1,6 +1,12 @@
 var lvls = {
   0: {
-    name: "The first level",
+    name: "Test",
+    player: {
+      x: 130,
+      y: 305,
+      w: 1.5,
+      h: 1.5,
+    },
     blocks: [
       {
         x: 40,
@@ -10,35 +16,27 @@ var lvls = {
       {
         x: 300,
         y: 330,
-        // type: "clear",
+      },
+      {
+        x: -30,
+        y: 180,
+        type: "death",
+      },
+      {
+        x: 400,
+        y: 150,
+        w: 20,
+        h: 20,
+        type: "goal",
       },
     ]
   },
   1: {
     name: "The first level",
-    bg: {
-      img: "sky",
-      type: "static",
-      camX: true,
-      camY: false,
-    },
     player: {
       x: 90,
       y: 87,
-      w: 1.5,
-      h: 1.5,
-      speed: {
-        move: 140,
-        jump: 500,
-        fall: 16,
-        slow: 80,
-        move_max: 10,
-        fall_max: 10,
-      },
-      vel: {
-        y: 0,
-        x: 0,
-      },
+      size: 1,
     },
     blocks: [
       {
@@ -47,7 +45,7 @@ var lvls = {
         w: 1000,
         h: 2000,
         fill: "rgba(0, 0, 0, 0)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 800,
@@ -55,7 +53,7 @@ var lvls = {
         w: 1000,
         h: 2000,
         fill: "rgba(0, 0, 0, 0)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 45,
@@ -87,7 +85,7 @@ var lvls = {
         w: 550,
         h: 60,
         fill: "rgba(30, 30, 30)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 200,
@@ -95,7 +93,7 @@ var lvls = {
         w: 100,
         h: 60,
         fill: "rgba(30, 30, 30)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 280,
@@ -103,7 +101,7 @@ var lvls = {
         w: 20,
         h: 250,
         fill: "rgba(30, 30, 30)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 90,
@@ -111,7 +109,7 @@ var lvls = {
         w: 60,
         h: 150,
         fill: "rgba(30, 30, 30)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 209,
@@ -119,7 +117,7 @@ var lvls = {
         w: 251,
         h: 30,
         fill: "rgba(30, 30, 30)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 400,
@@ -127,7 +125,7 @@ var lvls = {
         w: 31,
         h: 30,
         fill: "rgba(150, 30, 30)",
-        type: "obstacle"
+        type: "death"
       },
       {
         x: 430,
@@ -135,7 +133,7 @@ var lvls = {
         w: 30,
         h: 59,
         fill: "rgba(150, 30, 30)",
-        type: "obstacle"
+        type: "death"
       },
       {
         x: 459,
@@ -143,7 +141,7 @@ var lvls = {
         w: 500,
         h: 90,
         fill: "rgba(30, 30, 30)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 299,
@@ -151,7 +149,7 @@ var lvls = {
         w: 61,
         h: 30,
         fill: "rgba(30, 30, 30)",
-        type: "block"
+        type: "solid"
       },
       {
         x: 300,

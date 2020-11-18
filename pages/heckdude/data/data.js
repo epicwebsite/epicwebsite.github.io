@@ -5,16 +5,15 @@ var data = {
     default: {
       x: 80,
       y: 300,
-      w: 1.5,
-      h: 1.5,
+      size: 1.5,
       flip: false,
       speed: {
-        jump: 580,
-        fall: 20,
-        move: 70,
-        slow: 80,
-        move_max: 10,
-        fall_max: 10,
+        jump: 6,
+        fall_acel: 13,
+        fall_max: 7,
+        move_acel: 47,
+        move_decel: 47,
+        move_max: 5,
       },
       vel: {
         y: 0,
@@ -26,6 +25,7 @@ var data = {
     default: {
       img: "sky",
       type: "static",
+      fallDeath: true,
       cam: {
         x: true,
         y: false,
@@ -61,9 +61,9 @@ var data = {
       },
       death: {
         fill: F.getColor([
-          40,
-          220,
+          240,
           20,
+          10,
         ]),
         solid: false,
         visible: true,
@@ -72,9 +72,9 @@ var data = {
       },
       goal: {
         fill: F.getColor([
-          240,
-          240,
-          10,
+          40,
+          220,
+          20,
         ]),
         solid: false,
         visible: true,
@@ -82,5 +82,8 @@ var data = {
         goal: true,
       },
     },
+  },
+  timer: {
+    unfocused: false,
   },
 };
