@@ -11,6 +11,8 @@ var data = {
         jump: 6,
         fall_acel: 13,
         fall_max: 7,
+        drop_acel: 5,
+        drop_max: 70,
         move_acel: 47,
         move_decel: 47,
         move_max: 5,
@@ -22,6 +24,7 @@ var data = {
     },
   },
   bg: {
+    camMove: 3.5,
     default: {
       img: "sky",
       type: "static",
@@ -30,6 +33,7 @@ var data = {
         x: true,
         y: false,
         z: false,
+        type: "dynamic",
       },
     },
   },
@@ -40,7 +44,7 @@ var data = {
         fill: F.getColor([
           30,
           30,
-          45,
+          35,
         ]),
         solid: true,
         visible: true,

@@ -6,6 +6,12 @@ canvas.setAttribute("oncontextmenu", "return(false);");
 doc.id("canvas_contain").appendChild(canvas);
 var ctx = canvas.getContext("2d");
 
+window.addEventListener('keydown', function (e) {
+  if (e.keyCode == 32 && e.target == document.body) {
+    e.preventDefault();
+  }
+});
+
 var gameState = "title";
 var lvl = 0;
 var cam = {
@@ -39,26 +45,26 @@ function reset() {
     h: p.h,
     size: p.size,
   };
-  for (v = 0; v < player.keys().length; v++) {
-    if ((!player.values()[v] && player.values()[v] != 0) || player.values()[v].constructor != Number) {
-      player[player.keys()[v]] = data.player.default[player.keys()[v]];
+  for (v = 0; v < data.player.default.keys().length; v++) {
+    if ((!player[data.player.default.keys()[v]] && player[data.player.default.keys()[v]] != 0) || player[data.player.default.keys()[v]].constructor != Number) {
+      player[data.player.default.keys()[v]] = data.player.default[player.keys()[v]];
     }
   }
   if (!p.speed) {
     p.speed = data.player.default.speed;
   }
-  for (v = 0; v < p.speed.keys().length; v++) {
-    if ((!p.speed.values()[v] && p.speed.values()[v] != 0) || p.speed.values()[v].constructor != Number) {
-      p.speed[p.speed.keys()[v]] = data.player.default.speed[p.speed.keys()[v]];
+  for (v = 0; v < data.player.default.speed.keys().length; v++) {
+    if ((!p.speed[data.player.default.speed.keys()[v]] && p.speed[data.player.default.speed.keys()[v]] != 0) || p.speed[data.player.default.speed.keys()[v]].constructor != Number) {
+      p.speed[data.player.default.speed.keys()[v]] = data.player.default.speed.values()[v];
     }
     p.speed[p.speed.keys()[v]] *= player.size;
   }
   if (!p.vel) {
     p.vel = data.player.default.vel;
   }
-  for (v = 0; v < p.vel.keys().length; v++) {
-    if ((!p.vel.values()[v] && p.vel.values()[v] != 0) || p.vel.values()[v].constructor != Number) {
-      p.vel[p.vel.keys()[v]] = data.player.default.vel[p.vel.keys()[v]];
+  for (v = 0; v < data.player.default.vel.keys().length; v++) {
+    if ((!p.vel[data.player.default.keys()[v]] && p.vel[data.player.default.keys()[v]] != 0) || p.vel[data.player.default.keys()[v]].constructor != Number) {
+      p.vel[data.player.default.vel.keys()[v]] = data.player.default.vel.values()[v];
     }
   }
   player = {
@@ -81,14 +87,14 @@ function reset() {
     type: b.img,
     fallDeath: b.fallDeath,
   };
-  for (v = 0; v < bg.keys().length; v++) {
-    if ((!bg.values()[v] && bg.values()[v] != 0) || bg.values()[v].constructor != Number) {
-      bg[bg.keys()[v]] = data.bg.default[b.keys()[v]];
+  for (v = 0; v < data.bg.default.keys().length; v++) {
+    if (!bg[data.bg.default.keys()[v]] && bg[data.bg.default.keys()[v]] != 0) {
+      bg[data.bg.default.keys()[v]] = data.bg.default.values()[v];
     }
   }
-  for (v = 0; v < b.cam.keys().length; v++) {
-    if ((!b.cam.values()[v] && b.cam.values()[v] != 0) || b.cam.values()[v].constructor != Number) {
-      b.cam[b.cam.keys()[v]] = data.bg.default.cam[b.cam.keys()[v]];
+  for (v = 0; v < data.bg.default.cam.keys().length; v++) {
+    if (!b.cam[data.bg.default.cam.keys()[v][v]] && b.cam.values()[v] != 0) {
+      b.cam[data.bg.default.cam.keys()[v]] = data.bg.default.cam.values()[v];
     }
   }
   bg = {
@@ -97,6 +103,8 @@ function reset() {
     fallDeath: bg.fallDeath,
     cam: b.cam,
   };
+  cam.x = 0;
+  cam.y = 0;
 
   if (gameState != "title") {
     gameState = "level";
@@ -141,10 +149,7 @@ function render() {
     canvas.height,
   );
   
-  p = F.getCamPos(
-    player,
-    cam,
-  );
+  p = F.getCamPos(player, cam);
   player.img.src = "./image/player/{0}.png".format(player.src);
   if (player.flip) {
     ctx.save();
@@ -328,9 +333,9 @@ function render() {
 }
 
 function main() {
+  update((Date.now() - then) / 1000);
   render();
-  update((performance.now() - then) / 1000);
-  then = performance.now();
+  then = Date.now();
   requestAnimationFrame(main);
 }
 
@@ -340,12 +345,21 @@ var val = {
 };
 function update(mod) {
   var keysDown = F.getKeyCodes(controls);
+  cam.z = parseFloat(doc.id("z").value);
+  thenX = player.x;
+  thenY = player.y;
 
   switch (gameState) {
     case ("play"): {
-      cam.x = parseFloat(doc.id("x").value);
-      cam.y = parseFloat(doc.id("y").value);
-      cam.z = parseFloat(doc.id("z").value);
+
+      if (bg.cam.type == "sticky") {
+        if (bg.cam.x) {
+          cam.x = player.x - (canvas.width / 3);
+        }
+        if (bg.cam.y) {
+          cam.y = player.y - (canvas.height / 3);
+        }
+      }
 
       player.flip = false;
       mult = 0;
@@ -377,10 +391,10 @@ function update(mod) {
       } else {
         val.pass = true;
         if (keysDown.includes("player_down")) {
-          if (player.vel.y + (player.speed.fall_acel * mod) < player.speed.fall_max) {
-            player.vel.y += player.speed.fall_acel * mod;
+          if (player.vel.y + (player.speed.drop_acel * mod) < player.speed.drop_max) {
+            player.vel.y += player.speed.drop_acel;
           } else {
-            player.vel.y = player.speed.fall_max;
+            player.vel.y = player.speed.drop_max;
           }
         }
       }
@@ -412,11 +426,26 @@ function update(mod) {
       }
       if (cb === null) {
         player.y += player.vel.y;
-        player.jumpVal = false;
       } else {
         player.vel.y = 0;
-        player.jumpVal = true;
       }
+
+      cb = null;
+      for (b = 0; b < blocks.length; b++) {
+        if (!data.blocks.types[blocks[b].type].solid) {
+          continue;
+        }
+        if (F.collide({
+          x: player.x,
+          y: player.y + player.vel.y + 1,
+          w: player.w,
+          h: player.h,
+        }, blocks[b])) {
+          cb = blocks[b];
+          break;
+        }
+      }
+      player.jumpVal = cb !== null;
 
       cb = null;
       for (b = 0; b < blocks.length; b++) {
@@ -442,33 +471,27 @@ function update(mod) {
         player.vel.x = 0;
       }
 
-      for (b = 0; b < blocks.length; b++) {
-        if (!data.blocks.types[blocks[b].type].goal) {
-          continue;
-        }
-        if (F.collide({
-          x: player.x + player.vel.x,
-          y: player.y,
-          w: player.w,
-          h: player.h,
-        }, blocks[b])) {
-          goal();
-          break;
-        }
-      }
-
-      for (b = 0; b < blocks.length; b++) {
-        if (!data.blocks.types[blocks[b].type].death) {
-          continue;
-        }
-        if (F.collide({
-          x: player.x + player.vel.x,
-          y: player.y,
-          w: player.w,
-          h: player.h,
-        }, blocks[b])) {
-          death();
-          break;
+      let types = {
+        solid: () => {
+          player.y -= 1;
+        },
+        goal,
+        death,
+      };
+      for (i = 0; i < types.keys().length; i++) {
+        for (b = 0; b < blocks.length; b++) {
+          if (!data.blocks.types[blocks[b].type][types.keys()[i]]) {
+            continue;
+          }
+          if (F.collide({
+            x: player.x + player.vel.x,
+            y: player.y,
+            w: player.w,
+            h: player.h,
+          }, blocks[b])) {
+            types.values()[i]();
+            break;
+          }
         }
       }
 
@@ -476,6 +499,12 @@ function update(mod) {
         if (F.getCamPos(player, cam).y > canvas.height) {
           death();
         }
+      }
+
+      if (keysDown.includes("restart")) {
+        gameState = "restart";
+        reset();
+        return;
       }
 
       if (keysDown.includes("pause")) {
@@ -535,6 +564,33 @@ function update(mod) {
     }; break;
   }
 
+  if (bg.cam.type == "dynamic") {
+    if (bg.cam.x) {
+      if (player.x < thenX) {
+        if (F.getCamPos(player, cam).x < canvas.width / (data.bg.camMove)) {
+          cam.x += player.x - thenX;
+        }
+      }
+      if (player.x > thenX) {
+        if (F.getCamPos(player, cam).x > (canvas.width / data.bg.camMove) * (data.bg.camMove - 1)) {
+          cam.x += player.x - thenX;
+        }
+      }
+    }
+    if (bg.cam.y) {
+      if (player.y > thenY) {
+        if (F.getCamPos(player, cam).y < canvas.height / (data.bg.camMove)) {
+          cam.y += player.y - thenY;
+        }
+      }
+      if (player.y < thenY) {
+        if (F.getCamPos(player, cam).y > (canvas.height / data.bg.camMove) * (data.bg.camMove - 1)) {
+          cam.y += player.y - thenY;
+        }
+      }
+    }
+  }
+
   if (keysDown.includes("debug_main")) {
     if (F.buttonDown(0)) {
       player.x = (((F.mouse.x - (canvas.width / 2)) / (cam.z / 100)) + (canvas.width / 2)) + cam.x;
@@ -543,7 +599,7 @@ function update(mod) {
   }
 }
 
-async function goal() {
+function goal() {
   gameState = "goal";
   overlay.a = 0;
   overlay.type = "goal";
@@ -552,7 +608,7 @@ async function goal() {
   }, 50, 1, () => {
     lvl++;
     val.pass = false;
-    if (lvl >= lvls.keys().length) {
+    if (lvl >= lvls.length) {
       timer.stop();
       complete();
     } else {
@@ -569,7 +625,7 @@ async function goal() {
   });
 }
 
-async function death() {
+function death() {
   gameState = "death";
   overlay.a = 100;
   overlay.type = "death";
@@ -584,13 +640,14 @@ async function death() {
   }, 200);
 }
 
-async function complete() {
+function complete() {
   gameState = "complete";
   lvl = 0;
   console.log("Completed in {0}s".format((timer.value / 100).round(2)));
 }
 
 timer.play = function () {
+  timer.stop();
   timer.updater = setInterval(timer.update, 10);
   timer.setLast();
 }
@@ -615,6 +672,6 @@ function showSpeed() {
   doc.id("speed").style.display = doc.id("show_speed").checked ? "block" : "none";
 }
 
-var then = performance.now();
+var then = Date.now();
 reset();
 main();

@@ -29,6 +29,9 @@ var controls = {
     pause: [
       27,
     ],
+    restart: [
+      82,
+    ],
     debug_main: [
       16,
     ],
