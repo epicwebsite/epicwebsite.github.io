@@ -51,7 +51,7 @@ var data = {
         death: false,
         goal: false,
       },
-      clear: {
+      display: {
         fill: F.getColor([
           200,
           200,
@@ -63,11 +63,23 @@ var data = {
         death: false,
         goal: false,
       },
+      clear: {
+        fill: F.getColor([
+          0,
+          0,
+          0,
+          0,
+        ]),
+        solid: true,
+        visible: false,
+        death: false,
+        goal: false,
+      },
       death: {
         fill: F.getColor([
-          240,
-          20,
-          10,
+          160,
+          40,
+          30,
         ]),
         solid: false,
         visible: true,
