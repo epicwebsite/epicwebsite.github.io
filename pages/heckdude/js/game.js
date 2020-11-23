@@ -29,6 +29,7 @@ var overlay = {
   stop: false,
 };
 var images = {};
+var score = {};
 
 function main() {
   update((Date.now() - then) / 1000);
@@ -64,6 +65,7 @@ async function goal() {
   } else {
     reset();
   }
+  score.levels++;
 
   max = 50;
   for (j = 0; j < max; j++) {
@@ -81,6 +83,7 @@ async function death() {
   overlay.a = 100;
   overlay.type = "death";
   val.pass = false;
+  score.deaths++;
   
   reset();
   await F.sleep(0.2);
@@ -98,7 +101,10 @@ async function death() {
 function complete() {
   gameState = "complete";
   lvl = 0;
+  score.time = timer.value;
+  score.date = Date.now();
   console.log("Completed in {0}s".format((timer.value / 100).round(2)));
+  console.log(score);
 }
 
 timer.play = function () {

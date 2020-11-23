@@ -1,26 +1,5 @@
 var lvls = [
   {
-    name: "Goal Animation Test",
-    player: {
-      x: 400,
-      y: 200,
-      size: 1.3,
-    },
-    blocks: [
-      {
-        x: 0,
-        y: 450,
-        w: 1024,
-        h: 100,
-      },
-      {
-        x: 350,
-        y: 350,
-        type: "goal",
-      },
-    ],
-  },
-  {
     name: "The first level",
     player: {
       x: 90,
@@ -33,14 +12,14 @@ var lvls = [
         y: -1000,
         w: 1000,
         h: 2000,
-        type: "clear",
+        type: "barrier",
       },
       {
         x: 800,
         y: -1000,
         w: 1000,
         h: 2000,
-        type: "clear",
+        type: "barrier",
       },
       {
         x: 45,
@@ -80,7 +59,7 @@ var lvls = [
       },
       {
         x: 283,
-        y: 58,
+        y: 60,
         w: 17,
         h: 250,
       },
@@ -129,6 +108,186 @@ var lvls = [
         h: 60,
         fill: "rgba(150, 150, 30)",
         type: "goal"
+      }
+    ]
+  },
+  {
+    name: "Large Dessert",
+    player: {
+      size: 1,
+      jump: 10,
+    },
+    blocks: [
+      {
+        x: -1200,
+        y: -1000,
+        w: 1000,
+        h: 2000,
+        type: "barrier",
+      },
+      {
+        x: 1500,
+        y: -1000,
+        w: 1000,
+        h: 2000,
+        type: "barrier",
+      },
+      {
+        x: -500,
+        y: 400,
+        w: 730,
+        h: 200,
+        fill: "rgba(240, 240, 120)",
+      },
+      {
+        x: 229,
+        y: 400,
+        w: 34,
+        h: 200,
+        fill: "rgba(240, 240, 120)",
+        type: "display"
+      },
+      {
+        x: 230,
+        y: 500,
+        w: 30,
+        h: 200,
+        fill: "rgba(200, 250, 170)",
+        type: "goal"
+      },
+      {
+        x: 260,
+        y: 400,
+        w: 2000,
+        h: 200,
+        fill: "rgba(240, 240, 120)",
+      },
+      {
+        x: 210,
+        y: 330,
+        w: 20,
+        h: 70,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 195,
+        y: 340,
+        w: 10,
+        h: 30,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 195,
+        y: 365,
+        w: 20,
+        h: 10,
+        fill: "rgba(40, 150, 30)",
+        type: "display"
+      },
+      {
+        x: 240,
+        y: 355,
+        w: 10,
+        h: 30,
+        fill: "rgba(40, 150, 30)",
+        type: "display"
+      },
+      {
+        x: 220,
+        y: 375,
+        w: 30,
+        h: 10,
+        fill: "rgba(40, 150, 30)",
+        type: "display"
+      },
+      {
+        x: 510,
+        y: 330,
+        w: 20,
+        h: 70,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 495,
+        y: 340,
+        w: 10,
+        h: 30,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 495,
+        y: 365,
+        w: 20,
+        h: 10,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 540,
+        y: 355,
+        w: 10,
+        h: 30,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 520,
+        y: 375,
+        w: 30,
+        h: 10,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 810,
+        y: 330,
+        w: 20,
+        h: 70,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 795,
+        y: 340,
+        w: 10,
+        h: 30,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 795,
+        y: 365,
+        w: 20,
+        h: 10,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 840,
+        y: 355,
+        w: 10,
+        h: 30,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 820,
+        y: 375,
+        w: 30,
+        h: 10,
+        fill: "rgba(40, 150, 30)",
+        type: "death"
+      },
+      {
+        x: 1200,
+        y: 360,
+        w: 30,
+        h: 30,
+        fill: "rgba(150, 150, 50)",
       }
     ]
   },

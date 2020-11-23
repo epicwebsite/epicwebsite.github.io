@@ -33,4 +33,11 @@ function reset() {
       blocks[b].type = "solid";
     }
   }
+  score = {
+    deaths: 0,
+    levels: 0,
+    time: null,
+    date: null,
+    cheats: false,
+  };
 }

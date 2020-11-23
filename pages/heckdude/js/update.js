@@ -273,6 +273,11 @@ function update(mod) {
 
   if (keysDown.includes("debug_main")) {
     if (F.buttonDown(0)) {
+      if (score.cheats) {
+        score.cheats++;
+      } else {
+        score.cheats = 1;
+      }
       player.x = (((F.mouse.x - (canvas.width / 2)) / (scene.cam.z / 100)) + (canvas.width / 2)) + scene.cam.x;
       player.y = (((F.mouse.y - (canvas.height / 2)) / (scene.cam.z / 100)) + (canvas.height / 2)) - scene.cam.y;
     }

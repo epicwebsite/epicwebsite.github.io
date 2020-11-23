@@ -57,7 +57,7 @@ const data = {
         death: false,
         goal: false,
       },
-      clear: {
+      barrier: {
         fill: F.getColor([
           0,
           0,

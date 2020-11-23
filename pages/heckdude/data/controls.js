@@ -21,7 +21,8 @@ var controls = {
     ],
     player_down: [
       83,
-      40
+      40,
+      16,
     ],
     title_pass: [
       32,
@@ -33,7 +34,7 @@ var controls = {
       82,
     ],
     debug_main: [
-      16,
+      18,
     ],
   }
 };
