@@ -29,7 +29,7 @@ var lvls = [
       x: 90,
       y: 87,
       size: 1,
-      flipped: true,
+      // flipped: true,
     },
     blocks: [
       {

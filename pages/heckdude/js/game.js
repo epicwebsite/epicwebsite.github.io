@@ -14,17 +14,17 @@ window.addEventListener('keydown', function (e) {
 
 var gameState = "title";
 var lvl = 0;
-var cam = {
+/* var cam = {
   x: 0,
   y: 0,
   z: 100,
-};
+}; */
 var blocks = [];
 var player = {};
 var egg = {
   title: F.randomInt(0, 10) != 0,
 };
-var bg = {};
+var scene = {};
 var timer = {
   value: 0,
 };

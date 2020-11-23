@@ -19,18 +19,16 @@ const data = {
       vel_x: 0,
     },
   },
-  bg: {
-    camMove: 3.5,
+  scene: {
     default: {
-      img: "sky",
-      type: "static",
+      bg_type: "static",
+      bg_img: "sky",
       fallDeath: true,
-      cam: {
-        x: true,
-        y: false,
-        z: false,
-        type: "dynamic",
-      },
+      cam_x: true,
+      cam_y: false,
+      cam_z: false,
+      cam_type: "dynamic",
+      cam_edge: 3.5,
     },
   },
   blocks: {

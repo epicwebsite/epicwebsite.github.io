@@ -1,6 +1,6 @@
 Game = {};
 Game.Player = class {
-  constructor(vals) {
+  constructor (vals) {
     if (!vals || vals.constructor != Object || vals.keys().length <= 0) {
       vals = {};
     }
@@ -17,5 +17,23 @@ Game.Player = class {
     this.h = data.player.h * this.size;
     this.img = new Image();
     this.pose = "idle";
+  }
+}
+Game.Scene = class {
+  constructor (vals) {
+    if (!vals || vals.constructor != Object || vals.keys().length <= 0) {
+      vals = {};
+    }
+    this.setValues = vals;
+    let def = data.scene.default;
+    for (let v = 0; v < def.keys().length; v++) {
+      if (vals[def.keys()[v]] == undefined) {
+        this[def.keys()[v]] = def.values()[v];
+      } else {
+        this[def.keys()[v]] = vals[def.keys()[v]];
+      }
+    }
+    this.bg = new Image();
+    this.bg.src = "image/bg/{0}.png".format(this.bg_img);
   }
 }

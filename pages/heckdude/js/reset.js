@@ -45,7 +45,7 @@ function reset() {
   player.src = "idle";
   player.img = new Image(); */
 
-  b = lvls[lvl].bg;
+  /* b = lvls[lvl].bg;
   if (!b) {
     b = data.bg.default;
   }
@@ -71,7 +71,13 @@ function reset() {
     cam: b.cam,
   };
   cam.x = 0;
-  cam.y = 0;
+  cam.y = 0; */
+  scene = new Game.Scene(lvls[lvl].scene);
+  scene.cam = {
+    x: 0,
+    y: 0,
+    z: 100,
+  };
 
   if (gameState != "title") {
     gameState = "level";

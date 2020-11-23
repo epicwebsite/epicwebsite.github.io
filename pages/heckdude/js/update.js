@@ -1,7 +1,7 @@
 
 function update(mod) {
   var keysDown = F.getKeyCodes(controls);
-  cam.z = parseFloat(doc.id("z").value);
+  scene.cam.z = parseFloat(doc.id("z").value);
   thenX = player.x + (player.w / 2);
   thenY = player.y + (player.h / 2);
   old = player.vel_y;
@@ -9,12 +9,12 @@ function update(mod) {
   switch (gameState) {
     case ("play"): {
 
-      if (bg.cam.type == "sticky") {
-        if (bg.cam.x) {
-          cam.x = player.x - (canvas.width / 3);
+      if (scene.cam.type == "sticky") {
+        if (scene.cam.x) {
+          scene.cam.x = player.x - (canvas.width / 3);
         }
-        if (bg.cam.y) {
-          cam.y = player.y - (canvas.height / 3);
+        if (scene.cam.y) {
+          scene.cam.y = player.y - (canvas.height / 3);
         }
       }
 
@@ -100,7 +100,7 @@ function update(mod) {
         }
         if (F.collide({
           x: player.x + 1,
-          y: player.y + player.vel_y + 1,
+          y: player.y/*  + player.vel_y */ + 1,
           w: player.w - 2,
           h: player.h,
         }, blocks[b])) {
@@ -134,8 +134,8 @@ function update(mod) {
         player.vel_x = 0;
       }
 
-      if (bg.fallDeath) {
-        if (F.getCamPos(player, cam).y > canvas.height) {
+      if (scene.fallDeath) {
+        if (F.getCamPos(player, scene.cam).y > canvas.height) {
           death();
         }
       }
@@ -156,42 +156,42 @@ function update(mod) {
         val.pause = true;
       }
 
-      if (bg.cam.type == "dynamic") {
-        if (bg.cam.x) {
+      if (scene.cam_type == "dynamic") {
+        if (scene.cam_x) {
           x = player.x + (player.w / 2);
           y = player.y + (player.h / 2);
           if (x < thenX) {
             if (F.getCamPos({
               x,
               y,
-            }, cam).x < canvas.width / data.bg.camMove) {
-              cam.x += x - thenX;
+            }, scene.cam).x < canvas.width / scene.cam_edge) {
+              scene.cam.x += x - thenX;
             }
           }
           if (x > thenX) {
             if (F.getCamPos({
               x,
               y,
-            }, cam).x > (canvas.width / data.bg.camMove) * (data.bg.camMove - 1)) {
-              cam.x += x - thenX;
+            }, scene.cam).x > (canvas.width / scene.cam_edge) * (scene.cam_edge - 1)) {
+              scene.cam.x += x - thenX;
             }
           }
         }
-        if (bg.cam.y) {
+        if (scene.cam_y) {
           if (y > thenY) {
             if (F.getCamPos({
               x,
               y,
-            }, cam).y < canvas.height / data.bg.camMove) {
-              cam.y += y - thenY;
+            }, scene.cam).y < canvas.height / scene.cam_edge) {
+              scene.cam.y += y - thenY;
             }
           }
           if (y < thenY) {
             if (F.getCamPos({
               x,
               y,
-            }, cam).y > (canvas.height / data.bg.camMove) * (data.bg.camMove - 1)) {
-              cam.y += y - thenY;
+            }, scene.cam).y > (canvas.height / scene.cam_edge) * (scene.cam_edge - 1)) {
+              scene.cam.y += y - thenY;
             }
           }
         }
@@ -270,8 +270,8 @@ function update(mod) {
 
   if (keysDown.includes("debug_main")) {
     if (F.buttonDown(0)) {
-      player.x = (((F.mouse.x - (canvas.width / 2)) / (cam.z / 100)) + (canvas.width / 2)) + cam.x;
-      player.y = (((F.mouse.y - (canvas.height / 2)) / (cam.z / 100)) + (canvas.height / 2)) - cam.y;
+      player.x = (((F.mouse.x - (canvas.width / 2)) / (scene.cam.z / 100)) + (canvas.width / 2)) + scene.cam.x;
+      player.y = (((F.mouse.y - (canvas.height / 2)) / (scene.cam.z / 100)) + (canvas.height / 2)) - scene.cam.y;
     }
   }
 }

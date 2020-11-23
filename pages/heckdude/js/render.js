@@ -1,9 +1,7 @@
 function render() {
   ctx.fillCanvas();
-  img = new Image();
-  img.src = "image/bg/{0}.png".format(bg.img);
   ctx.drawImage(
-    img,
+    scene.bg,
     0,
     0,
     canvas.width,
@@ -11,7 +9,7 @@ function render() {
   );
 
   for (b = 0; b < blocks.length; b++) {
-    p = F.getCamPos(blocks[b], cam);
+    p = F.getCamPos(blocks[b], scene.cam);
     if (blocks[b].fill) {
       ctx.fillStyle = blocks[b].fill;
     } else {
@@ -35,7 +33,7 @@ function render() {
     }
   }
 
-  p = F.getCamPos(player, cam);
+  p = F.getCamPos(player, scene.cam);
   player.img.src = "./image/player/{0}.png".format(player.pose);
   if (F.operate.logic.xor(player.flip, player.flipped)) {
     ctx.save();
@@ -61,6 +59,13 @@ function render() {
       p.h,
     );
   }
+  ctx.strokeStyle = "magenta";
+  ctx.strokeRect(
+    p.x + 1,
+    p.y + player.vel_y + 1,
+    p.w - 2,
+    p.h,
+  );
 
   if (gameState != "complete") {
     ctx.fillStyle = F.getColor(250);
