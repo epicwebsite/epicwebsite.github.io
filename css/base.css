@@ -67,3 +67,8 @@ input:checked + .slider:before {
 .lightmode_contain .label {
   margin-top: 2009px;
 }
+#crashBtn {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+}

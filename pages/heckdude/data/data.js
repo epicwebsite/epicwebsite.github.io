@@ -1,4 +1,4 @@
-var data = {
+const data = {
   player: {
     w: 18,
     h: 63,
@@ -6,21 +6,17 @@ var data = {
       x: 80,
       y: 300,
       size: 1.5,
-      flip: false,
-      speed: {
-        jump: 6,
-        fall_acel: 13,
-        fall_max: 7,
-        drop_acel: 5,
-        drop_max: 70,
-        move_acel: 47,
-        move_decel: 47,
-        move_max: 5,
-      },
-      vel: {
-        y: 0,
-        x: 0,
-      },
+      flipped: false,
+      speed_jump: 6,
+      speed_fall_acel: 13,
+      speed_fall_max: 7,
+      speed_drop_acel: 5,
+      speed_drop_max: 70,
+      speed_move_acel: 47,
+      speed_move_decel: 47,
+      speed_move_max: 5,
+      vel_y: 0,
+      vel_x: 0,
     },
   },
   bg: {

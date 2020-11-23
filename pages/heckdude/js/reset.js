@@ -1,5 +1,6 @@
 function reset() {
-  p = lvls[lvl].player;
+  player = new Game.Player(lvls[lvl].player);
+  /* p = lvls[lvl].player;
   if (!p) {
     p = data.player.default;
   }
@@ -32,6 +33,7 @@ function reset() {
       p.vel[data.player.default.vel.keys()[v]] = data.player.default.vel.values()[v];
     }
   }
+  
   player = {
     x: player.x,
     y: player.y,
@@ -41,7 +43,7 @@ function reset() {
     vel: p.vel,
   };
   player.src = "idle";
-  player.img = new Image();
+  player.img = new Image(); */
 
   b = lvls[lvl].bg;
   if (!b) {

@@ -7,3 +7,5 @@
 ## Bug fixes
 - Jumping and clipping through edge of block causes player to jump high
 - Camera does not work for Y axis
+- Zooming zooms into canvas center, not player
+- Player cannot get out of block if stuck

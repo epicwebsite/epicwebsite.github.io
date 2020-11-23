@@ -10,9 +10,34 @@ function render() {
     canvas.height,
   );
 
+  for (b = 0; b < blocks.length; b++) {
+    p = F.getCamPos(blocks[b], cam);
+    if (blocks[b].fill) {
+      ctx.fillStyle = blocks[b].fill;
+    } else {
+      ctx.fillStyle = F.getColor(data.blocks.fill);
+    }
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.w,
+      p.h,
+    );
+    if (blocks[b].stroke) {
+      ctx.strokeStyle = blocks[b].stroke;
+      ctx.lineWidth = blocks[b].lineWidth ? blocks[b].lineWidth : data.blocks.lineWidth;
+      ctx.strokeRect(
+        p.x,
+        p.y,
+        p.w,
+        p.h,
+      );
+    }
+  }
+
   p = F.getCamPos(player, cam);
-  player.img.src = "./image/player/{0}.png".format(player.src);
-  if (player.flip) {
+  player.img.src = "./image/player/{0}.png".format(player.pose);
+  if (F.operate.logic.xor(player.flip, player.flipped)) {
     ctx.save();
     ctx.translate(
       p.x,
@@ -35,31 +60,6 @@ function render() {
       p.w,
       p.h,
     );
-  }
-
-  ctx.lineWidth = data.blocks.lineWidth;
-  for (b = 0; b < blocks.length; b++) {
-    p = F.getCamPos(blocks[b], cam);
-    if (blocks[b].fill) {
-      ctx.fillStyle = blocks[b].fill;
-    } else {
-      ctx.fillStyle = F.getColor(data.blocks.fill);
-    }
-    ctx.fillRect(
-      p.x,
-      p.y,
-      p.w,
-      p.h,
-    );
-    if (blocks[b].stroke) {
-      ctx.strokeStyle = blocks[b].stroke;
-      ctx.strokeRect(
-        p.x,
-        p.y,
-        p.w,
-        p.h,
-      );
-    }
   }
 
   if (gameState != "complete") {

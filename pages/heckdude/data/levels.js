@@ -1,13 +1,35 @@
 var lvls = [
+  /* {
+    name: "Decollision Test",
+    player: {
+      x: 400,
+      y: 200,
+      size: 1.3,
+      speed_fall_max: 0,
+    },
+    blocks: [
+      {
+        x: 350,
+        y: 200,
+      },
+      {
+        x: 80,
+        y: 200,
+      },
+      {
+        x: 200,
+        y: 190,
+        w: 150,
+      },
+    ],
+  }, */
   {
     name: "The first level",
     player: {
       x: 90,
       y: 87,
       size: 1,
-      speed: {
-        move: 1,
-      },
+      flipped: true,
     },
     blocks: [
       {

@@ -4,6 +4,7 @@ function update(mod) {
   cam.z = parseFloat(doc.id("z").value);
   thenX = player.x + (player.w / 2);
   thenY = player.y + (player.h / 2);
+  old = player.vel_y;
 
   switch (gameState) {
     case ("play"): {
@@ -21,49 +22,54 @@ function update(mod) {
       mult = 0;
       switch (F.boolToBin(keysDown.includes("player_right"), keysDown.includes("player_left"))) {
         case ("10"): {
-          player.src = "idle_side";
+          if (player.flipped) {
+            player.flip = true;
+          }
+          player.pose = "idle_side";
           mult = 1;
         }; break;
         case ("01"): {
-          player.flip = true;
-          player.src = "idle_side";
+          if (!player.flipped) {
+            player.flip = true;
+          }
+          player.pose = "idle_side";
           mult = -1;
         }; break;
         default: {
-          player.src = "idle";
-          player.vel.x -= (player.speed.move_decel * mod) * (0 - F.toOne(player.vel.x));
-          if (F.diff(0, player.vel.x) <= 1) {
-            player.vel.x = 0;
+          player.pose = "idle";
+          player.vel_x -= (player.speed_move_decel * mod) * (0 - F.toOne(player.vel_x));
+          if (F.diff(0, player.vel_x) <= 1) {
+            player.vel_x = 0;
           }
         }
       }
-      player.vel.x += (player.speed.move_acel * mod) * mult;
+      player.vel_x += (player.speed_move_acel * mod) * mult;
 
       if (keysDown.includes("player_up")) {
         if (player.jumpVal && val.pass) {
           player.jumpVal = false;
-          player.vel.y -= player.speed.jump;
+          player.vel_y -= player.speed_jump;
         }
       } else {
         val.pass = true;
         if (keysDown.includes("player_down")) {
-          if (player.vel.y + (player.speed.drop_acel * mod) < player.speed.drop_max) {
-            player.vel.y += player.speed.drop_acel;
+          if (player.vel_y + (player.speed_drop_acel * mod) < player.speed_drop_max) {
+            player.vel_y += player.speed_drop_acel;
           } else {
-            player.vel.y = player.speed.drop_max;
+            player.vel_y = player.speed_drop_max;
           }
         }
       }
-      if (player.vel.y <= -1) {
-        player.src = "jump";
+      if (player.vel_y <= -1) {
+        player.pose = "jump";
       }
-
-      if (player.vel.y + (player.speed.fall_acel * mod) < player.speed.fall_max) {
-        player.vel.y += player.speed.fall_acel * mod;
+      
+      if (player.vel_y + (player.speed_fall_acel * mod) < player.speed_fall_max) {
+        player.vel_y += player.speed_fall_acel * mod;
       } else {
-        player.vel.y = player.speed.fall_max;
+        player.vel_y = player.speed_fall_max;
       }
-      player.vel.x = player.vel.x.setBorder(0 - player.speed.move_max, player.speed.move_max);
+      player.vel_x = player.vel_x.setBorder(0 - player.speed_move_max, player.speed_move_max);
 
       cb = null;
       for (b = 0; b < blocks.length; b++) {
@@ -72,7 +78,7 @@ function update(mod) {
         }
         if (F.collide({
           x: player.x,
-          y: player.y + player.vel.y,
+          y: player.y + player.vel_y,
           w: player.w,
           h: player.h,
         }, blocks[b])) {
@@ -81,9 +87,9 @@ function update(mod) {
         }
       }
       if (cb === null) {
-        player.y += player.vel.y;
+        player.y += player.vel_y;
       } else {
-        player.vel.y = 0;
+        player.vel_y = 0;
       }
 
       cb = null;
@@ -94,7 +100,7 @@ function update(mod) {
         }
         if (F.collide({
           x: player.x + 1,
-          y: player.y + player.vel.y + 1,
+          y: player.y + player.vel_y + 1,
           w: player.w - 2,
           h: player.h,
         }, blocks[b])) {
@@ -110,7 +116,7 @@ function update(mod) {
           continue;
         }
         if (F.collide({
-          x: player.x + player.vel.x,
+          x: player.x + player.vel_x,
           y: player.y,
           w: player.w,
           h: player.h,
@@ -120,36 +126,12 @@ function update(mod) {
         }
       }
       if (cb === null) {
-        if (player.vel.x >= 1) {
-          player.src = "run";
+        if (player.vel_x >= 1) {
+          player.pose = "run";
         }
-        player.x += player.vel.x;
+        player.x += player.vel_x;
       } else {
-        player.vel.x = 0;
-      }
-
-      let types = {
-        solid: () => {
-          player.y -= 1;
-        },
-        goal,
-        death,
-      };
-      main: for (i = 0; i < types.keys().length; i++) {
-        for (b = 0; b < blocks.length; b++) {
-          if (!data.blocks.types[blocks[b].type][types.keys()[i]]) {
-            continue;
-          }
-          if (F.collide({
-            x: player.x + player.vel.x,
-            y: player.y,
-            w: player.w,
-            h: player.h,
-          }, blocks[b])) {
-            types.values()[i]();
-            break main;
-          }
-        }
+        player.vel_x = 0;
       }
 
       if (bg.fallDeath) {
@@ -172,6 +154,71 @@ function update(mod) {
         }
       } else {
         val.pause = true;
+      }
+
+      if (bg.cam.type == "dynamic") {
+        if (bg.cam.x) {
+          x = player.x + (player.w / 2);
+          y = player.y + (player.h / 2);
+          if (x < thenX) {
+            if (F.getCamPos({
+              x,
+              y,
+            }, cam).x < canvas.width / data.bg.camMove) {
+              cam.x += x - thenX;
+            }
+          }
+          if (x > thenX) {
+            if (F.getCamPos({
+              x,
+              y,
+            }, cam).x > (canvas.width / data.bg.camMove) * (data.bg.camMove - 1)) {
+              cam.x += x - thenX;
+            }
+          }
+        }
+        if (bg.cam.y) {
+          if (y > thenY) {
+            if (F.getCamPos({
+              x,
+              y,
+            }, cam).y < canvas.height / data.bg.camMove) {
+              cam.y += y - thenY;
+            }
+          }
+          if (y < thenY) {
+            if (F.getCamPos({
+              x,
+              y,
+            }, cam).y > (canvas.height / data.bg.camMove) * (data.bg.camMove - 1)) {
+              cam.y += y - thenY;
+            }
+          }
+        }
+      }
+
+      let types = {
+        solid: (cb) => {
+          player.y -= mod * 100;
+        },
+        goal,
+        death,
+      };
+      main: for (i = 0; i < types.keys().length; i++) {
+        for (b = 0; b < blocks.length; b++) {
+          if (!data.blocks.types[blocks[b].type][types.keys()[i]]) {
+            continue;
+          }
+          if (F.collide({
+            x: player.x + player.vel_x,
+            y: player.y,
+            w: player.w,
+            h: player.h,
+          }, blocks[b])) {
+            types.values()[i](blocks[b]);
+            break main;
+          }
+        }
       }
     }; break;
     case ("title"): {
@@ -219,47 +266,6 @@ function update(mod) {
         val.pass = true;
       }
     }; break;
-  }
-
-  if (bg.cam.type == "dynamic") {
-    if (bg.cam.x) {
-      x = player.x + (player.w / 2);
-      y = player.y + (player.h / 2);
-      if (x < thenX) {
-        if (F.getCamPos({
-          x,
-          y,
-        }, cam).x < canvas.width / data.bg.camMove) {
-          cam.x += x - thenX;
-        }
-      }
-      if (x > thenX) {
-        if (F.getCamPos({
-          x,
-          y,
-        }, cam).x > (canvas.width / data.bg.camMove) * (data.bg.camMove - 1)) {
-          cam.x += x - thenX;
-        }
-      }
-    }
-    if (bg.cam.y) {
-      if (y > thenY) {
-        if (F.getCamPos({
-          x,
-          y,
-        }, cam).y < canvas.height / data.bg.camMove) {
-          cam.y += y - thenY;
-        }
-      }
-      if (y < thenY) {
-        if (F.getCamPos({
-          x,
-          y,
-        }, cam).y > (canvas.height / data.bg.camMove) * (data.bg.camMove - 1)) {
-          cam.y += y - thenY;
-        }
-      }
-    }
   }
 
   if (keysDown.includes("debug_main")) {
