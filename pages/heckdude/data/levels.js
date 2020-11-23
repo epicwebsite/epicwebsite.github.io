@@ -1,6 +1,6 @@
 var lvls = [
   {
-    name: "Death Animation Test",
+    name: "Goal Animation Test",
     player: {
       x: 400,
       y: 200,
@@ -15,11 +15,6 @@ var lvls = [
       },
       {
         x: 350,
-        y: 350,
-        type: "death",
-      },
-      {
-        x: 600,
         y: 350,
         type: "goal",
       },

@@ -41,30 +41,38 @@ var val = {
   pause: false,
 };
 
-function goal() {
+async function goal() {
   gameState = "goal";
   overlay.a = 0;
   overlay.type = "goal";
-  F.interval("goal_fadeOut", (i, m) => {
-    overlay.a = i * (100 / m);
-  }, 50, 1, () => {
-    lvl++;
-    val.pass = false;
-    if (lvl >= lvls.length) {
-      timer.stop();
-      complete();
-    } else {
-      reset();
+  val.pass = false;
+  max = 80;
+  for (j = 0; j < max; j++) {
+    overlay.a += (j * (100 / max));
+    if (overlay.a >= max) {
+      break;
     }
-    overlay.a = 100;
-    setTimeout(() => {
-      F.interval("goal_fadeIn", (i, m) => {
-        overlay.a = 100 - (i * (100 / m));
-      }, 30, 1, () => {
-        overlay.a = 0;
-      });
-    }, 80);
-  });
+    await F.sleep(0.02);
+  }
+
+  await F.sleep(0.08);
+  lvl++;
+  if (lvl >= lvls.length) {
+    timer.stop();
+    complete();
+  } else {
+    reset();
+  }
+
+  max = 50;
+  for (j = 0; j < max; j++) {
+    overlay.a -= (j * (100 / max));
+    if (overlay.a <= 0) {
+      break;
+    }
+    await F.sleep(0.01);
+  }
+  overlay.a = 0;
 }
 
 async function death() {
@@ -72,6 +80,7 @@ async function death() {
   overlay.a = 100;
   overlay.type = "death";
   val.pass = false;
+  
   reset();
   await F.sleep(0.2);
   max = 100;
