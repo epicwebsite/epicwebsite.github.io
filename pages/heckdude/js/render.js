@@ -34,7 +34,7 @@ function render() {
   }
 
   p = F.getCamPos(player, scene.cam);
-  player.img.src = "./image/player/{0}.png".format(player.pose);
+  // player.img.src = "./image/player/{0}.png".format(player.pose);
   if (F.operate.logic.xor(player.flip, player.flipped)) {
     ctx.save();
     ctx.translate(
@@ -43,7 +43,7 @@ function render() {
     );
     ctx.scale(-1, 1);
     ctx.drawImage(
-      player.img,
+      images["player/{0}.png".format(player.pose)],
       0 - p.w,
       0,
       p.w,
@@ -52,7 +52,7 @@ function render() {
     ctx.restore();
   } else {
     ctx.drawImage(
-      player.img,
+      images["player/{0}.png".format(player.pose)],
       p.x,
       p.y,
       p.w,

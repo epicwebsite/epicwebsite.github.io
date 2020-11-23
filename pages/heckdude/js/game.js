@@ -28,6 +28,7 @@ var overlay = {
   type: null,
   stop: false,
 };
+var images = {};
 
 function main() {
   update((Date.now() - then) / 1000);
@@ -122,6 +123,16 @@ timer.setLast = function () {
   timer.last = Date.now();
 }
 
+function load() {
+  for (i = 0; i < assets.image.length; i++) {
+    img = new Image();
+    img.src = "./image/" + assets.image[i];
+    images[assets.image[i]] = img;
+  }
+  console.log("Loaded");
+  reset();
+  main();
+}
+
 var then = Date.now();
-reset();
-main();
+load();

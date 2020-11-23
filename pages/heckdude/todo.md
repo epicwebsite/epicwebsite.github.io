@@ -1,7 +1,9 @@
+# Doing at the moment
+- Load screen
+
 # To do
 
 ## Features
-- Load screen
 - Level editor
 
 ## Bug fixes
