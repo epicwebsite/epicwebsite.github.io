@@ -59,13 +59,6 @@ function render() {
       p.h,
     );
   }
-  ctx.strokeStyle = "magenta";
-  ctx.strokeRect(
-    p.x + 1,
-    p.y + player.vel_y + 1,
-    p.w - 2,
-    p.h,
-  );
 
   if (gameState != "complete") {
     ctx.fillStyle = F.getColor(250);
@@ -123,7 +116,7 @@ function render() {
       ctx.font = "32px Cubic";
       ctx.textAlign = "center";
       ctx.fillText(
-        (lvls[lvl].name ? lvls[lvl].name : "Unknown").truncate(19, "..."),
+        (lvls[lvl].name ? lvls[lvl].name : "Unknown").truncate(22, "..."),
         canvas.width / 2,
         canvas.height / 1.5,
       );

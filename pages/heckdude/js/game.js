@@ -14,11 +14,6 @@ window.addEventListener('keydown', function (e) {
 
 var gameState = "title";
 var lvl = 0;
-/* var cam = {
-  x: 0,
-  y: 0,
-  z: 100,
-}; */
 var blocks = [];
 var player = {};
 var egg = {
@@ -31,6 +26,7 @@ var timer = {
 var overlay = {
   a: 0,
   type: null,
+  stop: false,
 };
 
 function main() {
@@ -71,19 +67,22 @@ function goal() {
   });
 }
 
-function death() {
+async function death() {
   gameState = "death";
   overlay.a = 100;
   overlay.type = "death";
-  reset();
   val.pass = false;
-  setTimeout(() => {
-    F.interval("death_fade", (i, m) => {
-      overlay.a = 100 - (i * (100 / m));
-    }, 100, 1, () => {
-      overlay.a = 0;
-    });
-  }, 200);
+  reset();
+  await F.sleep(0.2);
+  max = 100;
+  for (j = 0; j < max; j++) {
+    overlay.a -= (j * (100 / max));
+    if (overlay.a <= 0) {
+      break;
+    }
+    await F.sleep(0.01);
+  }
+  overlay.a = 0;
 }
 
 function complete() {

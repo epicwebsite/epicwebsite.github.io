@@ -1,35 +1,36 @@
 var lvls = [
-  /* {
-    name: "Decollision Test",
+  {
+    name: "Death Animation Test",
     player: {
       x: 400,
       y: 200,
       size: 1.3,
-      speed_fall_max: 0,
     },
     blocks: [
       {
+        x: 0,
+        y: 450,
+        w: 1024,
+        h: 100,
+      },
+      {
         x: 350,
-        y: 200,
+        y: 350,
+        type: "death",
       },
       {
-        x: 80,
-        y: 200,
-      },
-      {
-        x: 200,
-        y: 190,
-        w: 150,
+        x: 600,
+        y: 350,
+        type: "goal",
       },
     ],
-  }, */
+  },
   {
     name: "The first level",
     player: {
       x: 90,
       y: 87,
       size: 1,
-      // flipped: true,
     },
     blocks: [
       {

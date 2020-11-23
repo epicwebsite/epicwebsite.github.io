@@ -100,7 +100,7 @@ function update(mod) {
         }
         if (F.collide({
           x: player.x + 1,
-          y: player.y/*  + player.vel_y */ + 1,
+          y: player.y + 1,
           w: player.w - 2,
           h: player.h,
         }, blocks[b])) {
