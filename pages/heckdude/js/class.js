@@ -33,7 +33,5 @@ Game.Scene = class {
         this[def.keys()[v]] = vals[def.keys()[v]];
       }
     }
-    this.bg = new Image();
-    this.bg.src = "image/bg/{0}.png".format(this.bg_img);
   }
 }

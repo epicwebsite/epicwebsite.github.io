@@ -34,7 +34,7 @@ function showLinks() {
       '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">{name}</a>',
       '<br>',
     ].join("").format({
-      href: "pages/{0}/index.html".format(links[i].id),
+      href: "pages/{0}".format(links[i].id),
       dir: F.url.dir,
       name: links[i].name ? links[i].name : links[i].id,
       id: "link_{0}".format(links[i].id),

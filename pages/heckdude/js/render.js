@@ -1,7 +1,7 @@
 function render() {
   ctx.fillCanvas();
   ctx.drawImage(
-    scene.bg,
+    images["bg/{0}.png".format(scene.bg_img)],
     0,
     0,
     canvas.width,
@@ -34,7 +34,6 @@ function render() {
   }
 
   p = F.getCamPos(player, scene.cam);
-  // player.img.src = "./image/player/{0}.png".format(player.pose);
   if (F.operate.logic.xor(player.flip, player.flipped)) {
     ctx.save();
     ctx.translate(
@@ -166,11 +165,9 @@ function render() {
   }
 
   if (overlay.type && overlay.a > 0) {
-    img = new Image();
-    img.src = "./image/game/{0}-overlay.png".format(overlay.type);
     ctx.globalAlpha = overlay.a / 100;
     ctx.drawImage(
-      img,
+      images["game/{0}-overlay.png".format(overlay.type)],
       0,
       0,
       canvas.width,
@@ -179,10 +176,8 @@ function render() {
     ctx.globalAlpha = 1.0;
   }
 
-  img = new Image();
-  img.src = "./image/game/overlay.png";
   ctx.drawImage(
-    img,
+    images["game/overlay.png"],
     0,
     0,
     canvas.width,
