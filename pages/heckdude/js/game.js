@@ -123,16 +123,53 @@ timer.setLast = function () {
   timer.last = Date.now();
 }
 
-function load() {
+async function load() {
+  h = 1.6;
+  h2 = 2.2;
+  canvas.style.visibility = "visible";
+  ctx.fillCanvas(F.getColor(20));
+  ctx.fillStyle = F.getColor(220);
+  ctx.textAlign = "center";
+  ctx.font = "64px Arial";
+  ctx.fillText(
+    "Loading...",
+    canvas.width / 2,
+    canvas.height / h2,
+  );
+  ctx.fillRect(
+    canvas.width / 6,
+    (canvas.height / h) - 20,
+    canvas.width / 1.5,
+    40,
+  );
+  ctx.fillStyle = F.getColor(20);
+  ctx.fillRect(
+    (canvas.width / 6) + 5,
+    (canvas.height / h) - 15,
+    (canvas.width / 1.5) - 10,
+    30,
+  );
+  ctx.fillStyle = F.getColor(220);
   for (i = 0; i < assets.image.length; i++) {
     img = new Image();
     img.src = "./image/" + assets.image[i];
     images[assets.image[i]] = img;
+    ctx.fillRect(
+      canvas.width / 6,
+      (canvas.height / h) - 20,
+      i * ((canvas.width / 1.5) / assets.image.length),
+      40,
+    );
   }
-  console.log("Loaded");
+  ctx.fillRect(
+    canvas.width / 6,
+    (canvas.height / h) - 20,
+    canvas.width / 1.5,
+    40,
+  );
+  await F.sleep(0.1);
   reset();
   main();
 }
 
 var then = Date.now();
-load();
