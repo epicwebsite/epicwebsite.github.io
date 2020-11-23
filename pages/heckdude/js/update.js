@@ -142,6 +142,9 @@ function update(mod) {
 
       if (keysDown.includes("restart")) {
         gameState = "restart";
+        if (lvl <= 0) {
+          timer.stop();
+        }
         reset();
         return;
       }
@@ -237,8 +240,8 @@ function update(mod) {
           gameState = "play";
           val.pass = false;
           if (lvl <= 0) {
-            timer.reset();
             timer.play();
+            timer.reset();
           }
         }
       } else {
