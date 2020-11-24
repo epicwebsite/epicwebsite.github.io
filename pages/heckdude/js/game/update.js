@@ -1,4 +1,3 @@
-
 function update(mod) {
   var keysDown = F.getKeyCodes(controls);
   scene.cam.z = parseFloat(doc.id("z").value);
@@ -6,8 +5,15 @@ function update(mod) {
   thenY = player.y + (player.h / 2);
   old = player.vel_y;
 
+  // console.log(playerDef.y);
+
   switch (gameState) {
     case ("play"): {
+      try {
+        doc.id("x").value = scene.cam.x;
+        doc.id("y").value = scene.cam.y;
+        doc.id("z").value = scene.cam.z;
+      } catch {}
 
       if (scene.cam.type == "sticky") {
         if (scene.cam.x) {
@@ -268,6 +274,9 @@ function update(mod) {
       } else {
         val.pass = true;
       }
+    }; break;
+    case ("edit"): {
+      editor(keysDown);
     }; break;
   }
 

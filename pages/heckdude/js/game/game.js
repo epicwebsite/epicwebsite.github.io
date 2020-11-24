@@ -30,6 +30,20 @@ var overlay = {
 };
 var images = {};
 var score = {};
+var newBlock = null;
+var playerDef = {};
+try {
+  inEditor;
+} catch {
+  inEditor = false;
+}
+if (inEditor) {
+  var editHistory = {
+    timeline: [],
+    place: -1,
+  };
+  historyUpdate();
+}
 
 function main() {
   update((Date.now() - then) / 1000);
@@ -59,13 +73,21 @@ async function goal() {
 
   await F.sleep(0.08);
   lvl++;
-  if (lvl >= lvls.length) {
-    timer.stop();
-    complete();
+
+  if (inEditor) {
+    resetPlayer();
+    resetCam();
+    togglePlay();
   } else {
     reset();
+    if (lvl >= lvls.length) {
+      timer.stop();
+      complete();
+    } else {
+      reset();
+    }
+    score.levels++;
   }
-  score.levels++;
 
   max = 50;
   for (j = 0; j < max; j++) {
@@ -85,7 +107,13 @@ async function death() {
   val.pass = false;
   score.deaths++;
   
-  reset();
+  if (inEditor) {
+    resetPlayer();
+    resetCam();
+    togglePlay();
+  } else {
+    reset();
+  }
   await F.sleep(0.2);
   max = 100;
   for (j = 0; j < max; j++) {
@@ -158,7 +186,7 @@ async function load() {
   ctx.fillStyle = F.getColor(220);
   for (i = 0; i < assets.image.length; i++) {
     img = new Image();
-    img.src = "./image/" + assets.image[i];
+    img.src = ".{0}/image/".format(inEditor ? "." : "") + assets.image[i];
     images[assets.image[i]] = img;
     ctx.fillRect(
       canvas.width / 6,
@@ -178,4 +206,5 @@ async function load() {
   main();
 }
 
+F.triggerOnload();
 var then = Date.now();

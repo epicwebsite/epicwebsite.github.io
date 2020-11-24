@@ -2,26 +2,27 @@
 <html>
   <head>
     <title>Heckdude</title>
-    <link rel="stylesheet"  type="text/css" href="style1.css">
+    <link rel="stylesheet"  type="text/css" href="./style.css">
     <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <link rel="shortcut icon" type="image/png" href="image/favicon.ico" id="favicon">
+    <link rel="shortcut icon" type="image/png" href="./image/favicon.ico" id="favicon">
   </head>
   <body onload="load()">
     <div id="canvas_contain"></div>
     <section>
       <input type="range" id="z" min="10" max="300" value="100" step="1">
+      <button onclick="location.href='./editor/index.html'">Level Editor</button>
     </section>
     <script type="text/javascript" src="https://darccman.github.io/fnct/index.js"></script>
     <!-- <script type="text/javascript" src="C:/Users/darcy/OneDrive/Documents/__THINGS/code/js/functions/index.js"></script> -->
-    <script type="text/javascript" src="data/data.js"></script>
-    <script type="text/javascript" src="data/levels.js"></script>
-    <script type="text/javascript" src="data/controls.js"></script>
-    <script type="text/javascript" src="data/assets.js"></script>
-    <script type="text/javascript" src="js/class.js"></script>
-    <script type="text/javascript" src="js/update.js"></script>
-    <script type="text/javascript" src="js/render.js"></script>
-    <script type="text/javascript" src="js/reset.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="./data/data.js"></script>
+    <script type="text/javascript" src="./data/levels.js"></script>
+    <script type="text/javascript" src="./data/controls.js"></script>
+    <script type="text/javascript" src="./data/assets.js"></script>
+    <script type="text/javascript" src="./js/class.js"></script>
+    <script type="text/javascript" src="./js/game/update.js"></script>
+    <script type="text/javascript" src="./js/game/render.js"></script>
+    <script type="text/javascript" src="./js/game/reset.js"></script>
+    <script type="text/javascript" src="./js/game/game.js"></script>
   </body>
 </html>

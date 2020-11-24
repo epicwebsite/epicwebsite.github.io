@@ -36,5 +36,16 @@ var controls = {
     debug_main: [
       18,
     ],
+    edit_undo: [
+      90
+    ],
+  },
+  buttons: {
+    edit_draw: [
+      0
+    ],
+    edit_player_move: [
+      0
+    ],
   }
 };

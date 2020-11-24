@@ -18,3 +18,4 @@
 ## Bug fixes
 - Camera does not work for Y axis
 - Zooming zooms into canvas center, not player
+- Vignette effect is too noticable
