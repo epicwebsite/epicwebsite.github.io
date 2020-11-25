@@ -48,6 +48,6 @@ canvas {
 #speed {
   display: none;
 }
-button, select, option {
+button, select, option, input {
   color: black;
 }

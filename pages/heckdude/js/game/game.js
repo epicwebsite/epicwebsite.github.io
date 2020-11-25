@@ -30,7 +30,6 @@ var overlay = {
 };
 var images = {};
 var score = {};
-var newBlock = null;
 var playerDef = {};
 try {
   inEditor;
@@ -43,6 +42,8 @@ if (inEditor) {
     place: -1,
   };
   historyUpdate();
+  var newBlock = null;
+  var selectedBlock = null;
 }
 
 function main() {

@@ -13,11 +13,15 @@ function reset() {
   blocks = [];
 
   gameState = "edit";
+  resetPlayer();
 }
 
 function resetPlayer() {
   player.x = playerDef.x;
   player.y = playerDef.y;
+  player.pose = "idle";
+  doc.id("player_x").value = player.x;
+  doc.id("player_y").value = player.y;
 }
 
 function resetCam() {

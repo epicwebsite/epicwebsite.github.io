@@ -35,28 +35,41 @@ function render() {
     }
   }
 
-  if (newBlock) {
-    p = {
-      x: (((F.mouse.x - (canvas.width / 2)) / (scene.cam.z / 100)) + (canvas.width / 2)) + scene.cam.x,
-      y: (((F.mouse.y - (canvas.height / 2)) / (scene.cam.z / 100)) + (canvas.height / 2)) - scene.cam.y,
-    };
-    block = {
-      x: Math.min(p.x, newBlock.x),
-      y: Math.min(p.y, newBlock.y),
-      w: F.diff(p.x, newBlock.x),
-      h: F.diff(p.y, newBlock.y),
-    };
-    p = F.getCamPos(block, scene.cam);
-    ctx.fillStyle = doc.id("block_fill").value;
-    ctx.fillRect(
-      p.x,
-      p.y,
-      p.w,
-      p.h,
-    );
-    if (doc.id("block_doStroke").checked) {
-      ctx.strokeStyle = doc.id("block_stroke").value;
-      ctx.lineWidth = doc.id("block_line").value;
+  if (inEditor) {
+    if (newBlock) {
+      p = {
+        x: (((F.mouse.x - (canvas.width / 2)) / (scene.cam.z / 100)) + (canvas.width / 2)) + scene.cam.x,
+        y: (((F.mouse.y - (canvas.height / 2)) / (scene.cam.z / 100)) + (canvas.height / 2)) - scene.cam.y,
+      };
+      block = {
+        x: Math.min(p.x, newBlock.x),
+        y: Math.min(p.y, newBlock.y),
+        w: F.diff(p.x, newBlock.x),
+        h: F.diff(p.y, newBlock.y),
+      };
+      p = F.getCamPos(block, scene.cam);
+      ctx.fillStyle = doc.id("block_defaultColor").checked ? data.blocks.types[doc.id("block_type").value].fill : doc.id("block_fill").value,
+        ctx.fillRect(
+          p.x,
+          p.y,
+          p.w,
+          p.h,
+        );
+      if (doc.id("block_doStroke").checked) {
+        ctx.strokeStyle = doc.id("block_stroke").value;
+        ctx.lineWidth = doc.id("block_line").value;
+        ctx.strokeRect(
+          p.x,
+          p.y,
+          p.w,
+          p.h,
+        );
+      }
+    }
+    if (selectedBlock != undefined) {
+      ctx.strokeStyle = F.getColor(selectedBlock.down ? 250 : 200);
+      ctx.lineWidth = 2;
+      p = F.getCamPos(blocks[selectedBlock.num], scene.cam);
       ctx.strokeRect(
         p.x,
         p.y,

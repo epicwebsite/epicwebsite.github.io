@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Game</title>
+    <title>Heckdude Level Editor</title>
     <link rel="stylesheet"  type="text/css" href="../style.css">
     <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -23,18 +23,41 @@
       <div>
         <select id="tool" onload="changeTool()" onchange="changeTool()">
           <option value="block_draw">Draw Block</option>
+          <option value="block_select">Select Block</option>
           <option value="player_move">Move Player</option>
         </select>
       </div>
       <div class="tooldiv block_draw">
-        <label>Fill</label><input type="color" id="block_fill" value="#FF0000">
+        <label>Block Type</label>
+        <select id="block_type">
+          <option value="solid">Solid</option>
+          <option value="goal">Goal</option>
+          <option value="death">Death</option>
+          <option value="display">Display</option>
+          <option value="barrier">Barrier</option>
+        </select>
         <br>
-        <label>Use stroke</label><input type="checkbox" id="block_doStroke" checked onchange="this.nextSibling.nextSibling.style.display=this.checked?'block':'none'">
-        <div>
-          <label>Stroke</label><input type="color" id="block_stroke" value="#0000FF">
+        <label>Use default colour</label>
+        <input type="checkbox" id="block_defaultColor" checked onchange="this.nextSibling.nextSibling.style.display=!this.checked?'block':'none'">
+        <div style="display:none;">
           <br>
-          <label>Stroke width</label><input type="range" id="block_line" min=1 max=10 value=2>
+          <label>Fill</label>
+          <input type="color" id="block_fill" value="#FF0000">
+          <br>
+          <label>Use stroke</label>
+          <input type="checkbox" id="block_doStroke" onchange="this.nextSibling.nextSibling.style.display=this.checked?'block':'none'">
+          <div>
+            <label>Stroke</label>
+            <input type="color" id="block_stroke" value="#0000FF">
+            <br>
+            <label>Stroke width</label>
+            <input type="range" id="block_line" min=1 max=10 value=2>
+          </div>
         </div>
+      </div>
+      <div class="tooldiv player_move">
+        <input type="number" onchange="playerChangeX()" id="player_x" placeholder="X position">
+        <input type="number" onchange="playerChangeY()" id="player_y" placeholder="Y position">
       </div>
     </section>
     <script type="text/javascript" src="https://darccman.github.io/fnct/index.js"></script>

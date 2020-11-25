@@ -5,6 +5,7 @@ function editor(keysDown) {
   scene.cam.z = parseFloat(doc.id("z").value);
 
   tool = doc.id("tool").value;
+  selectedBlock = null
 
   switch (tool) {
     case ("block_draw"): {
@@ -31,10 +32,10 @@ function editor(keysDown) {
                 y: Math.min(p.y, newBlock.y),
                 w: F.diff(p.x, newBlock.x),
                 h: F.diff(p.y, newBlock.y),
-                fill: doc.id("block_fill").value,
+                fill: doc.id("block_defaultColor").checked ? data.blocks.types[doc.id("block_type").value].fill : doc.id("block_fill").value,
                 stroke: doc.id("block_doStroke").checked ? doc.id("block_stroke").value : undefined,
                 lineWidth: doc.id("block_line").value,
-                type: "solid",
+                type: doc.id("block_type").value,
               });
               newBlock = null;
               historyUpdate();
@@ -51,6 +52,39 @@ function editor(keysDown) {
         player.x = (((F.mouse.x - (canvas.width / 2)) / (scene.cam.z / 100)) + (canvas.width / 2)) + scene.cam.x;
         player.y = (((F.mouse.y - (canvas.height / 2)) / (scene.cam.z / 100)) + (canvas.height / 2)) - scene.cam.y;
         historyUpdate();
+      }
+    }; break;
+    case ("block_select"): {
+      if (F.mouse.onCanvas) {
+        p = F.getCamPos({
+          x: F.mouse.x,
+          y: F.mouse.y,
+          w: 1,
+          h: 1,
+        }, scene.cam);
+        for (b = 0; b < blocks.length; b++) {
+          pb = F.getCamPos(blocks[b], scene.cam);
+          if (F.collide(p, pb)) {
+            selectedBlock = {
+              num: b,
+            };
+            if (keysDown.includes("edit_select")) {
+              selectedBlock.down = true;
+              if (val.selectBlock) {
+                selectedBlock.x = F.mouse.x;
+                selectedBlock.y = F.mouse.y;
+                val.selectBlock = false;
+              }
+            } else {
+              val.selectBlock = true;
+            }
+            break;
+          }
+        }
+        if (selectedBlock != null && selectedBlock.down) {
+          blocks[selectedBlock.num].x = F.mouse.x - (blocks[selectedBlock.num].x - blocks[se]);
+          blocks[selectedBlock.num].y = F.mouse.y - (blocks[selectedBlock.num].y - blocks[se]);
+        }
       }
     }; break;
   }
@@ -122,6 +156,7 @@ function lvlExport() {
 }
 function lvlImport() {
   text = prompt('Input level data!', 'Like this: {"name":"Level","player":{...');
+  try {
     text = JSON.parse(text);
     player = text.player;
     playerDef = {
@@ -130,4 +165,16 @@ function lvlImport() {
     };
     scene = text.scene;
     blocks = text.blocks;
+  } catch {}
+}
+
+function playerChangeX() {
+  if (parseFloat(doc.id("player_x").value) != NaN) {
+    player.x = parseFloat(doc.id("player_x").value);
+  }
+}
+function playerChangeY() {
+  if (parseFloat(doc.id("player_y").value) != NaN) {
+    player.y = parseFloat(doc.id("player_y").value);
+  }
 }

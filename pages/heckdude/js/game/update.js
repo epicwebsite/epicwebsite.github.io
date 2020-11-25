@@ -5,8 +5,6 @@ function update(mod) {
   thenY = player.y + (player.h / 2);
   old = player.vel_y;
 
-  // console.log(playerDef.y);
-
   switch (gameState) {
     case ("play"): {
       try {
