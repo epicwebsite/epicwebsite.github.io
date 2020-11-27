@@ -11,4 +11,8 @@ var links = [
     id: "heckdude",
     name: "Heckdude",
   },
+  {
+    id: "day",
+    name: "What day is it?",
+  },
 ];

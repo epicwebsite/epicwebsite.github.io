@@ -36,6 +36,7 @@ try {
 } catch {
   inEditor = false;
 }
+var isLocal = F.url.protocol == "file:";
 if (inEditor) {
   var editHistory = {
     timeline: [],
