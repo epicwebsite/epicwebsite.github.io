@@ -1,7 +1,7 @@
 var links = [
   {
-    id: "test",
-    name: "Test",
+    id: "about",
+    name: "About",
   },
   {
     id: "custom-tab",
