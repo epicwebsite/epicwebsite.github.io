@@ -3,4 +3,8 @@ body {
 }
 * {
   font-family: Arial, Helvetica, sans-serif;
+  color: rgba(240, 240, 240);
+}
+button, select, input {
+  color: rgba(10, 10, 10);
 }
