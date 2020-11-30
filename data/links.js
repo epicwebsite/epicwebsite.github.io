@@ -15,4 +15,8 @@ var links = [
     id: "day",
     name: "What day is it?",
   },
+  {
+    id: "download-ram",
+    name: "DOWNLOAD FREE RAM!",
+  },
 ];
