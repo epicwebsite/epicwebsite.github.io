@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>What day is it?</title>
+    <title id="title">What day is it?</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./favicon.png">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="https://darccman.github.io/fnct/index.js"></script>
+    <script type="text/javascript" src="./days.js"></script>
     <script type="text/javascript" src="./script.js"></script>
   </head>
   <body onload="init()">
-    <h1 id="day">Today is ???</h1>
+    <h1 id="day">What day is it?</h1>
     <br>
     <select id="type" onchange="setLocal(); changeText()">
       <option value="classic">Classic</option>
