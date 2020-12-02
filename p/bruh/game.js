@@ -8,12 +8,13 @@ var ctx = canvas.getContext("2d");
 
 var gameState = "start";
 var button = {
-  w: data.button.w,
-  h: data.button.h,
+  dw: data.button.w,
+  dh: data.button.h,
   pressed: false,
   img1: new Image(),
   img2: new Image(),
   val: false,
+  sound: new F.Sound("audio/bruh.mp3", "audio_contain"),
 };
 button.img1.src = "image/button1.png";
 button.img2.src = "image/button2.png";
@@ -48,9 +49,6 @@ function render() {
   canvas.height = window.innerHeight;
   let rgb = F.hsv_rgb(bg);
   ctx.fillCanvas(F.getColor(rgb));
-  
-  let w = button.w * (canvas.width / 512);
-  let h = button.h * (canvas.width / 512);
 
   let grd = ctx.createRadialGradient(
     canvas.width / 2,
@@ -58,7 +56,7 @@ function render() {
     0,
     canvas.width / 2,
     canvas.height / 2,
-    w * data.button.shine,
+    button.w * data.button.shine,
   );
   grd.addColorStop(0, F.getColor([255, 255, 255, 0.5]));
   grd.addColorStop(1, F.getColor([255, 255, 255, 0]));
@@ -67,13 +65,13 @@ function render() {
   ctx.ellipse(
     canvas.width / 2,
     (canvas.height * data.button.offset) / 2,
-    w,
-    h,
+    button.w,
+    button.h,
     0, 0, 2 * Math.PI
   );
   ctx.fill();
 
-  let fontSize = w * data.text.size / 100;
+  let fontSize = button.w * data.text.size / 100;
   ctx.font = "{0}px Impact".format(fontSize);
   ctx.textAlign = "center";
   ctx.fillStyle = F.getColor(F.hsv_rgb([
@@ -107,21 +105,24 @@ function render() {
 
   ctx.drawImage(
     button.pressed || button.held ? button.img1 : button.img2,
-    (canvas.width / 2) - (w / 2),
-    ((canvas.height * data.button.offset) / 2) - (h / 2),
-    w,
-    h,
+    (canvas.width / 2) - (button.w / 2),
+    ((canvas.height * data.button.offset) / 2) - (button.h / 2),
+    button.w,
+    button.h,
   );
 }
 
 function main() {
-  render();
   update((Date.now() - then) / 1000);
+  render();
   then = Date.now();
   requestAnimationFrame(main);
 }
 function update(mod) {
   var keysDown = F.getKeyCodes(controls);
+  button.w = button.dw * (canvas.width / 512);
+  button.h = button.dh * (canvas.width / 512);
+
   if (gameState == "play") {
     bg[0] += data.bg.speed / 100;
     bg[0] = bg[0].wrap(0, 360);
@@ -144,6 +145,15 @@ function update(mod) {
       (
         F.buttonDown(0)
         && F.mouse.onCanvas
+        && F.collide({
+          x: F.mouse.x,
+          y: F.mouse.y,
+          r: 1,
+        }, {
+          x: ((canvas.width / 2) - (button.w / 2)) + (button.w / 2),
+          y: (((canvas.height * data.button.offset) / 2) - (button.h / 2)) + (button.h / 2),
+          r: button.w / 2
+        }, true, true)
       )
       || keysDown.includes("play")
       || F.touch.down
@@ -170,16 +180,17 @@ function update(mod) {
   }
 }
 
-function play() {
+async function play() {
+  if (button.pressed) {
+    button.sound = new F.Sound("audio/bruh.mp3", "audio_contain");
+  }
   button.pressed = true;
-  let sound = new F.Sound("audio/bruh.mp3", "audio_contain");
-  sound.play();
-  sound.sound.setAttribute("onended", "delete_sound(this)");
+  button.sound.play();
   bg[1] = (bg[1] - data.bg.flash).setBorder(0, 100);
   text.color[0] += data.text.flash;
-  setTimeout(() => {
-    stop();
-  }, data.button.cooldown);
+  await F.sleep(data.button.cooldown / 1000);
+  button.sound = new F.Sound("audio/bruh.mp3", "audio_contain");
+  stop();
 }
 function stop() {
   button.pressed = false;
