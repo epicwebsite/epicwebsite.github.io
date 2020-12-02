@@ -19,6 +19,8 @@
 - Rearrange links
 ### Word search
 - Add to links.js
+### GitHub
+- Add issue template
 
 # Reference
-  - [HeckDude TODO.md](./p/heckdude/todo.md)
+  - [HeckDude TODO](./p/heckdude/todo.md)
