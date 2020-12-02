@@ -1,13 +1,24 @@
+<!-- # Fixed -->
+<!-- ## Confirmed fix -->
+<!-- -  -->
+<!-- ## Apparent fix -->
+<!-- -  -->
+
+<!-- # Doing at the moment -->
+<!-- -  -->
+
 # To do
+<!-- ## Features -->
+<!-- -  -->
+## Bug Fixes
+### Word search
+- Fix the whole thing
 
-## Root
-
+## Changes
+### Root
 - Rearrange links
+### Word search
+- Add to links.js
 
-## Word search
-
-- Fix
-
-# Refer
-
-- [HeckDude TODO.md](./p/heckdude/todo.md)
+# Reference
+  - [HeckDude TODO.md](./p/heckdude/todo.md)
