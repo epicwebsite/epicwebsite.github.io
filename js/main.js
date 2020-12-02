@@ -29,17 +29,28 @@ ls.edit = function (func) {
 
 function showLinks() {
   doc.id("links").innerHTML = "";
-  for (i = 0; i < links.length; i++) {
-    let el = [
-      '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">{name}</a>',
-      '<br>',
+  for (t = 0; t < links.keys().length; t++) {
+    el = [
+      '<section id="links_{id}">',
+      '<h1>{name}</h1>',
+      '</section>'
     ].join("").format({
-      href: "p/{0}{1}".format(links[i].id, (F.url.protocol[0] == "f") ? "/index.html" : ""),
-      dir: F.url.dir,
-      name: links[i].name ? links[i].name : links[i].id,
-      id: "link_{0}".format(links[i].id),
+      id: links.keys()[t],
+      name: links.values()[t].name,
     });
     $("#links").append(el);
+    for (i = 0; i < links.values()[t].items.length; i++) {
+      el = [
+        '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">{name}</a>',
+        '<br>',
+      ].join("").format({
+        href: "{0}/{1}{2}".format(links.keys()[t], links.values()[t].items[i].id, (F.url.protocol[0] == "f") ? "/index.html" : ""),
+        dir: F.url.dir,
+        name: links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id,
+        id: "link_{0}".format(links.values()[t].items[i].id),
+      });
+      $("#links_{0}".format(links.keys()[t])).append(el);
+    }
   }
 }
 

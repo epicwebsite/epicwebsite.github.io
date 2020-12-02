@@ -1,22 +1,41 @@
-var links = [
-  {
-    id: "about",
-    name: "About",
+var links =
+{
+  p: {
+    name: "Pages",
+    items: [
+    {
+      id: "about",
+      name: "About",
+    },
+    {
+      id: "custom-tab",
+      name: "NewTab",
+    },
+    {
+      id: "heckdude",
+      name: "Heckdude",
+    },
+    {
+      id: "day",
+      name: "What day is it?",
+    },
+    {
+      id: "download-ram",
+      name: "DOWNLOAD FREE RAM!",
+    },
+    {
+      id: "pen",
+      name: "Pen Speedrun",
+      },
+    ]
   },
-  {
-    id: "custom-tab",
-    name: "NewTab",
+  v: {
+    name: "Videos",
+    items: [
+      {
+      id: "test",
+      name: "Test video",
+      },
+    ],
   },
-  {
-    id: "heckdude",
-    name: "Heckdude",
-  },
-  {
-    id: "day",
-    name: "What day is it?",
-  },
-  {
-    id: "download-ram",
-    name: "DOWNLOAD FREE RAM!",
-  },
-];
+};
