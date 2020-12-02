@@ -24,6 +24,10 @@ var links =
         name: "What time is it?",
       },
       {
+        id: "keys",
+        name: "Get JS key codes",
+      },
+      {
         id: "download-ram",
         name: "DOWNLOAD FREE RAM!",
       },

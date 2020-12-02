@@ -27,6 +27,7 @@ var controls = {
       87,
       38,
       32,
+      13,
     ],
   },
   buttons: {},
