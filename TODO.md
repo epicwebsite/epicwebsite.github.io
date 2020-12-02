@@ -4,8 +4,8 @@
 <!-- ## Apparent fix -->
 <!-- -  -->
 
-<!-- # Doing at the moment -->
-<!-- -  -->
+# Doing at the moment
+- Fixing jQuery
 
 # To do
 <!-- ## Features -->
