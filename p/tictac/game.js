@@ -573,7 +573,15 @@ timer.reset = function() {
   timer.display_update();
 }
 timer.display_update = function () {
-  doc.id("timer_display").innerHTML = F.toTime(timer.time).join(" ");
+  num = F.toTime(timer.time * 10)[0].round(2);
+  num = num.toString().split(".");
+  num[0] = num[0].padStart(3, " ");
+  if (num[1] != undefined) {
+    num[1] = num[1].padEnd(2, "0");
+  } else {
+    num[1] = "0";
+  }
+  doc.id("timer_display").innerHTML = [num.join("."), F.toTime(timer.time * 10)[1]].join(" ");
 }
 timer.init = function () {
   timer.reset();
