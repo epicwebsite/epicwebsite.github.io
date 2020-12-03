@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Progress Bars</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="../../js/jquery.js"></script>
     <script type="text/javascript" src="https://darccman.github.io/fnct/index.js"></script>
@@ -13,8 +13,9 @@
   <body onload="init()">
     <div id="content"></div>
     <div class="date">
-      <h1 id="time"></h1>
-      <h1 id="date"></h1>
+      <h1>Date: <span id="time"></span></h1>
+      <h1>Time in milliseconds: <code id="date"></code></h1>
+      <h1>Time in binary: <code id="bin"></code></h1>
     </div>
   </body>
 </html>

@@ -1,4 +1,5 @@
 var now = new Date();
+var updater;
 function init() {
   for (i = 0; i < bars.length; i++) {
     var el = [
@@ -17,7 +18,7 @@ function init() {
     });
     $("#content").append(el);
   }
-  setInterval(() => {
+  updater = setInterval(() => {
     now = new Date();
     doc.id("content").removeChildren();
     for (i = 0; i < bars.length; i++) {
@@ -37,7 +38,8 @@ function init() {
       });
       $("#content").append(el);
     }
-    doc.id("date").innerHTML = "Date: {0}".format(now.toString().split("(").sub(0, -1));
-    doc.id("time").innerHTML = "Time in milliseconds: {0}".format(now.getTime());
+    doc.id("time").innerHTML = now.toString().split("(").sub(0, -2);
+    doc.id("date").innerHTML = now.getTime();
+    doc.id("bin").innerHTML = F.dec_bin(now.getTime());
   }, 10);
 }

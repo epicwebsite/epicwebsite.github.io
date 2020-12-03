@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="style1.css">
     <link rel="shortcut icon" href="img/favicon.ico">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script type="text/javascript" src="https://darccman.github.io/fnct/index.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="C:/Users/darcy/OneDrive/Documents/__THINGS/code/js/functions/index.js"></script>
+    <!-- <script type="text/javascript" src="https://darccman.github.io/fnct/index.js"></script> -->
     <script src="script.js"></script>
   </head>
   <body>
@@ -23,9 +25,9 @@
             <h2 id="text">Click button to test<i class="fas fa-arrow-right"></i></h2>
             <h3 id="text2"></h3>
           </section>
-          <button onclick="testRam()">Test my RAM</button>
+          <button onclick="test()" id="button">Test my RAM</button>
           <a id="download" download="c-moreRAM_c6-4GB-8-1.vbs" href=" ">
-            <button onclick="location.href = './thanks/index.html'">Download moreRAM</button>
+            <button onclick="location.href = './thanks/{0}'.format(F.url.online ? '' : 'index.html')">Download moreRAM</button>
           </a>
         </section>
       </div>
@@ -65,5 +67,5 @@
     </div>
   </body>
     <!--Do not edit-->
-  <button class="footer" onclick="location.href = './site/index.html'">Copyright 1996 - 船尾</button>
+  <button class="footer" onclick="location.href = './about/{0}'.format(F.url.online ? '' : 'index.html')">Copyright 1996 - 船尾</button>
 </html>

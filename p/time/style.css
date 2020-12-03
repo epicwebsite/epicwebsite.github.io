@@ -37,3 +37,7 @@ section h2 {
   color: rgba(220, 220, 220);
   font-weight: 500;
 }
+code {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
+}

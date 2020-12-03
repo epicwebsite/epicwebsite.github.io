@@ -1,10 +1,5 @@
 // Do not edit
-function randInt(min, max) {
-  return (Math.random() * (max - min) + min)
-}
-// Do not edit
-var done = false;
-var downloadProgress = [
+var progress = [
   "Locating CPU...",
   "CPU Located...",
   "Accessing cores...",
@@ -19,26 +14,17 @@ var downloadProgress = [
   "Finalising tests..."
 ]
 // Do not edit
-function testRam() {
-  textNum = 0;
-  document.getElementById("text").innerHTML = downloadProgress[0];
-  for (i = 0; i < downloadProgress.length; i++) {
-    setTimeout(() => {
-      changeText();
-    }, randInt(500, 4000));
+async function test() {
+  doc.id("text").innerHTML = progress[0];
+  doc.id("button").disabled = true;
+  for (i = 0; i < progress.length; i++) {
+    await F.sleep(F.randomInt(5, 20) / 10);
+    doc.id("text").innerHTML = progress[i];
   }
+  displayResults();
 }
 // Do not edit
-function changeText() {
-  textNum++;
-  if (textNum <= (downloadProgress.length - 1)) {
-    document.getElementById("text").innerHTML = downloadProgress[textNum - 1];
-  } else {
-    setTimeout(displayResults(), 1000);
-  }
-}
-// Do not edit
-ramValue = [
+values = [
   [-100, "It is a wonder your computer actually works"],
   [0, "That is terrible"],
   [4, "That is below average"],
@@ -48,29 +34,25 @@ ramValue = [
   [100, "That is great"]
 ]
 // Do not edit
-function displayResults() {
-  var result = Math.round(randInt(2, 12) * 10) / 10;
-  document.getElementById("text").innerHTML = "Ram: " + result + "GB";
+async function displayResults() {
+  var result = F.randomInt(20, 120) / 10;
+  doc.id("text").innerHTML = "Ram: {0}GB".format(result);
   var ret = null;
-  for (i = 0; i < ramValue.length; i++) {
+  for (i = 0; i < values.length; i++) {
     if (ret == null) {
-      if (result >= ramValue[i][0]) {
-        if ((i + 1) < ramValue.length) {
-          if (result < ramValue[i + 1][0]) {
-            ret = ramValue[i][1];
+      if (result >= values[i][0]) {
+        if ((i + 1) < values.length) {
+          if (result < values[i + 1][0]) {
+            ret = values[i][1];
           }
         } else {
-          ret = ramValue[i][1];
+          ret = values[i][1];
         }
       }
     }
   }
-  if (ret != null) {
-    document.getElementById("text2").innerHTML = ret;
-  } else {
-    document.getElementById("text2").innerHTML = "I don't know";
-  }
-  setTimeout(() => {
-    document.getElementById("download").style.visibility = "visible";
-  }, 500);
+  doc.id("text2").innerHTML = ret != null ? ret : "I don't know";
+  await F.sleep(0.5);
+  doc.id("download").style.visibility = "visible";
+  doc.id("button").disabled = false;
 }
