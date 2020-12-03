@@ -6,7 +6,7 @@ var ctx = canvas.getContext("2d"); */
 
 function init() {
   output_gen();
-  document.body.appendChild(canvas);
+  // document.body.appendChild(canvas);
 }
 // F.c(data);
 function output_clear() {
