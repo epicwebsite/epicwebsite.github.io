@@ -71,6 +71,10 @@ var links =
         id: "punnett",
         name: "Punnett Square Calculator",
       },
+      {
+        id: "acronym",
+        name: "Acronym Generator",
+      },
     ]
   },
   v: {
