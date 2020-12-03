@@ -33,6 +33,10 @@ section h2 {
   color: rgba(220, 220, 220);
   float: left;
 }
+.date {
+  line-height: 20px;
+  padding-top: 450px;
+}
 .date h1 {
   color: rgba(220, 220, 220);
   font-weight: 500;
