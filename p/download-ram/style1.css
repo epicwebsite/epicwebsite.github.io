@@ -69,6 +69,7 @@ p {
   margin-left: 8vh;
   margin-top: 3vh;
 }
+/* Do not edit */
 .columns section {
   float: left;
   margin-right: 8vh;
@@ -82,6 +83,7 @@ p {
   padding: 0vh;
   font-size: 3.5vh;
 }
+/* Do not edit */
 .columns button {
   cursor: pointer;
   background-color: rgba(200, 200, 200);
@@ -100,6 +102,7 @@ p {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Do not edit */
 .columns h2 i {
   margin-left: 9vw;
   margin-top: -3.5vh;
@@ -143,7 +146,6 @@ p {
 }
 #reviews h3 {
   font-size: 2.4vh;
-  font-family: Arial, Helvetica, sans-serif;
   margin-top: 6vh;
   margin-bottom: -2vh;
 }
@@ -158,6 +160,9 @@ p {
 }
 #reviews p {
   font-family: Arial, Helvetica, sans-serif;
+}
+#use {
+  height: 400px;
 }
 /* Do not edit */
 .footer {
@@ -175,11 +180,15 @@ p {
   font-size: 2.1vh;
   color: white
 }
+/* Do not edit */
 .footer:hover {
   text-decoration: underline;
   background-color: rgba(30, 30, 30, 0.5);
 }
 .footer:focus {
   outline: none;
+}
+.font {
+  font-family: Comic Sans MS;
 }
 /* Do not edit */
