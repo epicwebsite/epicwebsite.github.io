@@ -1,15 +1,17 @@
-<!-- # Fixed -->
-<!-- ## Confirmed fix -->
-<!-- -  -->
-<!-- ## Apparent fix -->
+# Fixed
+## Confirmed fix
+- Fixed font in DownloadRAM page
+## Apparent fix
+- Fixed jQuery loading for most pages
 <!-- -  -->
 
 # Doing at the moment
 - Fixing jQuery
 
 # To do
-<!-- ## Features -->
-<!-- -  -->
+## Features
+- Added binary time in time page
+- Added How to use section in DownloadRAM page
 ## Bug Fixes
 ### Word search
 - Fix the whole thing
