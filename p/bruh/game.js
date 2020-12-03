@@ -156,7 +156,18 @@ function update(mod) {
         }, true, true)
       )
       || keysDown.includes("play")
-      || F.touch.down
+      || (
+        F.touch.down
+        && F.collide({
+          x: F.touch.x,
+          y: F.touch.y,
+          r: 1,
+        }, {
+          x: ((canvas.width / 2) - (button.w / 2)) + (button.w / 2),
+          y: (((canvas.height * data.button.offset) / 2) - (button.h / 2)) + (button.h / 2),
+          r: button.w / 2
+        }, true, true)
+      )
     );
 
     if (
