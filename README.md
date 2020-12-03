@@ -2,6 +2,8 @@
 
 [Visit](https://epicwebsite.github.io)
 
+Powered by [FunctionsJS](https://github.com/darccman/fnct)
+
 ## Contributing:
 
 ```bash

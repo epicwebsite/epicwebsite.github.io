@@ -11,6 +11,8 @@
 ## Features
 - Added binary time in time page
 - Added How to use section in DownloadRAM page
+## Bug fixes
+- Fix word search generator
 
 # Reference
   - [Bug fixes / changes](https://github.com/epicwebsite/epicwebsite.github.io/commits/master)
