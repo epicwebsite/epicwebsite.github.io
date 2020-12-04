@@ -27,7 +27,7 @@ ls.edit = function (func) {
   F.ls("settings", JSON.stringify(d));
 }
 
-function showLinks() {
+function showLinks(showHidden) {
   doc.id("links").innerHTML = "";
   for (t = 0; t < links.keys().length; t++) {
     el = [
@@ -40,18 +40,31 @@ function showLinks() {
     });
     $("#links").append(el);
     for (i = 0; i < links.values()[t].items.length; i++) {
+      if (
+        links.values()[t].items[i].hidden
+        && !showHidden
+      ) {
+        continue;
+      }
+      icon = icons[links.values()[t].items[i].icon];
+      if (!icon) {
+        icon = "";
+      }
       el = [
         '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">{name}</a>',
         '<br>',
       ].join("").format({
-        href: "{0}/{1}{2}".format(links.keys()[t], links.values()[t].items[i].id, (F.url.protocol[0] == "f") ? "/index.html" : ""),
+        href: "{0}/{1}{2}".format(links.values()[t].id, links.values()[t].items[i].id, (F.url.protocol[0] == "f") ? "/index.html" : ""),
         dir: F.url.dir,
-        name: links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id,
+        name: "{0}{1}".format(icon, links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id),
         id: "link_{0}".format(links.values()[t].items[i].id),
       });
       $("#links_{0}".format(links.keys()[t])).append(el);
     }
   }
+}
+function showHidden() {
+  showLinks(true);
 }
 
 function changeStyle() {

@@ -1,6 +1,7 @@
 var links =
 {
-  p: {
+  page: {
+    id: "p",
     name: "Pages",
     items: [
       {
@@ -47,10 +48,36 @@ var links =
         id: "character",
         name: "Character Generator",
       },
-      /* {
+      {
         id: "word-search",
         name: "Word Search Generator",
-      }, */
+        hidden: true,
+      },
+      {
+        id: "3d",
+        name: "3D Ray tracing",
+        hidden: true,
+      },
+      {
+        id: "dog-age",
+        name: "Dog Age Calculator",
+        hidden: true,
+      },
+      {
+        id: "joystick",
+        name: "Joystick Test",
+        hidden: true,
+      },
+      {
+        id: "pattern",
+        name: "Pattern Generator",
+        hidden: true,
+      },
+      {
+        id: "population",
+        name: "Population Simulator",
+        hidden: true,
+      },
       {
         id: "connect4",
         name: "Connect 4",
@@ -77,12 +104,20 @@ var links =
       },
     ]
   },
-  v: {
-    name: "Videos",
+  media: {
+    id: "m",
+    name: "Media",
     items: [
       {
-      id: "test",
-      name: "Test video",
+        id: "test",
+        name: "Test video",
+        icon: "video",
+      },
+      {
+        id: "pirates",
+        name: "Pirates Recording",
+        icon: "music",
+        hidden: true,
       },
     ],
   },
