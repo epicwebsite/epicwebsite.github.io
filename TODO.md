@@ -4,8 +4,8 @@
 ## Apparent fix
 - Fixed jQuery loading for most pages
 
-# Doing at the moment
-- Fixing jQuery
+<!-- # Doing at the moment -->
+<!-- -  -->
 
 # To do
 ## Features
