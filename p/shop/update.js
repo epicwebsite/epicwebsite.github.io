@@ -9,26 +9,57 @@ function update(mod) {
     selectedPlace = null;
     fl = data.shops[shop].map.floor;
     if (F.mouse.onCanvas) {
-      for (b = 0; b < data.shops[shop].map.types.keys().length; b++) {
-        bl = data.shops[shop].map.types.values()[b];
+      names = [];
+      for (b = 0; b < spots.length; b++) {
+        bl = spots[b];
         p = F.getCamPos({
-          x: bl.x + fl.x,
-          y: bl.y + fl.y,
+          x: bl.x,
+          y: bl.y,
           w: bl.w,
           h: bl.h,
         }, cam);
         if (F.collide(p, {
           x: F.mouse.x,
           y: F.mouse.y,
-          w: 1,
-          h: 1,
+          w: 10,
+          h: 10,
         })) {
+          names.push(bl.name);
           selectedPlace = {
-            name: data.shops[shop].map.types.keys()[b],
+            name: names,
             x: bl.x + fl.x + (bl.w / 2),
             y: bl.y + fl.y + (bl.h / 2),
-          };
-          break;
+            type: "s",
+          }
+          // break;
+        }
+      }
+    }
+    if (!selectedPlace) {
+      fl = data.shops[shop].map.floor;
+      if (F.mouse.onCanvas) {
+        for (b = 0; b < data.shops[shop].map.types.keys().length; b++) {
+          bl = data.shops[shop].map.types.values()[b];
+          p = F.getCamPos({
+            x: bl.x + fl.x,
+            y: bl.y + fl.y,
+            w: bl.w,
+            h: bl.h,
+          }, cam);
+          if (F.collide(p, {
+            x: F.mouse.x,
+            y: F.mouse.y,
+            w: 1,
+            h: 1,
+          })) {
+            selectedPlace = {
+              name: data.shops[shop].map.types.keys()[b],
+              x: bl.x + fl.x + (bl.w / 2),
+              y: bl.y + fl.y + (bl.h / 2),
+              type: "p",
+            };
+            break;
+          }
         }
       }
     }

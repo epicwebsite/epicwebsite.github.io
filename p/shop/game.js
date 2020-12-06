@@ -9,6 +9,7 @@ var ctx = canvas.getContext("2d");
 var gameState = "start";
 var cam = {};
 var items = [];
+var spots = [];
 var shop = "test";
 var selectedPlace = null;
 
@@ -38,6 +39,7 @@ function addItem(item) {
 }
 function updateItems() {
   doc.id("items").innerHTML = "";
+  spots = [];
   for (i = 0; i < items.length; i++) {
     place = "unknown";
     if (data.items[items[i]] && data.items[items[i]].place) {
@@ -46,29 +48,47 @@ function updateItems() {
     el = [
       '<li value="{id}"><button onclick="removeItem(this)" class="fa fa-trash"></button> {name} <i>{place}</i></li>'
     ].join("").format({
-      id: items[i].lower().replaceAll(" ", ""),
+      id: items[i].lower(),
       name: items[i].capWords(),
       place: place.capWords(),
     });
     doc.id("items").innerHTML += el;
     doc.id("item").value = "";
+    if (place && place != "unknown") {
+      bl = data.shops[shop].map.types[data.items[items[i]].place];
+      if (bl) {
+        spots.push({
+          name: items[i],
+          x: fl.x + (bl.x + (bl.w / 2)),
+          y: fl.y + (bl.y + (bl.h / 2)),
+          w: 10,
+          h: 10,
+        });
+      }
+    }
   }
 }
 function changeAvailable() {
   doc.id("available_items").innerHTML = "";
   let item = doc.id("item").value.lower();
-  if (item && item.replaceAll(" ", "")) {
-    let els = [];
-    for (e = 0; e < data.items.keys().length; e++) {
-      if (!data.items.keys()[e].replaceAll(" ", "").startsWith(item.replaceAll(" ", ""))) {
-        continue;
-      }
-      els.push([
-        '<li><button onclick="addItem(\'{name}\')" class="fa fa-cart-plus"></button>{name}</li>',
-      ].join("").format({
-        name: data.items.keys()[e].capWords(),
-      }));
+  if (!(item && item.replaceAll(" ", ""))) {
+    item = null;
+  }
+  let els = [];
+  for (e = 0; e < data.items.keys().length; e++) {
+    if (item && !data.items.keys()[e].replaceAll(" ", "").startsWith(item.replaceAll(" ", ""))) {
+      continue;
     }
+    if (items.includes(data.items.keys()[e])) {
+      continue;
+    }
+    els.push([
+      '<li><button onclick="addItem(\'{name}\')" class="fa fa-cart-plus"></button>{name}</li>',
+    ].join("").format({
+      name: data.items.keys()[e].capWords(),
+    }));
+  }
+  if (item) {
     if (!data.items.keys().includes(item)) {
       els.push([
         '<li><button onclick="createItem()" class="fa fa-plus-square"></button>{name}</li>',
@@ -76,8 +96,8 @@ function changeAvailable() {
         name: item.capWords(),
       }));
     }
-    doc.id("available_items").innerHTML = els.join("");
   }
+  doc.id("available_items").innerHTML = els.join("");
 }
 function addItemFromInput() {
   let item = doc.id("item").value;
@@ -115,3 +135,4 @@ function resetCam() {
 var then = Date.now();
 reset();
 main();
+F.triggerOnload();

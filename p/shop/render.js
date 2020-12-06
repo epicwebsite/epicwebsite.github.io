@@ -55,53 +55,90 @@ function render() {
     10,
   );
 
+  ctx.fillStyle = "red";
+  for (i = 0; i < spots.length; i++) {
+    ctx.beginPath();
+    ctx.ellipse(
+      spots[i].x,
+      spots[i].y,
+      spots[i].w,
+      spots[i].h,
+      0, 0, 2 * Math.PI
+    );
+    ctx.fill();
+  }
+
   if (selectedPlace) {
-    ctx.font = "30pt Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    let txt = selectedPlace.name.capWords();
-    w = ctx.measureText(txt).width + 10;
-    h = parseInt(ctx.font) + 10;
+    switch (selectedPlace.type) {
+      case ("p"): {
+        ctx.font = "30pt Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        let txt = selectedPlace.name.capWords();
+        w = ctx.measureText(txt).width + 15;
+        h = parseInt(ctx.font) + 15;
+    
+        ctx.fillStyle = F.getColor([10, 10, 10, 0.7]);
+        ctx.fillRoundRect(
+          selectedPlace.x - (w / 2),
+          selectedPlace.y - h,
+          w,
+          h,
+          8,
+        );
+    
+        ctx.fillStyle = F.getColor([250, 240, 240]);
+        ctx.fillText(
+          txt,
+          selectedPlace.x,
+          selectedPlace.y,
+        );
+      }; break;
+      case ("s"): {
+        ctx.font = "25pt Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        header = "Items:";
+        w = ctx.measureText(header).width;
+        ctx.font = "15pt Arial";
+        h = 45;
+        for (i = 0; i < selectedPlace.name.length; i++) {
+          let txt = selectedPlace.name[i].capWords();
+          w = Math.max(w, ctx.measureText(txt).width);
+          h += parseInt(ctx.font) + 8;
+        }
+        w += 20;
 
-    ctx.fillStyle = F.getColor([10, 10, 10, 0.7]);
-    /* ctx.fillRect(
-      selectedPlace.x - (w / 2),
-      selectedPlace.y - h,
-      w,
-      h,
-    ); */
-    ctx.fillRoundRect(
-      selectedPlace.x - (w / 2),
-      selectedPlace.y - h,
-      w,
-      h,
-      10,
-    );
-
-    ctx.fillStyle = F.getColor([250, 240, 240]);
-    ctx.fillText(
-      txt,
-      selectedPlace.x,
-      selectedPlace.y,
-    );
+        ctx.fillStyle = F.getColor([10, 10, 10, 0.7]);
+        ctx.fillRoundRect(
+          selectedPlace.x - (w / 2),
+          selectedPlace.y - 10,
+          w,
+          h,
+          8,
+        );
+        
+        ctx.font = "25pt Arial";
+        ctx.fillStyle = F.getColor([250, 240, 240]);
+        ctx.fillText(
+          header,
+          selectedPlace.x,
+          selectedPlace.y + 30,
+        );
+        ctx.font = "15pt Arial";
+        h = 55;
+        for (i = 0; i < selectedPlace.name.length; i++) {
+          let txt = selectedPlace.name[i].capWords();
+          ctx.fillText(
+            txt,
+            selectedPlace.x,
+            selectedPlace.y + h,
+          );
+          h += parseInt(ctx.font) + 8;
+        }
+      }; break;
+    }
   }
 
   ctx.restore();
-}
-
-// Delete once FnctJS uploads
-CanvasRenderingContext2D.prototype.fillRoundRect = function (x, y, w, h, r) {
-  if (w < 2 * r) {
-    r = w / 2;
-  }
-  if (h < 2 * r) {
-    r = h / 2;
-  }
-  this.beginPath();
-  this.moveTo(x + r, y);
-  this.arcTo(x + w, y, x + w, y + h, r);
-  this.arcTo(x + w, y + h, x, y + h, r);
-  this.arcTo(x, y + h, x, y, r);
-  this.arcTo(x, y, x + w, y, r);
-  this.fill();
 }
