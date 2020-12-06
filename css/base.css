@@ -72,3 +72,6 @@ input:checked + .slider:before {
   right: 20px;
   top: 80px;
 }
+.center {
+  text-align: center;
+}
