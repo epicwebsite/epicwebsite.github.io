@@ -12,6 +12,9 @@ var items = [];
 var spots = [];
 var shop = "test";
 var selectedPlace = null;
+var newLine = null;
+var path = [];
+var vals = {};
 
 function main() {
   update((Date.now() - then) / 1000);
@@ -119,6 +122,12 @@ function removeItem(el) {
   item = el.parentNode.getAttribute("value");
   items.remove(item);
   updateItems();
+  changeAvailable();
+}
+function itemInit() {
+  for (i = 0; i < data.items.keys().length; i++) {
+    addItem(data.items.keys()[i].capWords());
+  }
 }
 
 function resetCam() {
@@ -130,6 +139,80 @@ function resetCam() {
   doc.id("x").value = cam.x;
   doc.id("y").value = cam.y;
   doc.id("z").value = cam.z;
+}
+
+function plotPath() {
+  if (gameState == "play") {
+    fl = data.shops[shop].map.floor;
+    path = [
+      {
+        x: data.shops[shop].map.in.x + fl.x + (data.map.inOutSize / 2),
+        y: data.shops[shop].map.in.y + fl.y + (data.map.inOutSize / 2),
+      }
+    ];
+  }
+  gameState = (gameState == "plot" ? "play" : "plot");
+  doc.id("plot_button").innerHTML = (gameState == "plot" ? "Stop Plotting" : "Plot Path");
+  return;
+
+  path = [];
+  fl = data.shops[shop].map.floor;
+  cp = {
+    x: data.shops[shop].map.in.x + fl.x,
+    y: data.shops[shop].map.in.y + fl.y,
+  };
+  places = [
+    cp,
+  ];
+  for (i = 0; i < spots.length; i++) {
+    val = true;
+    for (k = 0; k < places.length; k++) {
+      if (places[k].name == data.items[spots[i].name].place) {
+        val = false;
+      }
+    }
+    if (val) {
+      places.push({
+        name: data.items[spots[i].name].place,
+        x: spots[i].x,
+        y: spots[i].y,
+      });
+    }
+  }
+  left = Array.from(places);
+  for (l = 0; l < places.length; l++) {
+    closest = {
+      v: Infinity,
+      n: null,
+    };
+    for (i = 0; i < left.length; i++) {
+      d = (
+        (F.diff(cp.x, left[i].x) ** 2) +
+        (F.diff(cp.y, left[i].y) ** 2)
+      ) ** 0.5;
+      if (d < closest.v) {
+        closest = {
+          v: d,
+          n: left[i],
+        };
+      }
+    }
+    // console.log(closest.n);
+    // console.log(left[closest.n]);
+    path.push({
+      x: closest.n.x,
+      y: closest.n.y,
+    });
+
+    console.log(left);
+    for (i = 0; i < left.length; i++) {
+      if (left[i] == closest.n) {
+        left.splice(i, 1);
+      }
+    }
+    console.log(left);
+    // left.remove(left[closest.n]);
+  }
 }
 
 var then = Date.now();

@@ -21,7 +21,8 @@
           }
         " oninput="changeAvailable()" type="text" id="item" placeholder="Milk..." autocomplete="off">
         <button onclick="addItemFromInput()">Add Item</button>
-        <ul class="scroll" id="available_items" onload="changeAvailable()">
+        <button onclick="plotPath()" id="plot_button">Plot Path</button>
+        <ul class="scroll" id="available_items" onload="changeAvailable(); itemInit()">
         </ul>
         <h3>Items</h3>
         <ul class="scroll" id="items">

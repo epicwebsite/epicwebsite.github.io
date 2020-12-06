@@ -44,16 +44,38 @@ function render() {
   ctx.fillRect(
     fl.x + sl.x,
     fl.y + sl.y,
-    10,
-    10,
+    data.map.inOutSize,
+    data.map.inOutSize,
   );
   sl = data.shops[shop].map.out;
   ctx.fillRect(
     fl.x + sl.x,
     fl.y + sl.y,
-    10,
-    10,
+    data.map.inOutSize,
+    data.map.inOutSize,
   );
+
+  ctx.strokeStyle = "magenta";
+  if (path.length > 0) {
+    ctx.beginPath();
+    ctx.moveTo(
+      path[0].x,
+      path[0].y,
+    );
+    for (l = 1; l < path.length; l++) {
+      ctx.lineTo(
+        path[l].x,
+        path[l].y
+      );
+    }
+    if (newLine) {
+      ctx.lineTo(
+        newLine.x,
+        newLine.y
+      );
+    }
+    ctx.stroke();
+  }
 
   ctx.fillStyle = "red";
   for (i = 0; i < spots.length; i++) {

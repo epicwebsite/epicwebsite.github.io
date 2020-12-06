@@ -168,5 +168,8 @@ var data = {
       },
     },
   },
+  map: {
+    inOutSize: 20,
+  },
 };
 var controls = {};

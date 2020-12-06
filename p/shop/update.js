@@ -4,8 +4,9 @@ function update(mod) {
   cam.y = parseFloat(doc.id("y").value);
   cam.z = parseFloat(doc.id("z").value);
   F.ls("cam", JSON.stringify(cam));
+  newLine = null;
 
-  if (gameState == "play") {
+  if (gameState == "play" || gameState == "plot") {
     selectedPlace = null;
     fl = data.shops[shop].map.floor;
     if (F.mouse.onCanvas) {
@@ -31,7 +32,6 @@ function update(mod) {
             y: bl.y + fl.y + (bl.h / 2),
             type: "s",
           }
-          // break;
         }
       }
     }
@@ -61,6 +61,36 @@ function update(mod) {
             break;
           }
         }
+      }
+    }
+  }
+  if (gameState == "plot") {
+    if (F.mouse.onCanvas) {
+      newLine = {
+        x: (((F.mouse.x - (canvas.width / 2)) / (cam.z / 100)) + (canvas.width / 2)) + cam.x,
+        y: (((F.mouse.y - (canvas.height / 2)) / (cam.z / 100)) + (canvas.height / 2)) - cam.y,
+      };
+      if (F.buttonDown(0)) {
+        if (vals.path_add) {
+          path.push(newLine);
+          vals.path_add = false;
+          p = F.getCamPos({
+            x: data.shops[shop].map.out.x + fl.x,
+            y: data.shops[shop].map.out.y + fl.y,
+            w: data.map.inOutSize,
+            h: data.map.inOutSize,
+          }, cam);
+          if (F.collide(p, {
+            x: F.mouse.x,
+            y: F.mouse.y,
+            w: 1,
+            h: 1,
+          })) {
+            plotPath();
+          }
+        }
+      } else {
+        vals.path_add = true;
       }
     }
   }
