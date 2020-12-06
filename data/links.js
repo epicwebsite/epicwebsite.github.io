@@ -3,6 +3,7 @@ var links =
   page: {
     id: "p",
     name: "Pages",
+    local: true,
     items: [
       {
         id: "about",
@@ -107,6 +108,7 @@ var links =
   media: {
     id: "m",
     name: "Media",
+    local: true,
     items: [
       {
         id: "test",
@@ -119,6 +121,17 @@ var links =
         icon: "music",
         hidden: true,
       },
+    ],
+  },
+  online: {
+    id: "o",
+    name: "Online",
+    local: false,
+    items: [
+      {
+        id: "https://newsorg.github.io/",
+        name: "News Website",
+      }
     ],
   },
 };
