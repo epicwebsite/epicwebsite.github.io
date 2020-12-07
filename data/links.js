@@ -131,7 +131,11 @@ var links =
       {
         id: "https://newsorg.github.io/",
         name: "News Website",
-      }
+      },
+      {
+        id: "https://coveroil.github.io/",
+        name: "https://coveroil.github.io/",
+      },
     ],
   },
 };
