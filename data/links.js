@@ -121,6 +121,12 @@ var links =
         icon: "music",
         hidden: true,
       },
+      {
+        id: "block",
+        name: "block.zip",
+        icon: "folder",
+        hidden: true,
+      },
     ],
   },
   online: {
