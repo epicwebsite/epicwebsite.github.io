@@ -68,6 +68,8 @@ function showHidden() {
 }
 
 function changeStyle() {
+  alert("why");
+  return;
   doc.id("stylesheet").href = "css/{0}.css".format(doc.id("lightmode").checked ? "light" : "dark");
   ls.edit(d => {
     d.lightmode = doc.id("lightmode").checked;
