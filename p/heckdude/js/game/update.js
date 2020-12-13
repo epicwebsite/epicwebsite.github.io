@@ -24,7 +24,7 @@ function update(mod) {
 
       player.flip = false;
       mult = 0;
-      switch (F.boolToBin(keysDown.includes("player_right"), keysDown.includes("player_left"))) {
+      switch (F.bool_bin(keysDown.includes("player_right"), keysDown.includes("player_left"))) {
         case ("10"): {
           if (player.flipped) {
             player.flip = true;
