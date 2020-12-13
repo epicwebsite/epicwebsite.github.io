@@ -92,6 +92,11 @@ var links =
         name: "Snake Knockoff",
       },
       {
+        id: "snake2",
+        name: "Snake Knockoff #2",
+        hidden: true,
+      },
+      {
         id: "tictac",
         name: "Tic Tac Toe / Naughts & Crosses",
       },
