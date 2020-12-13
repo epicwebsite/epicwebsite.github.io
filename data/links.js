@@ -132,6 +132,11 @@ var links =
         icon: "folder",
         hidden: true,
       },
+      {
+        id: "hack",
+        name: "Hack any Game",
+        icon: "folder",
+      },
     ],
   },
   online: {
