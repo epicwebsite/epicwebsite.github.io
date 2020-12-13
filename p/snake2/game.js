@@ -243,6 +243,11 @@ function update(mod) {
   }
 }
 
+// Remove once fnctjs updates
+Array.prototype.insert = function (index, item) {
+  this.splice(index, 0, item);
+};
+
 var then = Date.now();
 reset();
 main();
