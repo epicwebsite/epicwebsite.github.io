@@ -1,7 +1,6 @@
 var links =
 {
   page: {
-    id: "p",
     name: "Pages",
     local: true,
     items: [
@@ -89,12 +88,12 @@ var links =
       },
       {
         id: "snake",
-        name: "Snake Knockoff",
+        name: "Snake Knockoff Old",
+        hidden: true,
       },
       {
         id: "snake2",
-        name: "Snake Knockoff #2",
-        hidden: true,
+        name: "Snake Knockoff",
       },
       {
         id: "tictac",
@@ -111,7 +110,6 @@ var links =
     ]
   },
   media: {
-    id: "m",
     name: "Media",
     local: true,
     items: [

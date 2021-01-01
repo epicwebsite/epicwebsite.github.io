@@ -50,11 +50,18 @@ function showLinks(showHidden) {
       if (!icon) {
         icon = "";
       }
+      let href = links.values()[t].items[i].id;
+      if (links.values()[t].local) {
+        href = "./p/{0}{1}".format(
+          links.values()[t].items[i].id,
+          (F.url.protocol[0] == "f") ? "/index.html" : ""
+        );
+      };
       el = [
         '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">{name}</a>',
         '<br>',
       ].join("").format({
-        href: links.values()[t].local ? ("{0}/{1}{2}".format(links.values()[t].id, links.values()[t].items[i].id, (F.url.protocol[0] == "f") ? "/index.html" : "")) : links.values()[t].items[i].id,
+        href: href,
         dir: F.url.dir,
         name: "{0}{1}".format(icon, links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id),
         id: "link_{0}".format(links.values()[t].items[i].id),
