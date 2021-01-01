@@ -1,7 +1,5 @@
 html {
   background-color: rgba(40, 40, 60);
-}
-html {
   width: 100%;
   min-height: 100%;
   margin: 0;
@@ -9,6 +7,10 @@ html {
   border: 10px solid rgba(30, 30, 30, 0.6);
   display:block;
   box-sizing: border-box;
+}
+body {
+  padding: 10px;
+  margin-bottom: 100px;
 }
 *:not(code) {
   color: rgba(250, 250, 250);

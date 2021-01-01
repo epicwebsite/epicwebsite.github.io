@@ -32,8 +32,9 @@ function showLinks(showHidden) {
   for (t = 0; t < links.keys().length; t++) {
     el = [
       '<section id="links_{id}">',
-      '<h1>{name}</h1>',
-      '</section>'
+      '  <h1>{name}</h1>',
+      '</section>',
+      '<hr>',
     ].join("").format({
       id: links.keys()[t],
       name: links.values()[t].name,

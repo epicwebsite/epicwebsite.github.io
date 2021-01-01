@@ -61,7 +61,7 @@ var links =
       {
         id: "dog-age",
         name: "Dog Age Calculator",
-        hidden: true,
+        // hidden: true,
       },
       {
         id: "joystick",
@@ -149,6 +149,10 @@ var links =
       {
         id: "https://coveroil.github.io/",
         name: "https://coveroil.github.io/",
+      },
+      {
+        id: "https://github.com/epicwebsite/epicwebsite.github.io",
+        name: "GitHub",
       },
     ],
   },
