@@ -4,18 +4,23 @@
     <title>404</title>
     <link rel="stylesheet" href="https://epicwebsite.github.io/css/base.css">
     <script type="text/javascript" src="https://epicwebsite.github.io/js/jquery.js"></script>
+    <!-- <script type="text/javascript" src="C:/Users/darcy/OneDrive/Documents/.other/code/js/fnctjs/index.js"></script> -->
     <script type="text/javascript" src="https://fnctjs.github.io/index.js"></script>
-    <script type="text/javascript" src="https://epicwebsite.github.io/js/404.js"></script>
   </head>
   <body>
     <div class="center">
       <br><br>
       <h1>404 - The funny not found</h1>
-      <p>Try typing in the URL properly instead of <em onload="this.innerHTML = F.url.filepath">this</em></p>
+      <p>Try typing in the URL properly instead of <em id="path">whatever that is</em></p>
       <br>
-      <a onload="this.href = F.url.online ? './' : './index.html'">BACK TO HOME</a>
+      <a id="link">BACK TO HOME</a>
       <br><br>
       <h1>¯\_(ツ)_/¯</h1>
     </div>
+    <script>
+      doc.id("link").href = F.url.online ? "./" : "./index.html";
+      doc.id("path").innerHTML = F.url.filepath;
+      console.log(F.url.filepath);
+    </script>
   </body>
 </html>
