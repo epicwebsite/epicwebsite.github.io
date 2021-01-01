@@ -11,34 +11,36 @@
   </head>
   <body onload="init()">
     <section>
+      <p>Input birthday or age and press calculate to see how old your <span id="animal"></span> is</p>
+    </section>
+    <section>
       <select id="input_type" onchange="input_change(); calc()">
         <option value="bday" selected>Birthday</option>
         <option value="age">Age</option>
       </select>
       <div id="input_bday">
-        <input type="date" onchange="calc()" value="2019-02-15" id="i_date">
+        <input type="date" onchange="calc(); bday_change()" value="2019-02-15" id="i_date">
       </div>
       <div id="input_age">
-        <input type="number" onchange="calc()" min="0" max="999" value="1" placeholder="Years" id="i_years">
-        <input type="number" onchange="calc()" min="0" max="12" value="4" placeholder="Months" id="i_months">
-        <input type="number" onchange="calc()" min="0" max="31" value="19" placeholder="Days" id="i_days">
+        <input type="number" onchange="calc(); age_change()" min="0" max="999" value="1" placeholder="Years" id="i_years">
+        <input type="number" onchange="calc(); age_change()" min="0" max="12" value="4" placeholder="Months" id="i_months">
+        <input type="number" onchange="calc(); age_change()" min="0" max="31" value="19" placeholder="Days" id="i_days">
       </div>
     </section>
     <section>
       <select id="mod" onchange="mod_change()">
-        <option value="7">Dog (~7)</option>
-        <option value="18">Cat (~18)</option>
-        <option value="other">Other</option>
+        <option value="7_dog">Dog (~7)</option>
+        <option value="18_cat">Cat (~18)</option>
+        <option value="other_animal">Other</option>
       </select>
       <input type="number" value="7" min="0" max="999" step="0.5" placeholder="Modifier" id="i_mod">
     </section>
     <button onclick="calc()">Calculate</button>
     <section>
-      <input type="number" placeholder="Years" id="o_years">
-      <input type="number" placeholder="Months" id="o_months">
-      <input type="number" placeholder="Days" id="o_days">
+      <p id="output"></p>
     </section>
-    <p id="bday"></p>
+    <p id="bday_h" style="display:none;">Happy Human Calendar Birthday!</p>
+    <p id="bday_d" style="display:none;">Happy Birthday!</p>
     <!-- <p>idk if this actually works</p> -->
   </body>
 </html>
