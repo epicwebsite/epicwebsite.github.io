@@ -107,6 +107,11 @@ var links =
         id: "acronym",
         name: "Acronym Generator",
       },
+      {
+        id: "patience",
+        name: "Patience / Solitaire Game",
+        hidden: true,
+      },
     ]
   },
   media: {
