@@ -2,7 +2,8 @@ var data = {
   columns: 7,
   card_amount: 12,
   card_ratio: 1.5,
-  card_border: 5,
+  card_border: 6,
+  card_outline: 3,
   suits: {
     "D": "\u2666",
     "H": "\u2665",
@@ -26,10 +27,20 @@ var data = {
   },
 };
 var color = {
+  background: F.getColor([
+    10,
+    100,
+    40,
+  ]),
   card: F.getColor([
     240,
     230,
     230,
+  ]),
+  card_outline: F.getColor([
+    220,
+    210,
+    210,
   ]),
   card_back: F.getColor([
     50,
