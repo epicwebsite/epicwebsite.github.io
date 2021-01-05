@@ -74,4 +74,14 @@ var color = {
     240,
     0.5,
   ]),
+  button_background: F.getColor([
+    40,
+    50,
+    80,
+  ]),
+  button_text: F.getColor([
+    240,
+    240,
+    240,
+  ]),
 };

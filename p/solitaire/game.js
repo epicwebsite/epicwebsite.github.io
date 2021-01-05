@@ -134,14 +134,14 @@ function render() {
   }
 
   drawCard(
-    (5 * width) + 7,
+    (4 * width) + 7,
     canvas.height - (width * 0.8 * data.card_ratio) - 30,
     null,
     2,
   );
   if (cards.deck.down.length > 0) {
     drawCard(
-      (5 * width) + 7,
+      (4 * width) + 7,
       canvas.height - (width * 0.8 * data.card_ratio) - 30,
       null,
       1,
@@ -159,12 +159,28 @@ function render() {
         continue;
       }
       drawCard(
-        ((((c - cards.deck.up.length + 3) / 2) + 2.5) * width) + 7,
+        ((((c - cards.deck.up.length + 1) / 2) + 2.5) * width) + 7,
         canvas.height - (width * 0.8 * data.card_ratio) - 30,
         cards.deck.up[c],
       );
     }
   }
+
+  ctx.fillStyle = color.button_background;
+  ctx.fillRoundRect(
+    canvas.width - 110,
+    canvas.height - 60,
+    90,
+    40,
+    6,
+  );
+  ctx.fillStyle = color.button_text;
+  ctx.font = "20px Arial"
+  ctx.fillText(
+    "Give Up",
+    canvas.width - 65,
+    canvas.height - 40,
+  );
 
   if (cards.selected) {
     if (!F.buttonDown(0)) {
@@ -234,6 +250,42 @@ function render() {
             );
           }
         } else if (cards.selected.stack.split("-")[0] == "d") {
+          w = canvas.width / (data.columns + 1) - 2;
+          c = parseInt(cards.selected.stack.split("-")[1]);
+
+          if (F.mouse.x < w * data.columns) {
+            ctx.fillStyle = color.card_drop;
+            x = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
+            ctx.fillRoundRect(
+              x * (canvas.width / (data.columns + 1) - 2) + 7,
+              (cards.table[x].down.length + cards.table[x].up.length) * ((canvas.height / 2) / data.card_amount) + 10,
+              w * 0.8,
+              (w * 0.8) * data.card_ratio,
+              4,
+            );
+          } else {
+            drawCard(
+              (data.columns + 0.2) * w,
+              (
+                (
+                  F.mouse.y - 50 - (
+                    cards.selected.ry
+                  ) + (
+                    (
+                      canvas.width / (
+                        data.columns + 1
+                      ) - 2
+                    ) * 0.4 * data.card_ratio
+                  ) + (
+                    (canvas.height / 2) / data.card_amount
+                  )
+                ) / 100
+              ).round().setBorder(0, 3) * 100 + 10,
+              null,
+              3,
+            );
+          }
+          
           drawCard(
             F.mouse.x - cards.selected.rx,
             F.mouse.y - cards.selected.ry - 10,
@@ -491,6 +543,16 @@ function update(mod) {
           } else {
             cards.drop = true;
           }
+        } else if (cards.selected.stack.split("-")[0] == "b") {
+          if (F.buttonDown(0)) {
+            if (cards.drop) {
+              cards.drop = false;
+
+              reset();
+            }
+          } else {
+            cards.drop = true;
+          }
         }
       }
 
@@ -498,36 +560,30 @@ function update(mod) {
         if (!F.buttonDown(0)) {
           cards.selected = null;
           w = canvas.width / (data.columns + 1) - 2;
-          mouse = {
-            x: F.mouse.x,
-            y: F.mouse.y,
-            w: 1,
-            h: 1,
-          };
 
           p = {
-            x: (5 * width) + 7,
+            x: (4 * width) + 7,
             y: canvas.height - (width * 0.8 * data.card_ratio) - 30,
             w: w * 0.8,
             h: w * 0.8 * data.card_ratio,
             stack: "s",
           };
-          if (F.collide(mouse, p)) {
+          if (F.collide(F.mouse, p)) {
             cards.selected = p;
             break Check;
           }
 
           if (cards.deck.up.length > 0) {
             p = {
-              x: (3.5 * width) + 7,
+              x: (2.5 * width) + 7,
               y: canvas.height - (width * 0.8 * data.card_ratio) - 30,
               w: w * 0.8,
               h: w * 0.8 * data.card_ratio,
-              rx: F.diff((3.5 * width) + 7, F.mouse.x),
+              rx: F.diff((2.5 * width) + 7, F.mouse.x),
               ry: F.diff(canvas.height - (width * 0.8 * data.card_ratio) - 30, F.mouse.y),
               stack: "d",
             };
-            if (F.collide(mouse, p)) {
+            if (F.collide(F.mouse, p)) {
               cards.selected = p;
               break Check;
             }
@@ -545,7 +601,7 @@ function update(mod) {
                   rx: F.diff((c * w) + 7, F.mouse.x),
                   ry: F.diff(cards.table[c].down.length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
                 };
-                if (F.collide(mouse, p)) {
+                if (F.collide(F.mouse, p)) {
                   cards.selected = p;
                   break Check;
                 }
@@ -560,7 +616,7 @@ function update(mod) {
                 rx: F.diff((c * w) + 7, F.mouse.x),
                 ry: F.diff(cards.table[c].down.length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
               };
-              if (F.collide(mouse, p)) {
+              if (F.collide(F.mouse, p)) {
                 cards.selected = p;
                 break Check;
               }
@@ -578,11 +634,23 @@ function update(mod) {
                 rx: F.diff((c * w) + 7, F.mouse.x),
                 ry: F.diff(cards.aces[c].length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
               };
-              if (F.collide(mouse, p)) {
+              if (F.collide(F.mouse, p)) {
                 cards.selected = p;
                 break Check;
               }
             }
+          }
+
+          p = {
+            x: canvas.width - 110,
+            y: canvas.height - 60,
+            w: 90,
+            h: 40,
+            stack: "b",
+          };
+          if (F.collide(F.mouse, p)) {
+            cards.selected = p;
+            break Check;
           }
         }
       }

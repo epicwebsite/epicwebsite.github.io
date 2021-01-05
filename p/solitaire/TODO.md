@@ -1,4 +1,4 @@
-# Fixed
+<!-- # Fixed -->
 <!-- ## Confirmed fix -->
 <!-- -  -->
 <!-- ## Apparent fix -->
@@ -10,7 +10,6 @@
 # To do
 ## Features
 - Basic Gameplay
-- - Add deck and hand
 - - Add ability to move from ace
 - - Add win detection
 
