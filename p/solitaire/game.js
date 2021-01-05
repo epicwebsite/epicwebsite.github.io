@@ -38,7 +38,7 @@ function reset() {
     }
     up = [deck[n]];
     n++;
-    if (c == 0) {
+    /* if (c == 0) {
       up = ["4-C", "3-D", "2-S", "1-H", "1-H", "1-H", "1-H", "1-H"];
     }
     if (c == 1) {
@@ -58,7 +58,7 @@ function reset() {
     }
     if (c == 6) {
       up = ["1-H"];
-    }
+    } */
     cards.table.push({
       down,
       up,
@@ -66,12 +66,12 @@ function reset() {
   }
   for (i = 0; i < 4; i++) {
     cards.aces[i] = [];
-    if (i == 2) {
+    /* if (i == 2) {
       cards.aces[i] = ["1-S"];
-    }
+    } */
   }
   cards.deck.down = deck;
-  cards.deck.up = ["13-S", "12-H", "11-D", "10-C", "9-S", "8-H", "7-D", "6-C", "5-S"];
+  // cards.deck.up = ["4-S", "3-H"];
 
   gameState = "play";
 }
@@ -149,8 +149,17 @@ function render() {
   }
   if (cards.deck.up.length > 0) {
     for (c = Math.max(0, cards.deck.up.length - 3); c < cards.deck.up.length; c++) {
+      if (
+        F.buttonDown(0)
+        && cards.selected
+        && cards.selected.stack
+        && cards.selected.stack.split("-")[0] == "d"
+        && c == cards.deck.up.length - 1
+      ) {
+        continue;
+      }
       drawCard(
-        ((((c - Math.max(0, cards.deck.up.length - 3)) / 2) + 2.5) * width) + 7,
+        ((((c - cards.deck.up.length + 3) / 2) + 2.5) * width) + 7,
         canvas.height - (width * 0.8 * data.card_ratio) - 30,
         cards.deck.up[c],
       );
@@ -224,6 +233,12 @@ function render() {
               cards.table[c].up[i],
             );
           }
+        } else if (cards.selected.stack.split("-")[0] == "d") {
+          drawCard(
+            F.mouse.x - cards.selected.rx,
+            F.mouse.y - cards.selected.ry - 10,
+            cards.deck.up.sub(-1),
+          );
         }
       }
     }
@@ -273,6 +288,95 @@ function update(mod) {
                   cards.table[x1].up = cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]));
                   if (cards.table[x1].up == undefined) {
                     cards.table[x1].up = [];
+                  }
+                }
+              } else {
+                x2 = (
+                  (
+                    F.mouse.y - 50 - (
+                      cards.selected.ry
+                    ) + (
+                      (
+                        canvas.width / (
+                          data.columns + 1
+                        ) - 2
+                      ) * 0.4 * data.card_ratio
+                    ) + (
+                      (
+                        (
+                          cards.table[
+                            cards.selected.stack.split("-")[1]
+                          ].up.length - (
+                            parseInt(cards.selected.stack.split("-")[2])
+                          )
+                        ) * (
+                          (canvas.height / 2) / data.card_amount
+                        )
+                      )
+                    )
+                  ) / 100
+                ).round().setBorder(0, 3);
+                c2 = cards.aces[x2].sub(-1);
+                if (c2) {
+                  c2 = c2.split("-");
+                }
+
+                if (
+                  F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)).length == 1 && (
+                    (
+                      cards.aces[x2].length == 0
+                      && c1[0] == 1
+                    )
+                    || (
+                      c2
+                      && c1[1] == c2[1]
+                      && parseInt(c2[0]) + 1 == c1[0]
+                    )
+                  )
+                ) {
+                  cards.aces[x2] = F.joinArray(cards.aces[x2], F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)));
+                  cards.table[x1].up = cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]));
+                  if (cards.table[x1].up == undefined) {
+                    cards.table[x1].up = [];
+                  }
+                }
+              }
+            }
+          } else {
+            cards.drop = true;
+          }
+        } else if (cards.selected.stack.split("-")[0] == "d") {
+          if (!F.buttonDown(0)) {
+            if (cards.drop) {
+              cards.drop = false;
+
+              c1 = cards.deck.up.sub(-1).split("-");
+              if (F.mouse.x < (canvas.width / (data.columns + 1) - 2) * data.columns) {
+                x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
+                c2 = cards.table[x2].up.sub(-1);
+                if (c2) {
+                  c2 = c2.split("-");
+                }
+
+                if (
+                  (
+                    cards.table[x2].up.length == 0
+                    && cards.table[x2].down.length == 0
+                    && c1[0] == 13
+                  )
+                  || (
+                    c2
+                    && F.operate.logic.xor(
+                      "DH".split("").includes(c1[1]),
+                      "DH".split("").includes(c2[1]),
+                    )
+                    && parseInt(c2[0]) - 1 == c1[0]
+                  )
+                ) {
+                  cards.table[x2].up = F.joinArray(cards.table[x2].up, F.toArray(cards.deck.up.sub(-1)));
+                  cards.deck.up = F.toArray(cards.deck.up.sub(0, -2));
+                  if (cards.deck.up == undefined || cards.deck.up[0] == undefined) {
+                    cards.deck.up = [];
                   }
                 }
               } else {
@@ -382,9 +486,13 @@ function update(mod) {
             if (cards.drop) {
               cards.drop = false;
 
-              c = parseInt(cards.selected.stack.split("-")[1]);
-              cards.deck.up.push(cards.deck.down.sub(-1));
-              cards.deck.down = cards.deck.down.length > 1 ? F.toArray(cards.deck.down.sub(0, -2)) : [];
+              if (cards.deck.down.length > 0) {
+                cards.deck.up.push(cards.deck.down.sub(-1));
+                cards.deck.down = cards.deck.down.length > 1 ? F.toArray(cards.deck.down.sub(0, -2)) : [];
+              } else {
+                cards.deck.down = cards.deck.up;
+                cards.deck.up = [];
+              }
             }
           } else {
             cards.drop = true;
@@ -402,14 +510,28 @@ function update(mod) {
             w: 1,
             h: 1,
           };
-          
-          if (cards.deck.down.length > 0) {
+
+          p = {
+            x: (5 * width) + 7,
+            y: canvas.height - (width * 0.8 * data.card_ratio) - 30,
+            w: w * 0.8,
+            h: w * 0.8 * data.card_ratio,
+            stack: "s",
+          };
+          if (F.collide(mouse, p)) {
+            cards.selected = p;
+            break Check;
+          }
+
+          if (cards.deck.up.length > 0) {
             p = {
-              x: (5 * width) + 7,
+              x: (3.5 * width) + 7,
               y: canvas.height - (width * 0.8 * data.card_ratio) - 30,
               w: w * 0.8,
               h: w * 0.8 * data.card_ratio,
-              stack: "s",
+              rx: F.diff((3.5 * width) + 7, F.mouse.x),
+              ry: F.diff(canvas.height - (width * 0.8 * data.card_ratio) - 30, F.mouse.y),
+              stack: "d",
             };
             if (F.collide(mouse, p)) {
               cards.selected = p;
@@ -535,7 +657,7 @@ function drawCard(x, y, card, style) {
       x + data.card_outline,
       y + data.card_outline,
       w - (data.card_outline * 2),
-      h - (data.card_outline * 2  ),
+      h - (data.card_outline * 2),
       4,
     );
 
