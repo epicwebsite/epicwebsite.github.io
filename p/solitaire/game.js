@@ -12,7 +12,10 @@ var cards = {};
 function reset() {
   cards = {
     table: [],
-    deck: {},
+    deck: {
+      down: [],
+      up: [],
+    },
     aces: [],
     selected: null,
   };
@@ -36,22 +39,25 @@ function reset() {
     up = [deck[n]];
     n++;
     if (c == 0) {
-      up = ["5-D", "4-C", "3-D", "2-S", "1-H"];
+      up = ["4-C", "3-D", "2-S", "1-H", "1-H", "1-H", "1-H", "1-H"];
     }
     if (c == 1) {
-      up = ["6-C"];
+      up = ["1-C", "1-C", "1-C"];
     }
     if (c == 2) {
       up = ["5-H"];
     }
     if (c == 3) {
-      up = ["4-S"];
+      up = ["4-C"];
     }
     if (c == 4) {
       up = ["3-D"];
     }
     if (c == 5) {
-      up = ["2-C"];
+      up = ["2-S"];
+    }
+    if (c == 6) {
+      up = ["1-H"];
     }
     cards.table.push({
       down,
@@ -64,6 +70,8 @@ function reset() {
       cards.aces[i] = ["1-S"];
     }
   }
+  cards.deck.down = deck;
+  cards.deck.up = ["13-S", "12-H", "11-D", "10-C", "9-S", "8-H", "7-D", "6-C", "5-S"];
 
   gameState = "play";
 }
@@ -108,6 +116,7 @@ function render() {
       }
     }
   }
+
   for (c = 0; c < cards.aces.length; c++) {
     drawCard(
       (data.columns + 0.2) * width,
@@ -120,6 +129,30 @@ function render() {
         (data.columns + 0.2) * width,
         (c * 100) + 10,
         cards.aces[c].sub(-1),
+      );
+    }
+  }
+
+  drawCard(
+    (5 * width) + 7,
+    canvas.height - (width * 0.8 * data.card_ratio) - 30,
+    null,
+    2,
+  );
+  if (cards.deck.down.length > 0) {
+    drawCard(
+      (5 * width) + 7,
+      canvas.height - (width * 0.8 * data.card_ratio) - 30,
+      null,
+      1,
+    );
+  }
+  if (cards.deck.up.length > 0) {
+    for (c = Math.max(0, cards.deck.up.length - 3); c < cards.deck.up.length; c++) {
+      drawCard(
+        ((((c - Math.max(0, cards.deck.up.length - 3)) / 2) + 2.5) * width) + 7,
+        canvas.height - (width * 0.8 * data.card_ratio) - 30,
+        cards.deck.up[c],
       );
     }
   }
@@ -154,7 +187,31 @@ function render() {
           } else {
             drawCard(
               (data.columns + 0.2) * w,
-              (((F.mouse.y - cards.selected.ry) / ((cards.aces.length * 100) / 4)) + 0.5).round().setBorder(0, cards.aces.length - 1) * ((cards.aces.length * 100) / 4) + 10,
+              (
+                (
+                  F.mouse.y - 50 - (
+                    cards.selected.ry
+                  ) + (
+                    (
+                      canvas.width / (
+                        data.columns + 1
+                      ) - 2
+                    ) * 0.4 * data.card_ratio
+                  ) + (
+                    (
+                      (
+                        cards.table[
+                          cards.selected.stack.split("-")[1]
+                        ].up.length - (
+                          parseInt(cards.selected.stack.split("-")[2])
+                        )
+                      ) * (
+                        (canvas.height / 2) / data.card_amount
+                      )
+                    )
+                  )
+                ) / 100
+              ).round().setBorder(0, 3) * 100 + 10,
               null,
               3,
             );
@@ -219,21 +276,47 @@ function update(mod) {
                   }
                 }
               } else {
-                x2 = (((F.mouse.y - cards.selected.ry) / (((cards.aces.length * 100) / 4))) + 0.5).round().setBorder(0, cards.aces.length - 1);
+                x2 = (
+                  (
+                    F.mouse.y - 50 - (
+                      cards.selected.ry
+                    ) + (
+                      (
+                        canvas.width / (
+                          data.columns + 1
+                        ) - 2
+                      ) * 0.4 * data.card_ratio
+                    ) + (
+                      (
+                        (
+                          cards.table[
+                            cards.selected.stack.split("-")[1]
+                          ].up.length - (
+                            parseInt(cards.selected.stack.split("-")[2])
+                          )
+                        ) * (
+                          (canvas.height / 2) / data.card_amount
+                        )
+                      )
+                    )
+                  ) / 100
+                ).round().setBorder(0, 3);
                 c2 = cards.aces[x2].sub(-1);
                 if (c2) {
                   c2 = c2.split("-");
                 }
 
                 if (
-                  (
-                    cards.aces[x2].length == 0
-                    && c1[0] == 1
-                  )
-                  || (
-                    c2
-                    && c1[1] == c2[1]
-                    && parseInt(c2[0]) + 1 == c1[0]
+                  F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)).length == 1 && (
+                    (
+                      cards.aces[x2].length == 0
+                      && c1[0] == 1
+                    )
+                    || (
+                      c2
+                      && c1[1] == c2[1]
+                      && parseInt(c2[0]) + 1 == c1[0]
+                    )
                   )
                 ) {
                   cards.aces[x2] = F.joinArray(cards.aces[x2], F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)));
@@ -294,74 +377,95 @@ function update(mod) {
           } else {
             cards.drop = true;
           }
+        } else if (cards.selected.stack.split("-")[0] == "s") {
+          if (F.buttonDown(0)) {
+            if (cards.drop) {
+              cards.drop = false;
+
+              c = parseInt(cards.selected.stack.split("-")[1]);
+              cards.deck.up.push(cards.deck.down.sub(-1));
+              cards.deck.down = cards.deck.down.length > 1 ? F.toArray(cards.deck.down.sub(0, -2)) : [];
+            }
+          } else {
+            cards.drop = true;
+          }
         }
       }
 
-      if (!F.buttonDown(0)) {
-        cards.selected = null;
-        w = canvas.width / (data.columns + 1) - 2;
-        Columns: for (c = 0; c < cards.table.length; c++) {
-          if (cards.table[c].up.length > 0) {
-            for (i = cards.table[c].up.length - 1; i >= 0; i--) {
+      Check: for (check = 0; check < 1; check++) {
+        if (!F.buttonDown(0)) {
+          cards.selected = null;
+          w = canvas.width / (data.columns + 1) - 2;
+          mouse = {
+            x: F.mouse.x,
+            y: F.mouse.y,
+            w: 1,
+            h: 1,
+          };
+          
+          if (cards.deck.down.length > 0) {
+            p = {
+              x: (5 * width) + 7,
+              y: canvas.height - (width * 0.8 * data.card_ratio) - 30,
+              w: w * 0.8,
+              h: w * 0.8 * data.card_ratio,
+              stack: "s",
+            };
+            if (F.collide(mouse, p)) {
+              cards.selected = p;
+              break Check;
+            }
+          }
+
+          for (c = 0; c < cards.table.length; c++) {
+            if (cards.table[c].up.length > 0) {
+              for (i = cards.table[c].up.length - 1; i >= 0; i--) {
+                p = {
+                  x: (c * w) + 7,
+                  y: (cards.table[c].down.length + i) * ((canvas.height / 2) / data.card_amount) + 10,
+                  w: w * 0.8,
+                  h: (((cards.table[c].up.length - i) - 1) * ((canvas.height / 2) / data.card_amount)) + ((w * 0.8) * data.card_ratio),
+                  stack: "t-{0}-{1}".format(c, (cards.table[c].up.length - i)),
+                  rx: F.diff((c * w) + 7, F.mouse.x),
+                  ry: F.diff(cards.table[c].down.length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
+                };
+                if (F.collide(mouse, p)) {
+                  cards.selected = p;
+                  break Check;
+                }
+              }
+            } else if (cards.table[c].down.length > 0) {
               p = {
                 x: (c * w) + 7,
-                y: (cards.table[c].down.length + i) * ((canvas.height / 2) / data.card_amount) + 10,
+                y: (cards.table[c].down.length - 1) * ((canvas.height / 2) / data.card_amount) + 10,
                 w: w * 0.8,
-                h: (((cards.table[c].up.length - i) - 1) * ((canvas.height / 2) / data.card_amount)) + ((w * 0.8) * data.card_ratio),
-                stack: "t-{0}-{1}".format(c, (cards.table[c].up.length - i)),
+                h: (w * 0.8) * data.card_ratio,
+                stack: "f-{0}".format(c),
                 rx: F.diff((c * w) + 7, F.mouse.x),
                 ry: F.diff(cards.table[c].down.length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
               };
-              if (F.collide({
-                x: F.mouse.x,
-                y: F.mouse.y,
-                w: 1,
-                h: 1,
-              }, p)) {
+              if (F.collide(mouse, p)) {
                 cards.selected = p;
-                break Columns;
+                break Check;
               }
             }
-          } else if (cards.table[c].down.length > 0) {
-            p = {
-              x: (c * w) + 7,
-              y: (cards.table[c].down.length - 1) * ((canvas.height / 2) / data.card_amount) + 10,
-              w: w * 0.8,
-              h: (w * 0.8) * data.card_ratio,
-              stack: "f-{0}".format(c),
-              rx: F.diff((c * w) + 7, F.mouse.x),
-              ry: F.diff(cards.table[c].down.length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
-            };
-            if (F.collide({
-              x: F.mouse.x,
-              y: F.mouse.y,
-              w: 1,
-              h: 1,
-            }, p)) {
-              cards.selected = p;
-              break Columns;
-            }
           }
-        }
-        Stacks: for (c = 0; c < cards.aces.length; c++) {
-          if (cards.aces[c].length > 0) {
-            p = {
-              x: (data.columns + 0.2) * w,
-              y: (c * 100) + 10,
-              w: w * 0.8,
-              h: (w * 0.8) * data.card_ratio,
-              stack: "a-{0}".format(c),
-              rx: F.diff((c * w) + 7, F.mouse.x),
-              ry: F.diff(cards.aces[c].length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
-            };
-            if (F.collide({
-              x: F.mouse.x,
-              y: F.mouse.y,
-              w: 1,
-              h: 1,
-            }, p)) {
-              cards.selected = p;
-              break Stacks;
+
+          for (c = 0; c < cards.aces.length; c++) {
+            if (cards.aces[c].length > 0) {
+              p = {
+                x: (data.columns + 0.2) * w,
+                y: (c * 100) + 10,
+                w: w * 0.8,
+                h: (w * 0.8) * data.card_ratio,
+                stack: "a-{0}".format(c),
+                rx: F.diff((c * w) + 7, F.mouse.x),
+                ry: F.diff(cards.aces[c].length * ((canvas.height / 2) / data.card_amount), F.mouse.y) - 10,
+              };
+              if (F.collide(mouse, p)) {
+                cards.selected = p;
+                break Check;
+              }
             }
           }
         }
