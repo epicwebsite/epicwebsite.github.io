@@ -20,3 +20,9 @@ canvas {
 select, input, button {
   color: black;
 }
+a {
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
