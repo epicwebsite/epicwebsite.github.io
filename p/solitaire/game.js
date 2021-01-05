@@ -37,28 +37,10 @@ function reset() {
       n++
     }
     up = [deck[n]];
-    n++;
-    /* if (c == 0) {
-      up = ["4-C", "3-D", "2-S", "1-H", "1-H", "1-H", "1-H", "1-H"];
-    }
-    if (c == 1) {
-      up = ["1-C", "1-C", "1-C"];
-    }
-    if (c == 2) {
-      up = ["5-H"];
-    }
     if (c == 3) {
-      up = ["4-C"];
+      up = ["4-S"];
     }
-    if (c == 4) {
-      up = ["3-D"];
-    }
-    if (c == 5) {
-      up = ["2-S"];
-    }
-    if (c == 6) {
-      up = ["1-H"];
-    } */
+    n++;
     cards.table.push({
       down,
       up,
@@ -66,12 +48,9 @@ function reset() {
   }
   for (i = 0; i < 4; i++) {
     cards.aces[i] = [];
-    /* if (i == 2) {
-      cards.aces[i] = ["1-S"];
-    } */
   }
   cards.deck.down = deck.sub(n, -1);
-  // cards.deck.up = ["4-S", "3-H"];
+  cards.deck.up = ["3-H"];
 
   gameState = "play";
 }
@@ -254,15 +233,17 @@ function render() {
           c = parseInt(cards.selected.stack.split("-")[1]);
 
           if (F.mouse.x < w * data.columns) {
-            ctx.fillStyle = color.card_drop;
-            x = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
-            ctx.fillRoundRect(
-              x * (canvas.width / (data.columns + 1) - 2) + 7,
-              (cards.table[x].down.length + cards.table[x].up.length) * ((canvas.height / 2) / data.card_amount) + 10,
-              w * 0.8,
-              (w * 0.8) * data.card_ratio,
-              4,
-            );
+            if (F.mouse.y < canvas.height - (width * 0.8 * data.card_ratio) - 30) {
+              ctx.fillStyle = color.card_drop;
+              x = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
+              ctx.fillRoundRect(
+                x * (canvas.width / (data.columns + 1) - 2) + 7,
+                (cards.table[x].down.length + cards.table[x].up.length) * ((canvas.height / 2) / data.card_amount) + 10,
+                w * 0.8,
+                (w * 0.8) * data.card_ratio,
+                4,
+              );
+            }
           } else {
             drawCard(
               (data.columns + 0.2) * w,
@@ -317,7 +298,7 @@ function update(mod) {
               if (F.mouse.x < (canvas.width / (data.columns + 1) - 2) * data.columns) {
                 x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
                 c2 = cards.table[x2].up.sub(-1);
-                if (c2) {
+                if (c2 && c2.length > 0) {
                   c2 = c2.split("-");
                 }
 
@@ -369,7 +350,7 @@ function update(mod) {
                   ) / 100
                 ).round().setBorder(0, 3);
                 c2 = cards.aces[x2].sub(-1);
-                if (c2) {
+                if (c2 && c2.length > 0) {
                   c2 = c2.split("-");
                 }
 
@@ -387,7 +368,7 @@ function update(mod) {
                   )
                 ) {
                   cards.aces[x2] = F.joinArray(cards.aces[x2], F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)));
-                  cards.table[x1].up = cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]));
+                  cards.table[x1].up = F.toArray(cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2])));
                   if (cards.table[x1].up == undefined) {
                     cards.table[x1].up = [];
                   }
@@ -404,31 +385,33 @@ function update(mod) {
 
               c1 = cards.deck.up.sub(-1).split("-");
               if (F.mouse.x < (canvas.width / (data.columns + 1) - 2) * data.columns) {
-                x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
-                c2 = cards.table[x2].up.sub(-1);
-                if (c2) {
-                  c2 = c2.split("-");
-                }
+                if (F.mouse.y < canvas.height - (width * 0.8 * data.card_ratio) - 30) {
+                  x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
+                  c2 = cards.table[x2].up.sub(-1);
+                  if (c2 && c2.length > 0) {
+                    c2 = c2.split("-");
+                  }
 
-                if (
-                  (
-                    cards.table[x2].up.length == 0
-                    && cards.table[x2].down.length == 0
-                    && c1[0] == 13
-                  )
-                  || (
-                    c2
-                    && F.operate.logic.xor(
-                      "DH".split("").includes(c1[1]),
-                      "DH".split("").includes(c2[1]),
+                  if (
+                    (
+                      cards.table[x2].up.length == 0
+                      && cards.table[x2].down.length == 0
+                      && c1[0] == 13
                     )
-                    && parseInt(c2[0]) - 1 == c1[0]
-                  )
-                ) {
-                  cards.table[x2].up = F.joinArray(cards.table[x2].up, F.toArray(cards.deck.up.sub(-1)));
-                  cards.deck.up = F.toArray(cards.deck.up.sub(0, -2));
-                  if (cards.deck.up == undefined || cards.deck.up[0] == undefined) {
-                    cards.deck.up = [];
+                    || (
+                      c2
+                      && F.operate.logic.xor(
+                        "DH".split("").includes(c1[1]),
+                        "DH".split("").includes(c2[1]),
+                      )
+                      && parseInt(c2[0]) - 1 == c1[0]
+                    )
+                  ) {
+                    cards.table[x2].up = F.joinArray(cards.table[x2].up, F.toArray(cards.deck.up.sub(-1)));
+                    cards.deck.up = F.toArray(cards.deck.up.sub(0, -2));
+                    if (cards.deck.up == undefined || cards.deck.up[0] == undefined) {
+                      cards.deck.up = [];
+                    }
                   }
                 }
               } else {
@@ -454,7 +437,7 @@ function update(mod) {
                   ) / 100
                 ).round().setBorder(0, 3);
                 c2 = cards.aces[x2].sub(-1);
-                if (c2) {
+                if (c2 && c2.length > 0) {
                   c2 = c2.split("-");
                 }
 
@@ -489,7 +472,7 @@ function update(mod) {
               c1 = cards.table[y1].up[0].split("-");
               y2 = ((F.mouse.y - cards.selected.ry) / (((cards.aces.length * 100) / 4))).round().setBorder(0, cards.aces.length - 1);
               c2 = cards.table[y2].up.sub(-1);
-              if (c2) {
+              if (c2 && c2.length > 0) {
                 c2 = c2.split("-");
               }
               console.log(y1, y2);/* 
