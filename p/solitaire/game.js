@@ -393,11 +393,7 @@ function update(mod) {
                     ) + (
                       (
                         (
-                          cards.table[
-                            cards.selected.stack.split("-")[1]
-                          ].up.length - (
-                            parseInt(cards.selected.stack.split("-")[2])
-                          )
+                          1
                         ) * (
                           (canvas.height / 2) / data.card_amount
                         )
@@ -411,22 +407,20 @@ function update(mod) {
                 }
 
                 if (
-                  F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)).length == 1 && (
-                    (
-                      cards.aces[x2].length == 0
-                      && c1[0] == 1
-                    )
-                    || (
-                      c2
-                      && c1[1] == c2[1]
-                      && parseInt(c2[0]) + 1 == c1[0]
-                    )
+                  (
+                    cards.aces[x2].length == 0
+                    && c1[0] == 1
+                  )
+                  || (
+                    c2
+                    && c1[1] == c2[1]
+                    && parseInt(c2[0]) + 1 == c1[0]
                   )
                 ) {
-                  cards.aces[x2] = F.joinArray(cards.aces[x2], F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)));
-                  cards.table[x1].up = cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]));
-                  if (cards.table[x1].up == undefined) {
-                    cards.table[x1].up = [];
+                  cards.aces[x2] = F.joinArray(cards.aces[x2], F.toArray(cards.deck.up.sub(-1)));
+                  cards.deck.up = F.toArray(cards.deck.up.sub(0, -2));
+                  if (cards.deck.up == undefined || cards.deck.up[0] == undefined) {
+                    cards.deck.up = [];
                   }
                 }
               }
