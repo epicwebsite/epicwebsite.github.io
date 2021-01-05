@@ -594,7 +594,7 @@ function update(mod) {
             if (cards.drop) {
               cards.drop = false;
 
-              reset();
+              giveUp();
             }
           } else {
             cards.drop = true;
@@ -814,6 +814,12 @@ function gameUpdate() {
 
   if (val) {
     console.log("WIN!");
-    reset();
+    setTimeout(reset, 200);
+  }
+}
+
+function giveUp() {
+  if (window.confirm("Are you sure you want to give up?")) {
+    setTimeout(reset, 200);
   }
 }
