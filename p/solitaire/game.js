@@ -70,7 +70,7 @@ function reset() {
       cards.aces[i] = ["1-S"];
     } */
   }
-  cards.deck.down = deck;
+  cards.deck.down = deck.sub(n, -1);
   // cards.deck.up = ["4-S", "3-H"];
 
   gameState = "play";
