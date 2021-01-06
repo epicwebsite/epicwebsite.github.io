@@ -581,7 +581,7 @@ function update(mod) {
                 cards.deck.up.push(cards.deck.down.sub(-1));
                 cards.deck.down = cards.deck.down.length > 1 ? F.toArray(cards.deck.down.sub(0, -2)) : [];
               } else {
-                cards.deck.down = cards.deck.up;
+                cards.deck.down = cards.deck.up.reverse();
                 cards.deck.up = [];
               }
               gameUpdate();
