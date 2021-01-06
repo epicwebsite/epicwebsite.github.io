@@ -232,8 +232,8 @@ function render() {
 
           for (i = cards.table[c].up.length - parseInt(cards.selected.stack.split("-")[2]); i < cards.table[c].up.length; i++) {
             drawCard(
-              F.mouse.x - cards.selected.rx,
-              (F.mouse.y - cards.selected.ry) + (i * ((canvas.height / 2) / data.card_amount) - 10),
+              (F.mouse.x - cards.selected.rx).setBorder(0, canvas.width - ((canvas.width / (data.columns + 1) - 2) * 0.8)),
+              ((F.mouse.y - cards.selected.ry) + (i * ((canvas.height / 2) / data.card_amount) - 10)).setBorder(0, canvas.width - (((canvas.width / (data.columns + 1) - 2) * 0.8) * data.card_ratio)),
               cards.table[c].up[i],
             );
           }
@@ -277,8 +277,8 @@ function render() {
           }
 
           drawCard(
-            F.mouse.x - cards.selected.rx,
-            F.mouse.y - cards.selected.ry - 10,
+            (F.mouse.x - cards.selected.rx).setBorder(0, canvas.width - ((canvas.width / (data.columns + 1) - 2) * 0.8)),
+            (F.mouse.y - cards.selected.ry - 10).setBorder(0, canvas.width - (((canvas.width / (data.columns + 1) - 2) * 0.8) * data.card_ratio)),
             cards.deck.up.sub(-1),
           );
         } else if (cards.selected.stack.split("-")[0] == "a") {
@@ -321,8 +321,8 @@ function render() {
           }
 
           drawCard(
-            F.mouse.x - cards.selected.rx,
-            F.mouse.y - cards.selected.ry - 10,
+            (F.mouse.x - cards.selected.rx).setBorder(0, canvas.width - ((canvas.width / (data.columns + 1) - 2) * 0.8)),
+            (F.mouse.y - cards.selected.ry - 10).setBorder(0, canvas.width - (((canvas.width / (data.columns + 1) - 2) * 0.8) * data.card_ratio)),
             cards.aces[c].sub(-1),
           );
         }
@@ -345,9 +345,21 @@ function update(mod) {
           if (!F.buttonDown(0)) {
             if (cards.drop) {
               cards.drop = false;
-
+              
               x1 = parseInt(cards.selected.stack.split("-")[1]);
               c1 = cards.table[x1].up[cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2])].split("-");
+              
+              if (
+                F.mouse.x < 20
+                && F.mouse.y > canvas.height - 20
+                && F.keyDown(32)
+              ) {
+                cards.table[x1].up = F.toArray(cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2])));
+                if (cards.table[x1].up == undefined) {
+                  cards.table[x1].up = [];
+                }
+              }
+
               if (F.mouse.x < (canvas.width / (data.columns + 1) - 2) * data.columns) {
                 x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
                 c2 = cards.table[x2].up.sub(-1);
@@ -439,6 +451,18 @@ function update(mod) {
               cards.drop = false;
 
               c1 = cards.deck.up.sub(-1).split("-");
+
+              if (
+                F.mouse.x < 20
+                && F.mouse.y > canvas.height - 20
+                && F.keyDown(32)
+              ) {
+                cards.deck.up = F.toArray(cards.deck.up.sub(0, -2));
+                if (cards.deck.up == undefined || cards.deck.up[0] == undefined) {
+                  cards.deck.up = [];
+                }
+              }
+
               if (F.mouse.x < (canvas.width / (data.columns + 1) - 2) * data.columns) {
                 if (F.mouse.y < canvas.height - (width * 0.8 * data.card_ratio) - 30) {
                   x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
@@ -524,9 +548,21 @@ function update(mod) {
           if (!F.buttonDown(0)) {
             if (cards.drop) {
               cards.drop = false;
-
+              
               x1 = parseInt(cards.selected.stack.split("-")[1]);
               c1 = cards.aces[x1].sub(-1).split("-");
+
+              if (
+                F.mouse.x < 20
+                && F.mouse.y > canvas.height - 20
+                && F.keyDown(32)
+              ) {
+                cards.aces[x1] = F.toArray(cards.aces[x1].sub(0, -2));
+                if (cards.aces[x1] == undefined) {
+                  cards.aces[x1] = [];
+                }
+              }
+
               x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
               c2 = cards.table[x2].up.sub(-1);
               if (c2 && c2.length > 0) {
@@ -699,6 +735,10 @@ function update(mod) {
             break Check;
           }
         }
+      }
+    } else {
+      if (!F.buttonDown(0)) {
+        cards.selected = null;
       }
     }
     canvas.style.cursor = cards.selected ? "pointer" : "default";
