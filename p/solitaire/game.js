@@ -371,7 +371,7 @@ function update(mod) {
                   )
                 ) {
                   cards.table[x2].up = F.joinArray(cards.table[x2].up, F.toArray(cards.table[x1].up.sub(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)));
-                  cards.table[x1].up = cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]));
+                  cards.table[x1].up = F.toArray(cards.table[x1].up.sub(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2])));
                   if (cards.table[x1].up == undefined) {
                     cards.table[x1].up = [];
                   }
