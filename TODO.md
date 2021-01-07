@@ -15,6 +15,6 @@
 - Fix word search generator
 
 # Reference
-- [Bug fixes / changes](https://github.com/epicwebsite/epicwebsite.github.io/commits/master)
+- [Commit Log](https://github.com/epicwebsite/epicwebsite.github.io/commits/master)
 - [HeckDude TODO](./p/heckdude/todo.md)
 - [Solitaire TODO](./p/solitaire/TODO.md)
