@@ -17,4 +17,4 @@
 # Reference
 - [Bug fixes / changes](https://github.com/epicwebsite/epicwebsite.github.io/commits/master)
 - [HeckDude TODO](./p/heckdude/todo.md)
-- [Solitaire TODO](./p/solitaire/todo.md)
+- [Solitaire TODO](./p/solitaire/TODO.md)
