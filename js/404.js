@@ -13,7 +13,7 @@ function init() {
         );
         doc.id("header").innerHTML = "Redirecting...";
         doc.id("text").innerHTML = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(link);
-      /* location.href = link */
+        location.href = link;
         redirected = true;
         break;
       }
