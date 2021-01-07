@@ -21,6 +21,6 @@ function init() {
   }
 
   if (!redirected) {
-    doc.id("path").innerHTML = F.url.filepath;
+    doc.id("path").innerHTML = "'{0}'".format(path);
   }
 }
