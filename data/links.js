@@ -5,10 +5,6 @@ var links =
     local: true,
     items: [
       {
-        id: "about",
-        name: "About",
-      },
-      {
         id: "custom-tab",
         name: "NewTab",
       },
