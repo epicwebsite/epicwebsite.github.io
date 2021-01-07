@@ -4,6 +4,7 @@ var data = {
   card_ratio: 1.5,
   card_border: 6,
   card_outline: 3,
+  card_move_speed: 5,
   suits: {
     "D": "\u2666",
     "H": "\u2665",
