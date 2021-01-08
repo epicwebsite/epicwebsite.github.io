@@ -40,34 +40,6 @@ function reset() {
       }
     }
   }
-  /* board[4][1] = {
-    c: 0,
-    p: 2,
-  };
-  board[6][0] = {
-    c: 0,
-    p: 2,
-  };
-  board[4][6] = {
-    c: 0,
-    p: 2,
-  };
-  board[4][3] = {
-    c: 0,
-    p: 0,
-  };
-  board[5][4] = {
-    c: 1,
-    p: 2,
-  };
-  board[4][3] = {
-    c: 0,
-    p: 2,
-  };
-  board[3][0] = {
-    c: 0,
-    p: 1,
-  }; */
 
   for (p = 0; p < data.pieces.length; p++) {
     img = new Image();
@@ -133,7 +105,7 @@ function update(mod) {
               ) {
                 board[moves[m].x][moves[m].y] = board[selected.x][selected.y];
                 board[selected.x][selected.y] = null;
-                turn = (turn + 1) % 2
+                // turn = (turn + 1) % 2
 
                 break;
               }
@@ -164,13 +136,13 @@ function availableMoves() {
   if (a) {
     moves = [];
 
-    if (data.moves[a.p]) {
-      for (m = 0; m < data.moves[a.p].length; m++) {
-        x = data.moves[a.p][m].x;
+    if (pieceMoves[a.p]) {
+      for (m = 0; m < pieceMoves[a.p].length; m++) {
+        x = pieceMoves[a.p][m].x;
         if (typeof x == "function") {
           x = x();
         }
-        y = data.moves[a.p][m].y;
+        y = pieceMoves[a.p][m].y;
         if (typeof y == "function") {
           y = y();
         }
@@ -180,24 +152,24 @@ function availableMoves() {
           && board[a.x + x][a.y + y] !== undefined
           && (
             (
-              data.moves[a.p][m].n == 2
+              pieceMoves[a.p][m].n == 2
               && (
                 !board[a.x + x][a.y + y]
                 || board[a.x + x][a.y + y].c != a.c
               )
             ) || (
-              data.moves[a.p][m].n && !(
+              pieceMoves[a.p][m].n && !(
                 !board[a.x + x][a.y + y]
                 || board[a.x + x][a.y + y].c == a.c
               )
             ) || (
-              !data.moves[a.p][m].n && (
+              !pieceMoves[a.p][m].n && (
                 !board[a.x + x][a.y + y]
               )
             )
           ) && (
-            !data.moves[a.p][m].e
-            || data.moves[a.p][m].e(
+            !pieceMoves[a.p][m].e
+            || pieceMoves[a.p][m].e(
               a.x,
               a.y,
               a.x + x,
