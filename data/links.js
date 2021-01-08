@@ -107,6 +107,10 @@ var links =
         id: "solitaire",
         name: "Solitaire Game",
       },
+      {
+        id: "chess",
+        name: "Chess Game",
+      },
     ]
   },
   media: {
