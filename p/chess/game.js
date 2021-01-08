@@ -105,7 +105,7 @@ function update(mod) {
               ) {
                 board[moves[m].x][moves[m].y] = board[selected.x][selected.y];
                 board[selected.x][selected.y] = null;
-                // turn = (turn + 1) % 2
+                turn = (turn + 1) % 2
 
                 break;
               }
@@ -127,6 +127,30 @@ function update(mod) {
           vals.click = true;
         }
       }
+    }
+
+    kings = [0, 0];
+    for (x = 0; x < 8; x++) {
+      for (y = 0; y < 8; y++) {
+        if (board[x][y] && board[x][y].p == 4) {
+          kings[board[x][y].c] = 1;
+        }
+      }
+    }
+    if (kings[0] ^ kings[1]) {
+      gameState = "win";
+      console.log(
+        "{0} Won!".format(
+          kings.join("") == "10" ?
+            "White" :
+            "Black"
+        )
+      );
+      setTimeout(reset, 500);
+    } else if (kings.join("") == "00") {
+      gameState = "draw";
+      console.log("Draw!");
+      setTimeout(reset, 500);
     }
   }
 }
