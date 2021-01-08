@@ -30,10 +30,10 @@ function render() {
   moves = availableMoves();
   if (moves && board[selected.x][selected.y] && board[selected.x][selected.y].c == turn) {
     ctx.fillStyle = color.move_available;
-    for (m = 0; m < moves.a.length; m++) {
+    for (m = 0; m < moves.length; m++) {
       ctx.fillRect(
-        moves.a[m].x * (canvas.width / 8),
-        moves.a[m].y * (canvas.height / 8),
+        moves[m].x * (canvas.width / 8),
+        moves[m].y * (canvas.height / 8),
         (canvas.width / 8),
         (canvas.height / 8),
       );

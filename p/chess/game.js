@@ -40,7 +40,7 @@ function reset() {
       }
     }
   }
-  board[4][1] = {
+  /* board[4][1] = {
     c: 0,
     p: 2,
   };
@@ -60,10 +60,14 @@ function reset() {
     c: 1,
     p: 2,
   };
-  board[6][2] = {
+  board[4][3] = {
     c: 0,
     p: 2,
   };
+  board[3][0] = {
+    c: 0,
+    p: 1,
+  }; */
 
   for (p = 0; p < data.pieces.length; p++) {
     img = new Image();
@@ -84,9 +88,9 @@ function main() {
 
 function update(mod) {
   if (gameState == "play") {
-    if (!selected || !selected.clicked) {
-      selected = null;
-      if (F.mouse.onCanvas) {
+    if (F.mouse.onCanvas) {
+      if (!selected || !selected.clicked) {
+        selected = null;
         x = (F.mouse.x / 64).round(0, "f").setBorder(0, 8);
         y = (F.mouse.y / 64).round(0, "f").setBorder(0, 8);
         p = null;
@@ -102,54 +106,54 @@ function update(mod) {
           c,
         };
       }
-    }
 
-    if (selected && selected.clicked) {
-      canvas.style.cursor = "default";
-      moves = availableMoves().a;
-      for (m = 0; m < moves.length; m++) {
-        if (
-          (F.mouse.x / 64).round(0, "f").setBorder(0, 8) == moves[m].x
-          && (F.mouse.y / 64).round(0, "f").setBorder(0, 8) == moves[m].y
-        ) {
-          canvas.style.cursor = "pointer";
-          break;
+      if (selected && selected.clicked) {
+        canvas.style.cursor = "default";
+        moves = availableMoves();
+        for (m = 0; m < moves.length; m++) {
+          if (
+            (F.mouse.x / 64).round(0, "f").setBorder(0, 8) == moves[m].x
+            && (F.mouse.y / 64).round(0, "f").setBorder(0, 8) == moves[m].y
+          ) {
+            canvas.style.cursor = "pointer";
+            break;
+          }
         }
-      }
-      
-      if (F.buttonDown(0)) {
-        if (vals.click) {
-          vals.click = false;
-          selected.clicked = false;
 
-          moves = availableMoves().a;
-          for (m = 0; m < moves.length; m++) {
-            if (
-              (F.mouse.x / 64).round(0, "f").setBorder(0, 8) == moves[m].x
-              && (F.mouse.y / 64).round(0, "f").setBorder(0, 8) == moves[m].y
-            ) {
-              board[moves[m].x][moves[m].y] = board[selected.x][selected.y];
-              board[selected.x][selected.y] = null;
-              turn = (turn + 1) % 2
-              
-              break;
+        if (F.buttonDown(0)) {
+          if (vals.click) {
+            vals.click = false;
+            selected.clicked = false;
+
+            moves = availableMoves();
+            for (m = 0; m < moves.length; m++) {
+              if (
+                (F.mouse.x / 64).round(0, "f").setBorder(0, 8) == moves[m].x
+                && (F.mouse.y / 64).round(0, "f").setBorder(0, 8) == moves[m].y
+              ) {
+                board[moves[m].x][moves[m].y] = board[selected.x][selected.y];
+                board[selected.x][selected.y] = null;
+                turn = (turn + 1) % 2
+
+                break;
+              }
             }
           }
+        } else {
+          vals.click = true;
         }
       } else {
-        vals.click = true;
-      }
-    } else {
-      canvas.style.cursor = "pointer";
-      if (F.buttonDown(0)) {
-        if (vals.click) {
-          vals.click = false;
-          if (board[selected.x][selected.y] && board[selected.x][selected.y].c == turn) {
-            selected.clicked = true;
+        canvas.style.cursor = "pointer";
+        if (F.buttonDown(0)) {
+          if (vals.click) {
+            vals.click = false;
+            if (board[selected.x][selected.y] && board[selected.x][selected.y].c == turn) {
+              selected.clicked = true;
+            }
           }
+        } else {
+          vals.click = true;
         }
-      } else {
-        vals.click = true;
       }
     }
   }
@@ -158,9 +162,7 @@ function update(mod) {
 function availableMoves() {
   a = selected;
   if (a) {
-    moves = {
-      a: [],
-    };
+    moves = [];
 
     if (data.moves[a.p]) {
       for (m = 0; m < data.moves[a.p].length; m++) {
@@ -204,7 +206,7 @@ function availableMoves() {
             )
           )
         ) {
-          moves.a.push({
+          moves.push({
             x: a.x + x,
             y: a.y + y,
           });
