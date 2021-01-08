@@ -188,7 +188,7 @@ function update(mod) {
 
     vx = 0;
     vy = 0;
-    switch (F.boolToBin(keysDown.includes("player_left"), keysDown.includes("player_right"))) {
+    switch (F.bool_bin(keysDown.includes("player_left"), keysDown.includes("player_right"))) {
       case ("10"): {
         vx += data.player.speed * mod;
       }; break;
@@ -196,7 +196,7 @@ function update(mod) {
         vx -= data.player.speed * mod;
       }; break;
     }
-    switch (F.boolToBin(keysDown.includes("player_up"), keysDown.includes("player_down"))) {
+    switch (F.bool_bin(keysDown.includes("player_up"), keysDown.includes("player_down"))) {
       case ("10"): {
         vy += data.player.speed * mod;
       }; break;
@@ -226,7 +226,7 @@ function update(mod) {
       player.x = vx2;
       player.y = vy2;
     }
-    switch (F.boolToBin(keysDown.includes("player_rotate_left"), keysDown.includes("player_rotate_right"))) {
+    switch (F.bool_bin(keysDown.includes("player_rotate_left"), keysDown.includes("player_rotate_right"))) {
       case ("10"): {
         player.angle -= data.player.speed * mod;
       }; break;
