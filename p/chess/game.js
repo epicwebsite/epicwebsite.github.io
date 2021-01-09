@@ -127,6 +127,10 @@ function update(mod) {
           vals.click = true;
         }
       }
+    } else {
+      if (selected && !selected.clicked) {
+        selected = null;
+      }
     }
 
     kings = [0, 0];
