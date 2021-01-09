@@ -6,6 +6,7 @@ function init() {
   changeStyle();
   doc.body.style.visibility = "visible";
 }
+console.log("._. Hello");
 
 var ls = {};
 ls.check = function () {
