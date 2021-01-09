@@ -1,5 +1,6 @@
 function init() {
   gen();
+  answer_hide();
 }
 function gen() {
   var then = Date.now();
@@ -50,7 +51,7 @@ function gen() {
           y: F.randomInt(-1, (output.length - words[i].length))
         }
         for (i2 = c.x; i2 < (c.x + words[i].length); i2++) {
-          if (! ["", words[i][i2 - c.x]].includes(output[c.y][i2])) {
+          if (output[c.y] && ! ["", words[i][i2 - c.x]].includes(output[c.y][i2])) {
             val = false;
           }
         }
@@ -61,7 +62,9 @@ function gen() {
       }
       if (val2) {
         for (i2 = c.x; i2 < (c.x + words[i].length); i2++) {
-          output[c.y][i2] = words[i][i2 - c.x];
+          if (output[c.y]) {
+            output[c.y][i2] = words[i][i2 - c.x];
+          }
         }  
       } else {
         console.log("Unable to insert word! Not enough room")
@@ -170,11 +173,7 @@ function gen() {
   for (i = 0; i < output_raw.length; i++) {
     var a = "<tr>";
     for (i2 = 0; i2 < output_raw[i].length; i2++) {
-      a = a + '<td {0}>{1}</td>'.format(() => { 
-        if (output_raw[i][i2] == "") {
-          return ('style="filter:brightness(80%);"');
-        }
-      }, output_raw[i][i2]);
+      a = a + '<td {0}>{1}</td>'.format(output_raw[i][i2] == "" ? 'style="filter:brightness(80%);"' : "", output_raw[i][i2]);
     }
     a = a + "</tr>";
     $("#output2").append(a);
