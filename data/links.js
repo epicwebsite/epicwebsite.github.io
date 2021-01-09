@@ -198,6 +198,17 @@ var links =
         id: "chess",
         name: "Chess Game",
       },
+      {
+        id: "dog-food",
+        name: "Can dogs eat ___?",
+        alias: [
+          "dogfood",
+          "dog-eat",
+          "dogs-eat",
+          "dogeat",
+          "dogseat",
+        ],
+      },
     ]
   },
   media: {
