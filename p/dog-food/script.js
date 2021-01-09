@@ -45,7 +45,10 @@ function search() {
       let res = food[r].items[j].lower();
       for (w = 0; w < res.split(" ").length; w++) {
         for (n = 0; n < text.length; n++) {
-          if (res.split(" ")[w].strip(F.chars.lower).includes(text[n])) {
+          if (
+            text[n].length > 0
+            && res.split(" ")[w].strip(F.chars.lower).includes(text[n])
+          ) {
             results.add("{0}_{1}".format(r, j), 1, 1);
           }
         }
@@ -108,14 +111,4 @@ function search() {
     }
     doc.id("output").innerHTML += el + '</tr>';
   }
-
-  console.log(groups);
-  if (length > results.length) {
-    console.log(" ".repeat(19) + "...");
-  }
-  console.log("About {0} results ({1} {2})\n".format(
-    length,
-    F.toTime((Date.now() - then) / 1000)[0].round(2),
-    F.toTime((Date.now() - then) / 1000)[1],
-  ));
 }
