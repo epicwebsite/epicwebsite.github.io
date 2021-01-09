@@ -4,3 +4,25 @@ body {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  float: left;
+}
+table th {
+  width: 25%;
+}
+table td, th {
+  border: 2px solid rgba(40, 40, 40);
+  text-align: left;
+  padding: 4px;
+  height: 10px;
+  font-size: 18px;
+}
+body {
+  background-color: rgba(50, 50, 50);
+}
+tbody:nth-child(even) {
+  background-color: rgba(40, 40, 40);
+}

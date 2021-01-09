@@ -8,8 +8,8 @@ function init() {
     for (l = 0; l < links.values()[o].items.length; l++) {
       if (
         path.split("/")[0] == links.values()[o].items[l].id
-        || links.values()[o].items[l].includes(path.split("/")[0])
-        || links.values()[o].items[l].includes(path.split("/p/")[0])
+        || links.values()[o].items[l].alias.includes(path.split("/")[0])
+        || links.values()[o].items[l].alias.includes(path.split("/p/")[0])
       ) {
         link = "https://{0}.github.io/p/{1}".format(
           meta.domain,
