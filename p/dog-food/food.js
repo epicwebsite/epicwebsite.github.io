@@ -42,6 +42,7 @@ var food = [
     "name": "Limit / Caution",
     "items": [
       "Almonds",
+      "Capsicum",
       "Cashews",
       "Cheese",
       "Cherries (flesh only)",
@@ -52,7 +53,7 @@ var food = [
       "Salt",
       "Salty meats (ham, salami)",
       "Sausage ",
-      "Tomato"
+      "Tomato",
     ]
   },
   {
