@@ -7,11 +7,8 @@ body {
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 60%;
   float: left;
-}
-table th {
-  width: 25%;
+  color: rgba(220, 220, 220);
 }
 table td, th {
   border: 2px solid rgba(40, 40, 40);

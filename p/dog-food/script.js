@@ -28,3 +28,66 @@ function setTable() {
     doc.id("table").innerHTML += el + '</tr>';
   }
 }
+
+function search() {
+  var text = doc.id("search").value;
+  var then = Date.now();
+
+  text = text.lower().split(" ");
+  results = {};
+  for (r = 0; r < food.length; r++) {
+    for (j = 0; j < food[r].items.length; j++) {
+      let res = food[r].items[j].lower();
+      for (w = 0; w < res.split(" ").length; w++) {
+        for (n = 0; n < text.length; n++) {
+          if (res.split(" ")[w].strip(F.chars.lower).includes(text[n])) {
+            results.add("{0}_{1}".format(r, j), 1, 1);
+          }
+        }
+      }
+    }
+  }
+
+  temp = [];
+  for (i = 0; i < results.keys().length; i++) {
+    temp.push({
+      title: food[results.keys()[i].split("_")[0]].items[results.keys()[i].split("_")[1]],
+      search: results.values()[i],
+      group: food[results.keys()[i].split("_")[0]].name,
+    });
+  }
+  let length = temp.length;
+  results = F.toArray(temp.sub(0, 10));
+  results.sort(function (a, b) {
+    return (b.search - a.search);
+  });
+  delete temp;
+
+  el = '<tr>';
+  done = [];
+  for (v = 0; v < results.length; v++) {
+    if (!done.includes(results[v].group)) {
+      el += '<th>{0}</th>'.format(
+        food.getFromId(results[v].group, "name").name,
+      );
+      done.push(results[v].group);
+    }
+  }
+  doc.id("output").innerHTML = el + '</tr>';
+
+  for (i = 0; i < results.length; i++) {
+    console.log("{group} {title}".format({
+      search: results[i].search,
+      title: results[i].title,
+      group: (results[i].group + ":").fill(20, " ", false),
+    }));
+  }
+  if (length > results.length) {
+    console.log(" ".repeat(19) + "...");
+  }
+  console.log("About {0} results ({1} {2})\n".format(
+    length,
+    F.toTime((Date.now() - then) / 1000)[0].round(2),
+    F.toTime((Date.now() - then) / 1000)[1],
+  ));
+}
