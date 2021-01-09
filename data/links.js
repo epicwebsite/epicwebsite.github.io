@@ -7,57 +7,120 @@ var links =
       {
         id: "custom-tab",
         name: "NewTab",
+        alias: [
+          "customtab",
+          "newtab",
+          "new-tab",
+        ],
       },
       {
         id: "heckdude",
         name: "Heckdude",
+        alias: [
+          "heck-dude",
+        ],
       },
       {
         id: "day",
         name: "What day is it?",
+        alias: [
+          "what-day",
+        ],
       },
       {
         id: "time",
         name: "What time is it?",
+        alias: [
+          "what-time",
+          "progress",
+        ],
       },
       {
         id: "keys",
         name: "Get JS key codes",
+        alias: [
+          "key",
+          "keycodes",
+          "key-codes",
+          "keycode",
+          "key-code",
+        ],
       },
       {
         id: "download-ram",
         name: "DOWNLOAD FREE RAM!",
+        alias: [
+          "ram",
+          "downloadram",
+        ],
       },
       {
         id: "block-game",
         name: "Block Game",
+        alias: [
+          "minecraft-2d",
+        ],
       },
       {
         id: "bruh",
         name: "BRUH Button",
+        alias: [
+          "bruh-button",
+          "bruhbutton",
+          "button",
+        ],
       },
       {
         id: "cave",
         name: "Cave Generator",
+        alias: [
+          "cave-generator",
+          "cavegenerator",
+          "cave-gen",
+          "cavegen",
+        ],
       },
       {
         id: "character",
         name: "Character Generator",
+        alias: [
+          "char-generator",
+          "chargenerator",
+          "char-gen",
+          "chargen",
+          "character-generator",
+          "charactergenerator",
+          "character-gen",
+          "charactergen",
+        ],
       },
       {
         id: "word-search",
         name: "Word Search Generator",
         hidden: true,
+        alias: [
+          "wordsearch",
+        ],
       },
       {
         id: "3d",
         name: "3D Ray tracing",
         hidden: true,
+        alias: [
+          "raytrace",
+          "ray-trace",
+        ],
       },
       {
         id: "dog-age",
         name: "Dog Age Calculator",
-        // hidden: true,
+        alias: [
+          "dogage",
+          "dog-year",
+          "dogyear",
+          "dog-years",
+          "dogyears",
+        ],
       },
       {
         id: "joystick",
@@ -68,6 +131,12 @@ var links =
         id: "pattern",
         name: "Pattern Generator",
         hidden: true,
+        alias: [
+          "pattern-generator",
+          "patterngenerator",
+          "pattern-gen",
+          "patterngen",
+        ],
       },
       {
         id: "population",
@@ -94,18 +163,36 @@ var links =
       {
         id: "tictac",
         name: "Tic Tac Toe / Naughts & Crosses",
+        alias: [
+          "tic-tac",
+          "tic-tac-toe",
+          "tictactoe",
+        ],
       },
       {
         id: "punnett",
         name: "Punnett Square Calculator",
+        alias: [
+          "punnetsquare",
+          "punnet-square",
+        ],
       },
       {
         id: "acronym",
         name: "Acronym Generator",
+        alias: [
+          "acronym-generator",
+          "acronymgenerator",
+          "acronym-gen",
+          "acronymgen",
+        ],
       },
       {
         id: "solitaire",
         name: "Solitaire Game",
+        alias: [
+          "patience",
+        ],
       },
       {
         id: "chess",
