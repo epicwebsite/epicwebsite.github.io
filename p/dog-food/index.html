@@ -13,12 +13,12 @@
     <!-- <link rel="shortcut icon" type="image/png" href="image/favicon.png"> -->
   </head>
   <body onload="init()">
+    <table id="table"></table>
+    <p>Disclaimer: this information might be wrong!!! If you feel that it is not correct then contact a vet</p>
     <section>
-      <input type="text" id="search" onchange="search()">
-      <br>
+      <input type="text" id="search" oninput="search()" placeholder="Search">
+      <br><br>
       <table id="output"></table>
     </section>
-    <br><br>
-    <table id="table"></table>
   </body>
 </html>

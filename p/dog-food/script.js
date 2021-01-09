@@ -33,6 +33,11 @@ function search() {
   var text = doc.id("search").value;
   var then = Date.now();
 
+  if (!text) {
+    doc.id("output").innerHTML = "";
+    return;
+  }
+
   text = text.lower().split(" ");
   results = {};
   for (r = 0; r < food.length; r++) {
@@ -68,20 +73,43 @@ function search() {
   for (v = 0; v < results.length; v++) {
     if (!done.includes(results[v].group)) {
       el += '<th>{0}</th>'.format(
-        food.getFromId(results[v].group, "name").name,
+        results[v].group,
       );
       done.push(results[v].group);
     }
   }
   doc.id("output").innerHTML = el + '</tr>';
 
+  groups = {};
   for (i = 0; i < results.length; i++) {
-    console.log("{group} {title}".format({
+    if (!groups[done.indexOf(results[i].group)]) {
+      groups[done.indexOf(results[i].group)] = [];
+    }
+    groups[done.indexOf(results[i].group)].push(results[i].title);
+
+    /* console.log("{group} {title}".format({
       search: results[i].search,
       title: results[i].title,
       group: (results[i].group + ":").fill(20, " ", false),
-    }));
+    })); */
   }
+
+  length = 0;
+  for (i = 0; i < groups.keys().length; i++) {
+    length = Math.max(length, groups.values()[i].length);
+  }
+
+  for (i = 0; i < length; i++) {
+    el = '<tr>';
+    for (v = 0; v < groups.keys().length; v++) {
+      el += '<td>{0}</td>'.format(
+        groups.values()[v][i] ? groups.values()[v][i] : "",
+      );
+    }
+    doc.id("output").innerHTML += el + '</tr>';
+  }
+
+  console.log(groups);
   if (length > results.length) {
     console.log(" ".repeat(19) + "...");
   }
