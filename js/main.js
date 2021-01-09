@@ -59,10 +59,18 @@ function showLinks(showHidden) {
           (F.url.protocol[0] == "f") ? "/index.html" : ""
         );
       };
+      let img = "";
+      if (links.values()[t].image) {
+        img = '<img src="{0}" class="icon_img" onerror="unloadImage(this)">'.format(
+          links.values()[t].items[i].image ? links.values()[t].image.format(links.values()[t].items[i].id) : ""
+        );
+      }
       el = [
+        '{img}',
         '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">{name}</a>',
         '<br>',
       ].join("").format({
+        img,
         href: href,
         dir: F.url.dir,
         name: "{0}{1}".format(icon, links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id),
@@ -81,4 +89,8 @@ function changeStyle() {
   ls.edit(d => {
     d.lightmode = doc.id("lightmode").checked;
   });
+}
+
+function unloadImage(el) {
+  el.style.visibility = "hidden";
 }

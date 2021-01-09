@@ -3,6 +3,7 @@ var links =
   page: {
     name: "Pages",
     local: true,
+    image: "./p/{0}/image/favicon.png",
     items: [
       {
         id: "custom-tab",
@@ -12,6 +13,7 @@ var links =
           "newtab",
           "new-tab",
         ],
+        image: true,
       },
       {
         id: "heckdude",
@@ -19,6 +21,7 @@ var links =
         alias: [
           "heck-dude",
         ],
+        image: true,
       },
       {
         id: "day",
@@ -26,6 +29,7 @@ var links =
         alias: [
           "what-day",
         ],
+        image: true,
       },
       {
         id: "time",
@@ -34,7 +38,8 @@ var links =
           "what-time",
           "progress",
         ],
-      },
+        image: true,
+      },  
       {
         id: "keys",
         name: "Get JS key codes",
@@ -53,6 +58,7 @@ var links =
           "ram",
           "downloadram",
         ],
+        image: true,
       },
       {
         id: "block-game",
@@ -60,6 +66,7 @@ var links =
         alias: [
           "minecraft-2d",
         ],
+        image: true,
       },
       {
         id: "bruh",
@@ -69,6 +76,7 @@ var links =
           "bruhbutton",
           "button",
         ],
+        image: true,
       },
       {
         id: "cave",
@@ -121,6 +129,7 @@ var links =
           "dog-years",
           "dogyears",
         ],
+        image: true,
       },
       {
         id: "joystick",
@@ -176,6 +185,7 @@ var links =
           "punnetsquare",
           "punnet-square",
         ],
+        image: true,
       },
       {
         id: "acronym",
@@ -193,10 +203,12 @@ var links =
         alias: [
           "patience",
         ],
+        image: true,
       },
       {
         id: "chess",
         name: "Chess Game",
+        image: true,
       },
       {
         id: "dog-food",
@@ -208,6 +220,7 @@ var links =
           "dogeat",
           "dogseat",
         ],
+        image: true,
       },
     ]
   },

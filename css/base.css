@@ -108,3 +108,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
+.icon_img {
+  width: 20px;
+  height: 20px;
+}
