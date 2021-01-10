@@ -31,7 +31,13 @@ function setTable() {
 
 function search() {
   var text = doc.id("search").value;
-  var then = Date.now();
+  if (text.length > 0) {
+    doc.id("link").style.display = "block";
+    doc.id("link").href = "https://www.google.com/search?q=can%20dog%20eat%20{0}".format(text.replaceAll(" ", "%20"));
+    doc.id("link_text").innerHTML = text.capWords();
+  } else {
+    doc.id("link").style.display = "none";
+  }
 
   if (!text) {
     doc.id("output").innerHTML = "";

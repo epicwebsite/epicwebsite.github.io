@@ -29,3 +29,6 @@ input {
 #output {
   float: none;
 }
+#link {
+  display: none;
+}

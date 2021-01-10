@@ -9,14 +9,17 @@
     <script type="text/javascript" src="https://fnctjs.github.io/index.js"></script>
     <script type="text/javascript" src="food.js"></script>
     <script type="text/javascript" src="script.js"></script>
-    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="image/favicon.png">
   </head>
   <body onload="init()">
     <table id="table"></table>
     <p>Disclaimer: this information might be wrong!!! If you feel that it is not correct then contact a vet</p>
     <section>
       <input type="text" id="search" oninput="search()" placeholder="Search" autofocus>
-      <br><br>
+      <br>
+      <br>
+      <a href="" target="_blank" id="link">Search Google for '<span id="link_text"></span>'</a>
+      <br>
       <table id="output"></table>
     </section>
   </body>
