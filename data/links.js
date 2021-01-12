@@ -250,6 +250,11 @@ var links =
         name: "Hack any Game",
         icon: "folder",
       },
+      {
+        id: "hacker",
+        name: "Hacker Typing",
+        icon: "folder",
+      },
     ],
   },
   online: {
