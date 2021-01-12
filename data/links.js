@@ -225,7 +225,7 @@ var links =
     ]
   },
   media: {
-    name: "Media",
+    name: "Media / Downloads",
     local: true,
     items: [
       {
@@ -253,7 +253,6 @@ var links =
     ],
   },
   online: {
-    id: "o",
     name: "Online",
     local: false,
     items: [
@@ -268,6 +267,24 @@ var links =
       {
         id: "https://github.com/epicwebsite/epicwebsite.github.io",
         name: "GitHub",
+      },
+      {
+        id: "https://github.com/fnctjs/fnctjs.github.io",
+        name: "FunctionsJS",
+      },
+    ],
+  },
+  other: {
+    name: "Other",
+    local: false,
+    items: [
+      {
+        id: "http://www.eeemo.net/",
+        name: "Zalgo Text Generator",
+      },
+      {
+        id: "https://geekprank.com/",
+        name: "Geek Prank",
       },
     ],
   },

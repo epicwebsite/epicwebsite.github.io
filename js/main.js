@@ -66,8 +66,10 @@ function showLinks(showHidden) {
         );
       }
       el = [
-        '{img}',
-        '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">{name}</a>',
+        '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">',
+        '  {img}',
+        '  {name}',
+        '</a>',
         '<br>',
       ].join("").format({
         img,
