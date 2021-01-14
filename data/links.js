@@ -222,6 +222,11 @@ var links =
         ],
         image: true,
       },
+      {
+        id: "hacker",
+        name: "Hacker Typing (Web)",
+        image: true,
+      },
     ]
   },
   media: {
@@ -246,13 +251,13 @@ var links =
         hidden: true,
       },
       {
-        id: "hack",
+        id: "hack-game",
         name: "Hack any Game",
         icon: "folder",
       },
       {
-        id: "hacker",
-        name: "Hacker Typing",
+        id: "hacker-download",
+        name: "Hacker Typing (Desktop)",
         icon: "folder",
       },
     ],
