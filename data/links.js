@@ -282,6 +282,11 @@ var links =
         id: "https://github.com/fnctjs/fnctjs.github.io",
         name: "FunctionsJS",
       },
+      {
+        id: "https://poop-sock.github.io/",
+        name: "PoopSock",
+        hidden: true,
+      },
     ],
   },
   other: {
