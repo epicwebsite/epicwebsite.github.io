@@ -227,6 +227,11 @@ var links =
         name: "Hacker Typing (Web)",
         image: true,
       },
+      {
+        id: "blackjack",
+        name: "BlackJack Game",
+        hidden: true,
+      },
     ]
   },
   media: {
