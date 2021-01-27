@@ -29,8 +29,9 @@ function reset() {
     }
   }
   deck.shuffle();
-  cards.p1 = deck.sub(0, 8);
-  cards.p2 = deck.sub(0, 8);
+  cards.p1 = deck.sub(0, 2);
+  cards.p2 = deck.sub(0, 2);
+  cards.p1[0] = new Card(1, 1);
   cards.deck = deck;
   
   gameState = "play";
@@ -58,6 +59,7 @@ function render() {
   }
 
   num = 0;
+  ace = false;
   for (i = 0; i < cards.p1.length; i++) {
     if (i < 9) {
       drawCard(
@@ -66,8 +68,15 @@ function render() {
         cards.p1[i],
       );
     }
-    num += cards.p1[i].vn;
+    num += cards.p1[i].vn.setBorder(1, 10);
+    
+    if (cards.p1[i].vn == 1) {
+      if (!ace) {
+        ace = true;
+      }
+    }
   }
+
   ctx.font = "32px Arial";
   ctx.textAlign = "left";
   ctx.fillStyle = "black";
@@ -76,6 +85,17 @@ function render() {
     40,
     (canvas.height / 1.4) - (h / 2),
   );
+
+  if (ace) {
+    ctx.font = "32px Arial";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "black";
+    ctx.fillText(
+      "Ace Total: {0}".format(num + 10),
+      300,
+      (canvas.height / 1.4) - (h / 2),
+    );
+  }
 
   for (i = 0; i < Math.min(9, cards.p2.length); i++) {
     drawCard(
@@ -163,7 +183,7 @@ function drawCard(x, y, card, style) {
 
     suit = card.si;
     value = card.vc;
-    ctx.fillStyle = card.b ? color.suit_red : color.suit_black;
+    ctx.fillStyle = card.b ? color.suit_black : color.suit_red;
     ctx.font = "bold 16px Arial";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
