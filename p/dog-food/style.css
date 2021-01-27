@@ -73,3 +73,9 @@ input {
 #desc p {
   font-size: 15px;
 }
+#search {
+  width: 240px;
+  height: 20px;
+  padding: 5px;
+  font-size: 18px;
+}
