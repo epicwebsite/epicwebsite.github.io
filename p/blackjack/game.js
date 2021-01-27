@@ -32,7 +32,7 @@ function reset() {
   cards.p1 = deck.sub(0, 2);
   cards.p2 = deck.sub(0, 2);
   cards.p1[0] = new Card(1, 1);
-  cards.deck = deck;
+  cards.deck = deck.sub(0, -5);
   
   gameState = "play";
 }
@@ -58,17 +58,27 @@ function render() {
     );
   }
 
-  num = 0;
+  total = 0;
   ace = false;
   for (i = 0; i < cards.p1.length; i++) {
-    if (i < 9) {
+    if (i < 21) {
+      x = i;
+      y = 1.25;
+      if (i >= 7) {
+        x = i - 6.9;
+        y = 0.75;
+        if (i >= 14) {
+          x = i - 13.8;
+          y = 0.25;
+        }
+      }
       drawCard(
-        30 + (w * i),
-        (canvas.height / 1.25) - (h / 2),
+        30 + ((w + 15) * x),
+        (canvas.height / 1.25) + 20 - (h * y),
         cards.p1[i],
       );
     }
-    num += cards.p1[i].vn.setBorder(1, 10);
+    total += cards.p1[i].vn.setBorder(1, 10);
     
     if (cards.p1[i].vn == 1) {
       if (!ace) {
@@ -77,24 +87,26 @@ function render() {
     }
   }
 
-  ctx.font = "32px Arial";
-  ctx.textAlign = "left";
-  ctx.fillStyle = "black";
-  ctx.fillText(
-    "Total: {0}".format(num),
-    40,
-    (canvas.height / 1.4) - (h / 2),
-  );
-
-  if (ace) {
+  if (doc.id("showTotal").checked) {
     ctx.font = "32px Arial";
     ctx.textAlign = "left";
     ctx.fillStyle = "black";
     ctx.fillText(
-      "Ace Total: {0}".format(num + 10),
-      300,
-      (canvas.height / 1.4) - (h / 2),
+      "Total: {0}".format(total),
+      40,
+      (canvas.height / 1.5) - (h / 2),
     );
+
+    if (ace && total + 10 <= 21) {
+      ctx.font = "32px Arial";
+      ctx.textAlign = "left";
+      ctx.fillStyle = "black";
+      ctx.fillText(
+        "Ace Total: {0}".format(total + 10),
+        300,
+        (canvas.height / 1.5) - (h / 2),
+      );
+    }
   }
 
   for (i = 0; i < Math.min(9, cards.p2.length); i++) {
@@ -210,5 +222,22 @@ function drawCard(x, y, card, style) {
       x + (w / 2),
       y + (h / 2),
     );
+  }
+}
+
+function sit() {
+  
+}
+
+function draw() {
+  if (cards.deck.length > 0) {
+    cards.p1.push(cards.deck.sub(0));
+    cards.deck = F.toArray(cards.deck.sub(1, -1));
+  }
+}
+
+function restart() {
+  if (confirm("Are you sure?")) {
+    reset();
   }
 }
