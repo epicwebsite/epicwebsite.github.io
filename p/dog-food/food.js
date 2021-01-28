@@ -119,24 +119,6 @@ var food = [
         desc: "When ingested in small amounts, coconut and coconut-based products are not likely to cause serious harm to your pet. The flesh and milk of fresh coconuts do contain oils that may cause stomach upset, loose stools or diarrhea. Because of this, we encourage you to use caution when offering your pets these foods.",
       },
       {
-        name: "Prawns",
-        subtitle: "Cooked",
-        tags: [
-          "shrimp",
-          "prawn",
-          "seafood",
-        ],
-        desc: "Yes, dogs can eat prawns provided they are cooked and peeled. Don't feed your dog whole prawns with the shell on, and never feed them raw prawns that haven't been frozen. ... However, you should always feed seafood to your pooch in moderation and introduce any new foods, even treats, slowly into your dog's diet.",
-      },
-      {
-        name: "Rice",
-        subtitle: "Cooked",
-        tags: [
-          "",
-        ],
-        desc: "Safe: Cooked White Rice and Pasta. Dogs can eat plain white rice or pasta after it's cooked. And, a serving of plain white rice with some boiled chicken can sometimes make your dog feel better when they are having stomach problems.",
-      },
-      {
         name: "Corn",
         subtitle: "Not the cob",
         tags: [
@@ -245,6 +227,16 @@ var food = [
         desc: "Your dog can have a healthy snack of carrot sticks, green beans, cucumber slices, or zucchini slices. Even a plain baked potato is OK. Don't let your dog eat any raw potatoes or any potato plants from your pantry or garden.",
       },
       {
+        name: "Prawns",
+        subtitle: "Cooked",
+        tags: [
+          "shrimp",
+          "prawn",
+          "seafood",
+        ],
+        desc: "Yes, dogs can eat prawns provided they are cooked and peeled. Don't feed your dog whole prawns with the shell on, and never feed them raw prawns that haven't been frozen. ... However, you should always feed seafood to your pooch in moderation and introduce any new foods, even treats, slowly into your dog's diet.",
+      },
+      {
         name: "Pumpkin",
         subtitle: "Flesh or seeds",
         tags: [
@@ -259,6 +251,14 @@ var food = [
           "",
         ],
         desc: "But, can dogs eat quinoa? The answer is generally yes. The edible seed is actually an ingredient in some high-quality dry dog foods. Its strong nutritional profile makes it a healthy alternative to corn, wheat, and soy — starches that are often used to make kibble.",
+      },
+      {
+        name: "Rice",
+        subtitle: "Cooked",
+        tags: [
+          "",
+        ],
+        desc: "Safe: Cooked White Rice and Pasta. Dogs can eat plain white rice or pasta after it's cooked. And, a serving of plain white rice with some boiled chicken can sometimes make your dog feel better when they are having stomach problems.",
       },
       {
         name: "Strawberries",
@@ -383,6 +383,15 @@ var food = [
           "vege",
         ],
         desc: "Mushrooms sold in large and chain grocery stores are generally safe for dogs to eat. However, we rarely serve up plain mushrooms. ... Unless the mushroom is served plain, it is generally safer to avoid feeding dishes with mushrooms to dogs. Never give dogs wild mushrooms",
+      },
+      {
+        name: "Nectarine",
+        subtitle: "",
+        tags: [
+          "fruit",
+          "peach",
+        ],
+        desc: "Rich in vitamins A and C, magnesium, potassium, and dietary fiber, nectarines are a sweet and nutritious summer fruit.",
       },
       {
         name: "Peanuts",
@@ -648,6 +657,16 @@ var food = [
         desc: "Although pistachios are not directly toxic to dogs they are not recommended. The canine system is not designed to process nuts and they ultimately cause gastrointestinal distress, obesity, and pancreatitis.",
       },
       {
+        name: "Prawns",
+        subtitle: "Uncooked / Raw",
+        tags: [
+          "prawn",
+          "shrimp",
+          "seafood",
+        ],
+        desc: "No, dogs should not eat raw prawns. It is advised against feeding your dog raw seafood and shellfish because they could potentially carry parasites. Prawns are no exception, and raw prawns may carry harmful pathogens or parasites that could make you or your pet ill.",
+      },
+      {
         name: "Pumpkin skin, stem",
         subtitle: "",
         tags: [
@@ -688,16 +707,6 @@ var food = [
           "",
         ],
         desc: "Tea tree oil is often found in varying concentrations and high concentrations should never be used on pets. As little as 7 drops of 100% oil has resulted in severe poisoning, and applications of 10-20 mls of 100% oil have resulted in poisoning and death in both dogs and cats.",
-      },
-      {
-        name: "Prawns",
-        subtitle: "Uncooked / Raw",
-        tags: [
-          "prawn",
-          "shrimp",
-          "seafood",
-        ],
-        desc: "No, dogs should not eat raw prawns. It is advised against feeding your dog raw seafood and shellfish because they could potentially carry parasites. Prawns are no exception, and raw prawns may carry harmful pathogens or parasites that could make you or your pet ill.",
       },
       {
         name: "Vegemite",
