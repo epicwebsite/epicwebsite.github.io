@@ -17,6 +17,15 @@ function setTable() {
 
   length = 0;
   for (i = 0; i < food.length; i++) {
+    food[i].items.sort((a, b) => {
+      if (b.name.lower() < a.name.lower()) {
+        return (1);
+      }
+      if (b.name.lower() > a.name.lower()) {
+        return (-1);
+      }
+      return (0);
+    });
     if (food[0]) {
       length = Math.max(length, food[0].items.length);
     }
