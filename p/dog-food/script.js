@@ -103,6 +103,7 @@ function search() {
             name: food[v].items[i].name,
             subtitle: food[v].items[i].subtitle,
             group: food[v].name,
+            tags: food[v].items[i].tags,
             num: 0,
             v,
             i,

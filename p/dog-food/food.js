@@ -145,13 +145,13 @@ var food = [
       },
       {
         name: "Fish",
-        subtitle: "Skin is good for coat",
+        subtitle: "",
         tags: [
           "tuna",
           "salmon",
           "seafood",
         ],
-        desc: "Absolutely. There are many varieties of fish that are good for dogs. 'Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,” says Dempsey. ... And fish isn't just healthy for dogs—they like the taste of fish, too.",
+        desc: "Absolutely. There are many varieties of fish that are good for dogs. 'Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,' says Dempsey. ... And fish isn't just healthy for dogs—they like the taste of fish, too. Skin is good for the coat too.",
       },
       {
         name: "Mango",

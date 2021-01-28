@@ -93,3 +93,8 @@ input {
 #noResults, #descLine {
   display: none;
 }
+img {
+  width: 400px;
+  height: 400px;
+  filter: brightness(60%);
+}
