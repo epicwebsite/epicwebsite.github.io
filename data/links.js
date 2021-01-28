@@ -212,7 +212,7 @@ var links =
       },
       {
         id: "dog-food",
-        name: "Can dogs eat ___?",
+        name: "Food dogs can eat",
         alias: [
           "dogfood",
           "dog-eat",
