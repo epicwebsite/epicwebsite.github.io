@@ -6,7 +6,6 @@ var food = [
         name: "Apple",
         subtitle: "Not core",
         tags: [
-          "apple",
           "fruit",
           "core",
         ],

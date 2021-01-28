@@ -74,7 +74,7 @@ function search() {
           if (!text.split(" ")[j]) {
             continue;
           }
-          if (food[v].items[i].name.split(" ")[l].includes(text.split(" ")[j])) {
+          if (food[v].items[i].name.lower().split(" ")[l].includes(text.split(" ")[j])) {
             num += 10;
           }
         }
@@ -83,17 +83,17 @@ function search() {
         if (!food[v].items[i].tags[t]) {
           continue;
         }
-        for (l = 0; l < food[v].items[i].tags[t].split(" ").length; l++) {
+        for (l = 0; l < food[v].items[i].tags[t].lower().split(" ").length; l++) {
           for (j = 0; j < text.split(" ").length; j++) {
             if (!text.split(" ")[j]) {
               continue;
             }
-            if (food[v].items[i].tags[t].split(" ")[l].includes(text.split(" ")[j])) {
+            if (food[v].items[i].tags[t].lower().split(" ")[l].includes(text.split(" ")[j])) {
               num += 1;
             }
           }
         }
-        if (text.includes(food[v].items[i].tags[t])) {
+        if (text.includes(food[v].items[i].tags[t].lower())) {
           num += 7;
         }
       }
@@ -186,7 +186,7 @@ function search() {
       doc.id("output").innerHTML += el + '</tr>';
     }
   }
-  doc.id("noResults").style.display = length < 1 ? "block" : "none";
+  doc.id("noResults").style.display = (length < 1 && text.replaceAll(" ", "").length > 0) ? "block" : "none";
 }
 
 function clickItem(el) {
