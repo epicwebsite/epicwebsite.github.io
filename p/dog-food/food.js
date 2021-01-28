@@ -451,7 +451,7 @@ var food = [
         desc: "Solanine, a substance found in the stem and leaves of the tomato and related plants, is harmful to dogs in large quantities. ... The leaves, stems, and young, green tomatoes contain higher amounts of solanine than ripe fruit, which means that ripe tomatoes are generally safe to feed to dogs.",
       },
       {
-        name: "cereal",
+        name: "Cereal",
         subtitle: "",
         tags: [
           "wheat",
@@ -688,6 +688,7 @@ var food = [
         subtitle: "",
         tags: [
           "yeast",
+          "unbake",
         ],
         desc: "Raw bread dough that contains yeast can lead to serious and even fatal poisoning in dogs. The lump of unbaked bread dough will expand in the dog&rsquo;s stomach causing severe abdominal distention. As the yeast cells ferment, blood ethanol can rise to toxic levels.",
       },

@@ -16,9 +16,10 @@ function init() {
           )
         )
       ) {
-        link = "https://{0}.github.io/p/{1}".format(
+        link = "https://{0}.github.io/p/{1}{2}".format(
           meta.domain,
           links.values()[o].items[l].id,
+          F.url.queryRaw.length > 0 ? "?" + F.url.queryRaw : ""
         );
         doc.id("header").innerHTML = "Redirecting...";
         doc.id("text").innerHTML = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(link);
