@@ -203,6 +203,7 @@ function clickItem(el) {
   }
   item = food[item[1]].items[item[2]];
   el = [
+    '<hr>',
     '<h1>',
     '  Can dog eat ',
     '  <em>{name}</em>? - <code>{answer}</code>',

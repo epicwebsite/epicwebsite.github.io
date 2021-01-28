@@ -19,7 +19,7 @@ var food = [
           "peel",
           "fruit",
         ],
-        desc: "Yes, dogs can have bananas. They may not get all the nutritional benefits humans get from this fruit, but bananas make a good—and motivating—treat. If you're wondering “Can puppies eat bananas?”, check with your veterinarian. ... Added calories from bananas and other fruits could interfere.",
+        desc: "Yes, dogs can have bananas. They may not get all the nutritional benefits humans get from this fruit, but bananas make a good—and motivating—treat. If you're wondering 'Can puppies eat bananas?', check with your veterinarian. ... Added calories from bananas and other fruits could interfere.",
       },
       {
         name: "Beans",
@@ -61,7 +61,7 @@ var food = [
           "gluten",
           "loaf",
         ],
-        desc: "The short answer to the question “can dogs eat bread?” is yes. Dogs can safely eat bread in much the same way as humans—in moderation. Plain white and wheat bread is generally safe for dogs to eat, provided they don't have any allergies, and it usually does not cause any stomach upset.",
+        desc: "The short answer to the question 'can dogs eat bread?” is yes. Dogs can safely eat bread in much the same way as humans—in moderation. Plain white and wheat bread is generally safe for dogs to eat, provided they don't have any allergies, and it usually does not cause any stomach upset.",
       },
       {
         name: "Broccoli",
@@ -142,7 +142,7 @@ var food = [
         tags: [
           "vege",
         ],
-        desc: "Is corn bad for dogs and just “filler” in dog food? No, corn is not harmful to dogs and is certainly not a filler. In fact, it has nutritional benefits.",
+        desc: "Is corn bad for dogs and just 'filler” in dog food? No, corn is not harmful to dogs and is certainly not a filler. In fact, it has nutritional benefits.",
       },
       {
         name: "Cucumbers",
@@ -169,7 +169,7 @@ var food = [
           "salmon",
           "seafood",
         ],
-        desc: "Absolutely. There are many varieties of fish that are good for dogs. “Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,” says Dempsey. ... And fish isn't just healthy for dogs—they like the taste of fish, too.",
+        desc: "Absolutely. There are many varieties of fish that are good for dogs. 'Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,” says Dempsey. ... And fish isn't just healthy for dogs—they like the taste of fish, too.",
       },
       {
         name: "Mango",
@@ -250,7 +250,7 @@ var food = [
         tags: [
           "vege",
         ],
-        desc: "Pumpkin. Dogs will eat almost anything, so a pumpkin isn't out of the question, particularly since tiny pumpkins and gourds may resemble a toy or ball. ... Lobos, “Canned pumpkin (NOT canned pumpkin pie mix, which contains sugar and spices) is a fabulous source of fiber and can even help with digestive upset.",
+        desc: "Pumpkin. Dogs will eat almost anything, so a pumpkin isn't out of the question, particularly since tiny pumpkins and gourds may resemble a toy or ball. ... Lobos, 'Canned pumpkin (NOT canned pumpkin pie mix, which contains sugar and spices) is a fabulous source of fiber and can even help with digestive upset.",
       },
       {
         name: "Quinoa",
@@ -662,7 +662,7 @@ var food = [
           "poultry",
           "chicken",
         ],
-        desc: "Dogs should never eat raw or undercooked eggs. Raw eggs aren't safe at all. “They can be a source of Salmonella. ... Some foods can lose nutrients while they are cooked, but the protein in eggs isn't.",
+        desc: "Dogs should never eat raw or undercooked eggs. Raw eggs aren't safe at all. 'They can be a source of Salmonella. ... Some foods can lose nutrients while they are cooked, but the protein in eggs isn't.",
       },
       {
         name: "Raw bread dough",

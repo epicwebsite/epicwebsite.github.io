@@ -13,6 +13,7 @@ table {
   border-collapse: collapse;
   float: left;
   margin: 10px;
+  margin-left: 0px;
 }
 table td, th {
   border: 2px solid rgba(40, 40, 40);
@@ -72,7 +73,7 @@ input {
   color: rgba(220, 220, 220);
 }
 #desc {
-  padding: 10px;
+  padding-bottom: 10px;
 }
 #desc h1 {
   font-size: 25px;
@@ -89,6 +90,6 @@ input {
   padding: 5px;
   font-size: 18px;
 }
-#noResults {
+#noResults, #descLine {
   display: none;
 }
