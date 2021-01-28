@@ -1,5 +1,9 @@
 function init() {
   setTable();
+  if (F.url.query.search) {
+    doc.id("search").value = F.url.query.search;
+    search();
+  }
 }
 
 function setTable() {
@@ -136,8 +140,9 @@ function search() {
   for (i = 0; i < groups.length; i++) {
     length = Math.max(length, groups[i].length);
   }
+  max = 7;
 
-  for (i = 0; i < length; i++) {
+  for (i = 0; i < Math.min(max, length); i++) {
     el = '<tr>';
     for (v = 0; v < groups.length; v++) {
       el += [
@@ -160,7 +165,28 @@ function search() {
       });
     }
     doc.id("output").innerHTML += el + '</tr>';
+    if (i == max - 1 && length > max) {
+      el = '<tr>';
+      for (v = 0; v < groups.length; v++) {
+        if (groups[v].length > max) {
+          el += [
+            '<td>',
+            '  <button class="tableButton ect">',
+            '    Ect...',
+            '  </button>',
+            '</td>',
+          ].join("");
+        } else {
+          el += [
+            '<td>',
+            '</td>',
+          ].join("");
+        }
+      }
+      doc.id("output").innerHTML += el + '</tr>';
+    }
   }
+  doc.id("noResults").style.display = length < 1 ? "block" : "none";
 }
 
 function clickItem(el) {

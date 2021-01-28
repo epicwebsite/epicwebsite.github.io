@@ -9,6 +9,7 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   float: left;
+  margin: 10px;
 }
 table td, th {
   border: 2px solid rgba(40, 40, 40);
@@ -31,7 +32,7 @@ input {
   color: black;
 }
 .tableButton {
-  cursor: pointer;
+  cursor: default;
   margin: 0;
   left: 0;
   top: 0;
@@ -43,19 +44,25 @@ input {
   font-size: 18px;
 }
 .tableButton.hover:hover {
+  cursor: pointer;
   background-color: rgba(30, 30, 30);
 }
 .tableButton:focus {
   outline: none;
 }
-.output_contain {
-  padding: 20px;
+.tableButton.ect {
+  font-size: 15px;
+  color: rgba(180, 180, 180);
 }
 #output {
   float: none;
 }
+#search_contain {
+  margin-right: 10px;
+}
 #link {
   display: none;
+  margin: 20px 0;
 }
 .subtitle {
   font-size: 12px;
@@ -78,4 +85,7 @@ input {
   height: 20px;
   padding: 5px;
   font-size: 18px;
+}
+#noResults {
+  display: none;
 }
