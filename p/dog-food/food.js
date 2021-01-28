@@ -326,7 +326,7 @@ var food = [
           "nut",
         ],
         desc: "",
-      },/* 
+      },
       {
         name: "Capsicum",
         subtitle: "",
@@ -428,7 +428,7 @@ var food = [
           "vege",
         ],
         desc: "",
-      }, */
+      },
     ],
   },
   {
