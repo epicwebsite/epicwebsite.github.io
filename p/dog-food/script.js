@@ -192,10 +192,20 @@ function search() {
 function clickItem(el) {
   el = el.parentNode;
   item = el.id.split("_");
+  answer = "NO!";
+  switch (food[item[1]].can) {
+    case (0): {
+      answer = "YES";
+    }; break;
+    case (1): {
+      answer = "YES, But be careful";
+    }; break;
+  }
   item = food[item[1]].items[item[2]];
   el = [
     '<h1>',
-    '  {name}',
+    '  Can dog eat ',
+    '  <em>{name}</em>? - <code>{answer}</code>',
     '</h1>',
     '<h2>',
     '  {subtitle}',
@@ -203,11 +213,12 @@ function clickItem(el) {
     '<p>',
     '  {desc}',
     '</p>',
-    '<a href="https://www.google.com/search?q=can dog eat {link}">',
+    '<a href="https://www.google.com/search?q=can dog eat {link}" target="_blank">',
     '  Search google for \'{name}\'',
     '</a>',
   ].join("").format({
     name: item.name,
+    answer,
     link: item.name.lower(),
     subtitle: item.subtitle ? item.subtitle : "",
     desc: item.desc ? item.desc : "No information",
