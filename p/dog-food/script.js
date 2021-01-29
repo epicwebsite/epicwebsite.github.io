@@ -4,6 +4,7 @@ function init() {
     doc.id("search").value = F.url.query.search;
     search();
   }
+  doc.id("image").src = "image/favicon.png";
 }
 
 function setTable() {
