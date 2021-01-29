@@ -1,4 +1,4 @@
-text = {};
+text = {"_":null};
 text.jquery = [
   "! function(e, t) {",
   "  ",

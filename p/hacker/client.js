@@ -1,17 +1,27 @@
+var doFullscreen = true;
+// doFullscreen = false;
 function goFullscreen() {
-  mf = doc.body;
-  mf.webkitRequestFullscreen();
+  if (doFullscreen) {
+    mf = doc.body;
+    mf.webkitRequestFullscreen();
+  }
 }
 doc.documentElement.onclick = goFullscreen;
 
 char = 0;
-var type = "beemovie";
+var type = 1;
+changeType(1);
 function changeType(value) {
-  if (text[value]) {
+  if (value == 0) {
     type = value;
-    clear();  
+    doc.id("type").innerHTML = "?";
   } else {
-    console.error("Does not exist");
+    if (text[text.keys()[value]]) {
+      type = value;
+      doc.id("type").innerHTML = text.keys()[type][0].upper();
+    } else {
+      console.error("Does not exist");
+    }
   }
 }
 function clear() {
@@ -21,35 +31,75 @@ function clear() {
 
 val = true;
 addEventListener("keydown", (e) => {
-  if (
-    !e.ctrlKey
-    && !e.altKey
-    && e.code
-    && e.code.sub(0, 3) == "Key"
-  ) {
-    goFullscreen();
-    if (val) {
-      val = false;
-      addText();
+  if (!e.ctrlKey) {
+    if (
+      !e.altKey
+      && e.code
+      && (
+        e.code.sub(0) != "F"
+        && e.code != "Escape"
+      )
+    ) {
+      goFullscreen();
+      if (text.keys()[type] == "_") {
+        key = e.shiftKey ? e.key.upper() : e.key;
+        if (key.lower() == "spacekey") {
+          key = " ";
+        }
+        if (key.lower() == "enter") {
+          key = "<br>";
+        }
+        if (key.lower() != "shift") {
+          if (key.lower() == "backspace") {
+            doc.id("content").innerHTML = doc.id("content").innerHTML.sub(0, -2);
+          } else {
+            doc.id("content").innerHTML += key;
+          }
+        }
+      } else {
+        if (val) {
+          val = false;
+          addText();
+        }
+      }
+    }
+  } else {
+    switch (e.key) {
+      case ("c"): {
+        clear();
+      }; break;
+      case ("h"): {
+        alert("You are idiot");
+      }; break;
+      case ("d"): {
+        changeType((type + 1).wrap(-1, text.keys().length - 1));
+        if (doc.id("content").innerHTML) {
+          doc.id("content").innerHTML += "<br>";
+        }
+        char = 0;
+      }; break;
     }
   }
+  e.preventDefault();
 });
 addEventListener("keyup", () => {
   val = true;
 });
 
 function addText() {
-  for (i = 0; i < F.randomInt(1, 4); i++) {
-    setTimeout(() => {
-      doc.id("content").innerHTML += text[type][char] == "\n" ? '<br>' : text[type][char].replace(" ", "&nbsp;");
-      char++;
-      if (char >= text[type].length) {
-        doc.id("content").innerHTML += '<br>';
-        char = 0;
-      }
-    }, i * (50 * (F.randomInt(5, 20) / 10)));
+  if (type != 0) {
+    for (i = 0; i < F.randomInt(1, 4); i++) {
+      setTimeout(() => {
+        doc.id("content").innerHTML += text[text.keys()[type]][char] == "\n" ? '<br>' : text[text.keys()[type]][char].replace(" ", "&nbsp;");
+        char++;
+        if (char >= text[text.keys()[type]].length) {
+          doc.id("content").innerHTML += '<br>';
+          char = 0;
+        }
+      }, i * (50 * (F.randomInt(5, 20) / 10)));
+    }
+    doc.id("content").innerHTML = doc.id("content").innerHTML.split("<br>").sub((7 - (((window.innerHeight - 30) / 20)).round()).setBorder(-Infinity, 0), -1).join("<br>");
   }
-  doc.id("content").innerHTML = doc.id("content").innerHTML.split("<br>").sub((7 - (((window.innerHeight - 30) / 20)).round()).setBorder(-Infinity, 0), -1).join("<br>");
 }
 
 doAuto = true;
