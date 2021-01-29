@@ -78,6 +78,13 @@ addEventListener("keydown", (e) => {
         }
         char = 0;
       }; break;
+      case ("n"): {
+        if (doAuto) {
+          stop();
+        } else {
+          start();
+        }
+      }; break;
     }
   }
   e.preventDefault();
