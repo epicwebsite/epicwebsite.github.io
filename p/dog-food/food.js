@@ -154,6 +154,14 @@ var food = [
         desc: "Absolutely. There are many varieties of fish that are good for dogs. 'Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,' says Dempsey. ... And fish isn't just healthy for dogs—they like the taste of fish, too. Skin is good for the coat too.",
       },
       {
+        name: "Lentils",
+        subtitle: "",
+        tags: [
+          "bean",
+        ],
+        desc: "Dogs will enjoy eating lentils in small or moderate amounts after they've been soaked and cooked without spices. Dogs can eat lentils: Mixed with a meat protein and vegetable for a homemade meal. Blended and incorporated into a smaller portion of your dog's store-bought food.",
+      },
+      {
         name: "Mango",
         subtitle: "",
         tags: [
@@ -490,6 +498,15 @@ var food = [
           "vege",
         ],
         desc: "Avocado contains a toxin called persin, which is considered poisonous for dogs and other animals.",
+      },
+      {
+        name: "Butter",
+        subtitle: "",
+        tags: [
+          "margarine",
+          "dairy",
+        ],
+        desc: "Dogs will enjoy eating lentils in small or moderate amounts after they've been soaked and cooked without spices. Dogs can eat lentils: Mixed with a meat protein and vegetable for a homemade meal. Blended and incorporated into a smaller portion of your dog's store-bought food.",
       },
       {
         name: "Cherry pips, stems, leaves",
