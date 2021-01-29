@@ -42,7 +42,7 @@ var links =
       },  
       {
         id: "keys",
-        name: "Get JS key codes",
+        name: "Get key codes",
         alias: [
           "key",
           "keycodes",

@@ -3,14 +3,35 @@ function goFullscreen() {
   mf.webkitRequestFullscreen();
 }
 doc.documentElement.onclick = goFullscreen;
-doc.onkeydown = goFullscreen;
 
 char = 0;
+var type = "beemovie";
+function changeType(value) {
+  if (text[value]) {
+    type = value;
+    clear();  
+  } else {
+    console.error("Does not exist");
+  }
+}
+function clear() {
+  doc.id("content").innerHTML = "";
+  char = 0;
+}
+
 val = true;
-addEventListener("keydown", () => {
-  if (val) {
-    val = false;
-    addText();
+addEventListener("keydown", (e) => {
+  if (
+    !e.ctrlKey
+    && !e.altKey
+    && e.code
+    && e.code.sub(0, 3) == "Key"
+  ) {
+    goFullscreen();
+    if (val) {
+      val = false;
+      addText();
+    }
   }
 });
 addEventListener("keyup", () => {
@@ -18,12 +39,12 @@ addEventListener("keyup", () => {
 });
 
 function addText() {
-  for (i = 0; i < F.randomInt(2, 5); i++) {
+  for (i = 0; i < F.randomInt(1, 4); i++) {
     setTimeout(() => {
-      doc.id("content").innerHTML += text[char] == "\n" ? '<br>' : text[char].replace(" ", "&nbsp;");
+      doc.id("content").innerHTML += text[type][char] == "\n" ? '<br>' : text[type][char].replace(" ", "&nbsp;");
       char++;
-      if (char >= text.length) {
-        doc.id("content").innerHTML += '<br><br>';
+      if (char >= text[type].length) {
+        doc.id("content").innerHTML += '<br>';
         char = 0;
       }
     }, i * (50 * (F.randomInt(5, 20) / 10)));

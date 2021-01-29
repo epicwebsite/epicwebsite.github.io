@@ -1,4 +1,5 @@
-var text = [
+text = {};
+text.jquery = [
   "! function(e, t) {",
   "  ",
   "  \"use strict\";",
