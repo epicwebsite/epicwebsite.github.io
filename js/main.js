@@ -74,7 +74,7 @@ function showLinks(showHidden) {
       ].join("").format({
         img,
         href: href,
-        dir: F.url.dir,
+        dir: F.url.href,
         name: "{0}{1}".format(icon, links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id),
         id: "link_{0}".format(links.values()[t].items[i].id),
       });
