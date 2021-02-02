@@ -79,7 +79,7 @@ addEventListener("keydown", (e) => {
         char = 0;
       }; break;
       case ("n"): {
-        if (doAuto) {
+        if (doAuto === true) {
           stop();
         } else {
           start();
@@ -109,12 +109,12 @@ function addText() {
   }
 }
 
-doAuto = true;
+doAuto = 1;
 async function start() {
   doAuto = true;
   while (true) {
     if (doAuto) {
-      await F.sleep(F.randomInt(1, 3) / 10);
+      await F.sleep(F.randomInt(8, 20) / 100);
       addText();
     } else {
       break;
