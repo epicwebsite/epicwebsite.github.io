@@ -14,8 +14,7 @@ function reset() {
 }
 
 function render() {
-  ctx.fillStyle = "white";
-  ctx.fillCanvas(20);
+  ctx.fillCanvas(F.getColor(180));
   
   number = doc.id("input").value;
   doc.id("decimal").value = "";
@@ -53,7 +52,11 @@ function render() {
       ];
       full.push([Math.round((digit + 2) / 2) % 2, line]);
       x = d.wrap(-1, lineMax, true);
-      y = Math.floor(d / lineMax) * w;
+      y = Math.floor(d / lineMax);
+      if (y >= lineMax) {
+        continue;
+      }
+      y *= w;
 
       /* Diagonal */
       ctx.strokeStyle = "black";
