@@ -232,6 +232,11 @@ var links =
         name: "BlackJack Game",
         hidden: true,
       },
+      {
+        id: "aerune",
+        name: "Aerune Number Converter",
+        hidden: true,
+      },
     ]
   },
   media: {
