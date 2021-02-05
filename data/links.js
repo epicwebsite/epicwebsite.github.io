@@ -235,7 +235,7 @@ var links =
       {
         id: "aerune",
         name: "Aerune Number Converter",
-        hidden: true,
+        image: true,
       },
     ]
   },

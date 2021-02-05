@@ -14,7 +14,7 @@ function reset() {
 }
 
 function render() {
-  ctx.fillCanvas(F.getColor(180));
+  ctx.fillCanvas(F.getColor(210));
   
   number = doc.id("input").value;
   doc.id("decimal").value = "";
@@ -24,16 +24,19 @@ function render() {
   lineMax = 10;
   full = [];
   if (number || number == 0) {
-    arr = number.split(" ");
+    arr = number;
     temp = [];
+    if (doc.id("convert").checked) {
+      arr = arr.split(" ");
+    }
     for (i = 0; i < arr.length; i++) {
       if (parseInt(arr[i]) == arr[i]) {
-        temp.push(doc.id("convert").checked ? parseInt(arr[i]).toString(16) : parseInt(arr[i]));
-      } else if (arr[i].length < 1) {
+        temp.push(parseInt(arr[i]).toString(16));
+      } else if (arr[i].replaceAll(" ", "").length < 1) {
         temp.push(" ");
       }
     }
-    hex = temp.join(" ");
+    hex = temp.join("");
     delete temp;
     doc.id("decimal").value = hex.upper();
     

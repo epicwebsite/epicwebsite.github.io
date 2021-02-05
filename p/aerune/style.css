@@ -12,11 +12,15 @@ body {
   -ms-user-select: none;
 }
 canvas {
-  background-color: rgba(20, 20, 20);
+  background-color: rgba(60, 60, 60);
   border: 3px solid rgba(70, 70, 70);
   margin-right: 10px;
   /* cursor: none; */
 }
-select, input, button {
+select, input, button, textarea {
   color: black;
+}
+textarea {
+  width: 300px;
+  height: 300px;
 }
