@@ -1,31 +1,28 @@
-/* var canvas = document.createElement("canvas");
-canvas.width = 512;
-canvas.height = 512;
-canvas.id = "canvas";
-var ctx = canvas.getContext("2d"); */
-
 function init() {
   output_gen();
-  // document.body.appendChild(canvas);
 }
-// F.c(data);
 function output_clear() {
-  for (i = 0; i < document.getElementById("output_table").childNodes.length; i++) {
-    if (document.getElementById("output_table").childNodes[i].tagName == "TR") {
-      for (i2 = 0; i2 < ((document.getElementById("output_table").childNodes[i].childNodes.length)); i2++) {
-        document.getElementById("output_table").childNodes[i].removeChild(document.getElementById("output_table").childNodes[i].childNodes[i2]);
-        document.getElementById("output_table").childNodes[i].removeChild(document.getElementById("output_table").childNodes[i].childNodes[i2]);
-      }
-    }
-  }
+  doc.id("output_table").innerHTML = "";
 }
 var un;
 function output_gen() {
-  // $("<tr></tr>").insertAfter(document.getElementById("output_table").lastChild)
   for (i = 0; i < Object.keys(data).length; i++) {
     var choice = F.randomInt(1, (Object.values(data)[i].length - 1));
-    var tableLine = '<tr id="output_' + Object.keys(data)[i] + '"><th>' + Object.values(data)[i][0] + '</th><td>' + Object.values(data)[i][choice] + '</td></tr>';
-    $(tableLine).insertAfter(document.getElementById("output_table").lastChild)
+    var el = [
+      '<tr id="output_{id}">',
+      '  <th>',
+      '    {name}',
+      '  </th>',
+      '  <td>',
+      '    {value}',
+      '  </td>',
+      '</tr>'
+    ].join("").format({
+      id: Object.keys(data)[i],
+      name: Object.values(data)[i][0],
+      value: Object.values(data)[i][choice],
+    });
+    document.getElementById("output_table").innerHTML += el;
   }
   un = "";
   var noun = nouns[F.randomInt(0, nouns.length - 1)];
@@ -37,21 +34,22 @@ function output_gen() {
   for (i = 0; i < F.randomInt(0, 3); i++) {
     un = un + F.randomInt(0, 9);
   }
-  var tableLine = '<tr id="output_un"><th>Username</th><td>' + un + '</td></tr>';
-  $(tableLine).insertAfter(document.getElementById("output_table").lastChild);
-  // drawElement();
+  var el = [
+    '<tr id="output_un">',
+    '  <th>',
+    '    Username',
+    '  </th>',
+    '  <td>',
+    '    {value}',
+    '  </td>',
+    '</tr>'
+  ].join("").format({
+    value: un,
+  });
+  document.getElementById("output_table").innerHTML += el;
 }
 function addChar() {
   var chars = ["", "", "_", "."];
   var charNum = F.randomInt(0, chars.length - 1);
   un = un + chars[charNum];
 }
-/* function drawElement() {
-  elements = {}
-  elementImgs = []
-  for (i = 1; i < document.getElementById("output_table").childNodes.length; i++) {
-    elements[document.getElementById("output_table").childNodes[i].firstChild.innerHTML] = document.getElementById("output_table").childNodes[i].childNodes[1].innerHTML;
-    elementImgs[i] = new Image();
-    elementImgs[i].src = "img/"
-  }
-} */
