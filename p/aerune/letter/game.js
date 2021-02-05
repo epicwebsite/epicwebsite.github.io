@@ -16,13 +16,13 @@ function reset() {
 function render() {
   ctx.fillCanvas(F.getColor(210));
 
-  letters = doc.id("input").value;
+  letters = doc.id("input").value.lower();
   w = 50;
   margin = 5;
   padding = 5;
   lineMax = 10;
   if (letters && letters.length > 0) {
-    letters = letters.split("/");
+    letters = letters.split("'");
     ctx.lineWidth = 3;
     ctx.lineCap = "round";
     for (d = 0; d < letters.length; d++) {
