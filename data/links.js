@@ -234,7 +234,7 @@ var links =
       },
       {
         id: "aerune",
-        name: "Aerune Number Converter",
+        name: "Aerune Translator",
         image: true,
       },
     ]
