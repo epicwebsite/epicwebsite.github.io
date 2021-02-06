@@ -155,4 +155,8 @@ footer {
   border-radius: 100px;
   backdrop-filter: blur(5px);
   background-color: #111A;
+  cursor: pointer;
+}
+footer:hover {
+  text-decoration: underline;
 }
