@@ -5,7 +5,7 @@ html {
   margin: 0;
   padding: 0;
   border: 10px solid rgba(30, 30, 30, 0.6);
-  display:block;
+  display: block;
   box-sizing: border-box;
 }
 body {
@@ -19,7 +19,10 @@ body {
 code {
   font-family: 'Courier New', Courier, monospace;
 }
-button, select, option, input {
+button,
+select,
+option,
+input {
   color: rgba(5, 5, 5);
 }
 .switch {
@@ -33,7 +36,18 @@ button, select, option, input {
   width: 0;
   height: 0;
 }
-.slider {
+.switch input:checked + .slider {
+  background-color: #2196F3;
+}
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.switch .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -41,10 +55,10 @@ button, select, option, input {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
-.slider:before {
+.switch .slider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -52,24 +66,13 @@ button, select, option, input {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
-input:checked + .slider {
-  background-color: #2196F3;
-}
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-.slider.round {
+.switch .slider.round {
   border-radius: 34px;
 }
-.slider.round:before {
+.switch .slider.round:before {
   border-radius: 50%;
 }
 .button {
@@ -88,7 +91,6 @@ input:checked + .slider:before {
 .button:focus {
   outline: none;
 }
-
 .lightmode_contain {
   position: absolute;
   right: 20px;
@@ -111,9 +113,21 @@ a {
 a:hover {
   text-decoration: underline;
 }
-.icon_img {
-  width: 20px;
-  height: 20px;
+#links .link {
+  padding: 5px;
+  font-size: 18px;
+  margin: -5px 0;
+}
+#links .link a {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #0002;
+}
+#links .link .icon_img {
+  width: 30px;
+  height: 30px;
+  margin-bottom: -5px;
+  margin-right: 5px;
 }
 .download {
   font-size: 30px;

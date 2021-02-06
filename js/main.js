@@ -66,11 +66,12 @@ function showLinks(showHidden) {
         );
       }
       el = [
-        '<a href="{href}" class="link" id="{id}" title="Go to: {dir}{href}">',
+        '<article class="link">',
         '  {img}',
-        '  {name}',
-        '</a>',
-        '<br>',
+        '  <a href="{href}" id="{id}" title="Go to: {dir}{href}">',
+        '    {name}',
+        '  </a>',
+        '</article>',
       ].join("").format({
         img,
         href: href,
@@ -94,5 +95,7 @@ function changeStyle() {
 }
 
 function unloadImage(el) {
-  el.style.visibility = "hidden";
+  // el.style.visibility = "hidden";
+  el.src = "./source/fallback.png";
+  el.className += " unloaded";
 }
