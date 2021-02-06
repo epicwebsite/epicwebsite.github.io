@@ -66,7 +66,7 @@ function showLinks(showHidden) {
         );
       }
       el = [
-        '<article class="link">',
+        '<article class="link {noImage}">',
         '  {img}',
         '  <a href="{href}" id="{id}" title="Go to: {dir}{href}">',
         '    {name}',
@@ -74,6 +74,7 @@ function showLinks(showHidden) {
         '</article>',
       ].join("").format({
         img,
+        noImage: !img ? "noImage" : "",
         href: href,
         dir: F.url.href,
         name: "{0}{1}".format(icon, links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id),
@@ -96,6 +97,6 @@ function changeStyle() {
 
 function unloadImage(el) {
   // el.style.visibility = "hidden";
-  el.src = "./source/fallback.png";
+  el.src = "./source/image/fallback.png";
   el.className += " unloaded";
 }
