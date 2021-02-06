@@ -287,14 +287,13 @@ var links =
         name: "FunctionsJS",
       },
       {
-        id: "https://poop-sock.github.io/",
-        name: "PoopSock",
-        hidden: true,
+        id: "https://snickdog.github.io/",
+        name: "Awesome Dog!",
       },
     ],
   },
   other: {
-    name: "Other",
+    name: "Other (Not made by me)",
     local: false,
     items: [
       {

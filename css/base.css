@@ -3,12 +3,12 @@
   src: url("ComicSansMS.ttf");
 }
 html {
-  background-color: rgba(40, 40, 60);
+  background-color: #202030;
   width: 100%;
   min-height: 100%;
   margin: 0;
   padding: 0;
-  border: 10px solid rgba(30, 30, 30, 0.6);
+  border: 10px solid #1e1e1e99;
   display: block;
   box-sizing: border-box;
 }
@@ -17,7 +17,7 @@ body {
   margin-bottom: 100px;
 }
 * {
-  color: rgba(250, 250, 250);
+  color: #fafafa;
   font-family: Arial, Helvetica, sans-serif;
 }
 code {
@@ -27,7 +27,18 @@ button,
 select,
 option,
 input {
-  color: rgba(5, 5, 5);
+  color: #050505;
+}
+button {
+  cursor: pointer;
+}
+.top header {
+  font-size: 40px;
+  font-weight: 600;
+}
+.top h1 {
+  font-size: 25px;
+  font-weight: 500;
 }
 .switch {
   position: relative;
@@ -69,7 +80,7 @@ input {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: #FBFBFB;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -80,17 +91,17 @@ input {
   border-radius: 50%;
 }
 .button {
-  background-color: rgba(240, 240, 240);
+  background-color: #f0f0f0;
   border: 2px solid gray;
   min-width: 80px;
   min-height: 30px;
   font-size: 15px;
 }
 .button:hover {
-  background-color: rgba(220, 220, 220);
+  background-color: #dcdcdc;
 }
 .button:active {
-  background-color: rgba(200, 200, 200);
+  background-color: #c8c8c8;
 }
 .button:focus {
   outline: none;
@@ -124,6 +135,9 @@ a {
 a:hover {
   text-decoration: underline;
 }
+#links h2 {
+  font-size: 30px;
+}
 #links .link {
   padding: 5px;
   font-size: 18px;
@@ -155,8 +169,12 @@ footer {
   border-radius: 100px;
   backdrop-filter: blur(5px);
   background-color: #111A;
+  box-shadow: 0 0 5px 5px #0002;
   cursor: pointer;
 }
 footer:hover {
   text-decoration: underline;
+}
+hr {
+  margin-top: 20px;
 }
