@@ -4,7 +4,6 @@ function init() {
   F.triggerOnload();
   doc.id("lightmode").checked = ls.get().lightmode;
   changeStyle();
-  doc.id("splash").innerText = rootData.splash;
   doc.body.style.visibility = "visible";
 }
 console.log("._. Hello");
@@ -31,10 +30,42 @@ ls.edit = function (func) {
 
 function showLinks(showHidden) {
   doc.id("links").innerHTML = "";
-  for (t = 0; t < links.keys().length; t++) {
-    content = '';
-    // $("#links").append(el);
+  columns = 3;
+  for (t = 0; t < /* links.keys().length */1; t++) {
+    l = links.values()[t].items.length;
+    lens = [Math.ceil(l / columns)];
+    for (i = 0; i < columns - 2; i++) {
+      lens.push(Math.round(l / columns));
+    }
+    lens.push(Math.floor(l / columns));
+    console.log(lens);
+
+    temp = [];
+    total = 0;
+    for (i = 0; i < lens.length; i++) {
+      temp[i] = total;
+      total += lens[i];
+    }
+    lens = temp;
+    delete temp;
+    console.log(lens);
+
+    el = [
+      '<section id="links_{id}">',
+      '  <h2>{name}</h2>',
+      '</section>',
+      '<hr>',
+    ].join("").format({
+      id: links.keys()[t],
+      name: links.values()[t].name,
+    });
+    $("#links").append(el);
+    column = '';
     for (i = 0; i < links.values()[t].items.length; i++) {
+      if (i == 0 || lens.includes(i - 1)) {
+        console.log("start", i);
+        column = '<column>';
+      }
       if (
         links.values()[t].items[i].hidden
         && !showHidden
@@ -58,7 +89,7 @@ function showLinks(showHidden) {
           links.values()[t].items[i].image ? links.values()[t].image.format(links.values()[t].items[i].id) : ""
         );
       }
-      content += [
+      el = [
         '<article class="link {noImage}">',
         '  {img}',
         '  <a href="{href}" id="{id}" title="Go to: {dir}{href}">',
@@ -73,21 +104,13 @@ function showLinks(showHidden) {
         name: "{0}{1}".format(icon, links.values()[t].items[i].name ? links.values()[t].items[i].name : links.values()[t].items[i].id),
         id: "link_{0}".format(links.values()[t].items[i].id),
       });
+      column += el;
+
+      if (lens.includes(i + 1)) {
+        console.log("end", i);
+        $("#links_{0}".format(links.keys()[t])).append(column + '</column>');
+      }
     }
-    doc.id("links").innerHTML += [
-      '<section id="links_{id}">',
-      '  <h2>{name}</h2>',
-      '</section>',
-      '<div class="content">',
-      ' {content}',
-      '</div>',
-      '<hr>',
-    ].join("").format({
-      id: links.keys()[t],
-      name: links.values()[t].name,
-      content: content,
-    });
-    // $("#links_{0}".format(links.keys()[t])).append(el);
   }
 }
 function showHidden() {

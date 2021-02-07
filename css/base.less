@@ -34,6 +34,7 @@ option,
 input {
   color: #050505;
 }
+
 button {
   cursor: pointer;
 }
@@ -43,6 +44,7 @@ button {
     font-size: 40px;
     font-weight: 600;
   }
+
   h1 {
     font-size: 25px;
     font-weight: 500;
@@ -167,29 +169,36 @@ a {
 #links {
   h2 {
     font-size: 30px;
+    padding-left: 50px;
   }
-  
-  .link {
-    padding: 5px;
-    font-size: 18px;
-    margin: -5px 0;
 
-    a {
+  .content {
+    column-count: 3;
+    column-fill: auto;
+
+    .link {
       padding: 5px;
-      border-radius: 5px;
-      background-color: #0002;
-    }
+      font-size: 18px;
+      margin: -5px 0;
 
-    .icon_img {
-      @img-size: 30px;
-      width: @img-size;
-      height: @img-size;
-      margin-bottom: -5px;
-      margin-right: 5px;
-    }
 
-    &.noImage {
-      margin-top: 8px;
+      a {
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #0002;
+      }
+
+      .icon_img {
+        @img-size: 30px;
+        width: @img-size;
+        height: @img-size;
+        margin-bottom: -5px;
+        margin-right: 5px;
+      }
+
+      &.noImage {
+        margin-top: 8px;
+      }
     }
   }
 }

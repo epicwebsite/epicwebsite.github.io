@@ -16,8 +16,7 @@ function init() {
           )
         )
       ) {
-        link = "https://{0}.github.io/p/{1}{2}".format(
-          meta.domain,
+        link = "https://epicwebsite.github.io/p/{1}{2}".format(
           links.values()[o].items[l].id,
           F.url.queryRaw.length > 0 ? "?" + F.url.queryRaw : ""
         );

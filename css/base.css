@@ -137,24 +137,29 @@ a:hover {
 }
 #links h2 {
   font-size: 30px;
+  padding-left: 50px;
 }
-#links .link {
+#links .content {
+  column-count: 3;
+  column-fill: auto;
+}
+#links .content .link {
   padding: 5px;
   font-size: 18px;
   margin: -5px 0;
 }
-#links .link a {
+#links .content .link a {
   padding: 5px;
   border-radius: 5px;
   background-color: #0002;
 }
-#links .link .icon_img {
+#links .content .link .icon_img {
   width: 30px;
   height: 30px;
   margin-bottom: -5px;
   margin-right: 5px;
 }
-#links .link.noImage {
+#links .content .link.noImage {
   margin-top: 8px;
 }
 .download {

@@ -1,5 +1,4 @@
-var links =
-{
+var links = {
   page: {
     name: "Pages",
     local: true,

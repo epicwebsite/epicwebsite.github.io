@@ -1,3 +1,0 @@
-var meta = {
-  domain: "epicwebsite",
-};
