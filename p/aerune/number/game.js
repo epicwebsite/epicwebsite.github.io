@@ -22,7 +22,7 @@ function render() {
   margin = 5;
   padding = 5;
   lineMax = 10;
-  full = [];
+  binary = [];
   if (number || number == 0) {
     arr = number;
     temp = [];
@@ -47,13 +47,18 @@ function render() {
       if (!digit && digit != 0) {
         continue;
       }
-      line = [
-        Math.floor((digit - 1) / 4) % 2,
-        Math.round((digit + 2) / 2) % 2,
-        (digit > 8 || digit == 0) ? 1 : 0,
-        !(digit % 2) ? 1 : 0,
-      ];
-      full.push([Math.round((digit + 2) / 2) % 2, line]);
+      line = {
+        left: (digit > 8 || digit == 0) ? 1 : 0,
+        right: !(digit % 2) ? 1 : 0,
+        second: Math.round((digit + 2) / 2) % 2,
+        rotate: Math.abs(Math.floor((digit - 1) / 4) % 2),
+      };
+      binary.push((parseInt([
+        line.left,
+        line.rotate,
+        line.second,
+        line.right,
+      ].join(""), 2) + 1).toString(2).fill(4, "0").sub(-4, -1));
       x = d.wrap(-1, lineMax, true);
       y = Math.floor(d / lineMax);
       if (y >= lineMax) {
@@ -66,11 +71,11 @@ function render() {
       ctx.beginPath();
       ctx.moveTo(
         margin + padding + (x * w),
-        margin + y + (!line[0] ? w - padding : 0 + padding),
+        margin + y + (!line.rotate ? w - padding : 0 + padding),
       );
       ctx.lineTo(
         margin - padding + ((x + 1) * w),
-        margin + y + (line[0] ? w - padding : 0 + padding),
+        margin + y + (line.rotate ? w - padding : 0 + padding),
       );
       ctx.stroke();
 
@@ -80,7 +85,7 @@ function render() {
         margin + (x + 0.5) * w,
         margin + (w / 2) + y,
       );
-      switch (F.bool_bin(line[0], line[1])) {
+      switch (F.bool_bin(line.rotate, line.second)) {
         case ("00"): {
           ctx.lineTo(
             margin - padding + ((x + 1) * w),
@@ -108,35 +113,36 @@ function render() {
       }
       ctx.stroke();
 
-      /* Left Line */
-      if (line[2]) {
+      /* Right Line */
+      if (line.right) {
         ctx.beginPath();
         ctx.moveTo(
-          margin + padding + (x * w),
+          margin - padding + ((x + 1) * w),
           margin + padding + y,
         );
         ctx.lineTo(
-          margin + padding + (x * w),
+          margin - padding + ((x + 1) * w),
           margin - padding + y + w,
         );
         ctx.stroke();
       }
 
-      /* Right Line */
-      if (line[3]) {
+      /* Left Line */
+      if (line.left) {
         ctx.beginPath();
         ctx.moveTo(
-          margin - padding + ((x + 1) * w),
+          margin + padding + (x * w),
           margin + padding + y,
         );
         ctx.lineTo(
-          margin - padding + ((x + 1) * w),
+          margin + padding + (x * w),
           margin - padding + y + w,
         );
         ctx.stroke();
       }
     }
   }
+  doc.id("binary").innerText = binary.join(" ");
 }
 
 function main() {
