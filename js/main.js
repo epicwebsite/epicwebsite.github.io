@@ -100,3 +100,10 @@ function unloadImage(el) {
   el.src = "./source/image/fallback.png";
   el.className += " unloaded";
 }
+
+function crash() {
+  console.log("Look out! *crash*");
+  while (true) {
+    alert("You idiot!");
+  }
+}

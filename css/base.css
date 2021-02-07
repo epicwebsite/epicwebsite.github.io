@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Comic Sans MS";
-  src: url("ComicSansMS.ttf");
+  src: url("../source/font/ComicSansMS.ttf");
 }
 html {
   background-color: #202030;
@@ -8,7 +8,7 @@ html {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  border: 10px solid #1e1e1e99;
+  border: 10px solid #10101040;
   display: block;
   box-sizing: border-box;
 }
