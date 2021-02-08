@@ -20,8 +20,8 @@ function init() {
           links.values()[o].items[l].id,
           F.url.queryRaw.length > 0 ? "?" + F.url.queryRaw : ""
         );
-        doc.id("header").innerHTML = "Redirecting...";
-        doc.id("text").innerHTML = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(link);
+        doc.id("header").innerText = "Redirecting...";
+        doc.id("text").innerText = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(link);
         location.href = link;
         redirected = true;
         break;
@@ -30,6 +30,6 @@ function init() {
   }
 
   if (!redirected) {
-    doc.id("path").innerHTML = "'{0}'".format(path);
+    doc.id("path").innerText = "'{0}'".format(path);
   }
 }
