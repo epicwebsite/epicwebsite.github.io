@@ -15,6 +15,13 @@ html {
   background-size: 80px 80px;
   background-position: 0 0, 0 40px, 40px -40px, -40px 0px;
 }
+html[lightmode=true] {
+  background-color: #505085;
+  background-image: none;
+}
+html[lightmode=true] * {
+  font-family: "Comic Sans MS";
+}
 body {
   padding: 10px;
   margin-bottom: 100px;
