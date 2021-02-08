@@ -38,23 +38,3 @@ function init() {
     doc.id("path").innerText = "'{0}'".format(path);
   }
 }
-
-var ls = {};
-ls.check = function () {
-  if (!F.ls("settings")) {
-    ls.reset();
-  }
-}
-ls.get = function () {
-  return (JSON.parse(F.ls("settings")));
-}
-ls.reset = function () {
-  F.ls("settings", JSON.stringify({
-    lightmode: false,
-  }));
-}
-ls.edit = function (func) {
-  let d = ls.get();
-  func(d);
-  F.ls("settings", JSON.stringify(d));
-}
