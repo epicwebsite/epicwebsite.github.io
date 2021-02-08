@@ -2,7 +2,9 @@ function init() {
   ls.check();
   doc.id("stylesheet").href = "https://epicwebsite.github.io/css/{0}.css".format(ls.get("lightmode") ? "light" : "dark");
   
-  doc.id("link").href = F.url.online ? "./" : "./index.html";
+  doc.id("link").href = "https://epicwebsite.github.io".format(
+    F.url.online ? "" : "/index.html"
+  );
 
   path = F.url.filepath;
   redirected = false;
