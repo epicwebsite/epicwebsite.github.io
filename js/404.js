@@ -1,4 +1,5 @@
 function init() {
+  doc.id("stylesheet").href = "https://epicwebsite.github.io/css/{0}.css".format(doc.id("lightmode").checked ? "light" : "dark");
   doc.id("link").href = F.url.online ? "./" : "./index.html";
 
   path = F.url.filepath;
