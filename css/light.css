@@ -1,5 +1,6 @@
 body, html {
   background-color: #505085;
+  background-image: none;
 }
 * {
   font-family: "Comic Sans MS";

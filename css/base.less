@@ -4,14 +4,29 @@
 }
 
 html {
-  background-color: #202030;
+  @color1: #202030;
+  @color2: #1E1E2E;
+  @cubesize: 80px;
+  display: block;
+  margin: 0;
   width: 100%;
   min-height: 100%;
-  margin: 0;
   padding: 0;
   border: 10px solid #10101040;
-  display: block;
   box-sizing: border-box;
+  background-color: @color1;
+  background-image: linear-gradient(45deg, @color2 25%, transparent 25%),
+  linear-gradient(-45deg, @color2 25%, transparent 25%),
+  linear-gradient(45deg, transparent 75%, @color2 75%),
+  linear-gradient(-45deg, transparent 75%, @color2 75%);
+  background-size: @cubesize @cubesize;
+  @a: (@cubesize / 2);
+  @b: (0 - @a);
+  background-position:
+  0 0,
+  0 @a,
+  @a @b,
+  @b 0px;
 }
 
 body {
@@ -175,21 +190,24 @@ a {
   .content {
     column-count: 3;
     column-fill: auto;
-
+    padding: 5px;
+    font-size: 18px;
+    margin-top: -20px;
+    
     .link {
-      padding: 5px;
-      font-size: 18px;
-      margin: -5px 0;
+      break-inside: avoid;
+      margin: 5px 0;
 
 
       a {
         padding: 5px;
         border-radius: 5px;
-        background-color: #0002;
+        background-color: #0004;
       }
 
       .icon_img {
         @img-size: 30px;
+        display: inline-block;
         width: @img-size;
         height: @img-size;
         margin-bottom: -5px;
@@ -197,7 +215,7 @@ a {
       }
 
       &.noImage {
-        margin-top: 8px;
+        margin-top: 12px;
       }
     }
   }

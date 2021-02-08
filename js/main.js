@@ -4,7 +4,7 @@ function init() {
   F.triggerOnload();
   doc.id("lightmode").checked = ls.get().lightmode;
   changeStyle();
-  doc.id("splash").innerText = rootData.splash;
+  doc.id("splash").innerHTML = rootData.splash;
   doc.body.style.visibility = "visible";
 }
 console.log("._. Hello");
@@ -33,7 +33,6 @@ function showLinks(showHidden) {
   doc.id("links").innerHTML = "";
   for (t = 0; t < links.keys().length; t++) {
     content = '';
-    // $("#links").append(el);
     for (i = 0; i < links.values()[t].items.length; i++) {
       if (
         links.values()[t].items[i].hidden
@@ -87,10 +86,9 @@ function showLinks(showHidden) {
       name: links.values()[t].name,
       content: content,
     });
-    // $("#links_{0}".format(links.keys()[t])).append(el);
   }
 }
-function showHidden() {
+function unhide() {
   showLinks(true);
 }
 

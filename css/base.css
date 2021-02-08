@@ -3,14 +3,17 @@
   src: url("../source/font/ComicSansMS.ttf");
 }
 html {
-  background-color: #202030;
+  display: block;
+  margin: 0;
   width: 100%;
   min-height: 100%;
-  margin: 0;
   padding: 0;
   border: 10px solid #10101040;
-  display: block;
   box-sizing: border-box;
+  background-color: #202030;
+  background-image: linear-gradient(45deg, #1E1E2E 25%, transparent 25%), linear-gradient(-45deg, #1E1E2E 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #1E1E2E 75%), linear-gradient(-45deg, transparent 75%, #1E1E2E 75%);
+  background-size: 80px 80px;
+  background-position: 0 0, 0 40px, 40px -40px, -40px 0px;
 }
 body {
   padding: 10px;
@@ -142,25 +145,28 @@ a:hover {
 #links .content {
   column-count: 3;
   column-fill: auto;
-}
-#links .content .link {
   padding: 5px;
   font-size: 18px;
-  margin: -5px 0;
+  margin-top: -20px;
+}
+#links .content .link {
+  break-inside: avoid;
+  margin: 5px 0;
 }
 #links .content .link a {
   padding: 5px;
   border-radius: 5px;
-  background-color: #0002;
+  background-color: #0004;
 }
 #links .content .link .icon_img {
+  display: inline-block;
   width: 30px;
   height: 30px;
   margin-bottom: -5px;
   margin-right: 5px;
 }
 #links .content .link.noImage {
-  margin-top: 8px;
+  margin-top: 12px;
 }
 .download {
   font-size: 30px;
