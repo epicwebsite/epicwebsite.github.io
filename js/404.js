@@ -1,6 +1,6 @@
 function init() {
   ls.check();
-  doc.id("stylesheet").href = "https://epicwebsite.github.io/css/{0}.css".format(ls.get("lightmode") ? "light" : "dark");
+  doc.id("stylesheet").href = "https://epicwebsite.github.io/css/{0}.css".format(ls.get().lightmode ? "light" : "dark");
   
   doc.id("link").href = "https://epicwebsite.github.io".format(
     F.url.online ? "" : "/index.html"
