@@ -22,7 +22,6 @@ button.img2.src = "image/button2.png";
 button.glow.src = "image/glow.png";
 var bg = [];
 var text = {
-  msg: "press for bruh".upper(),
   color: [],
   flash: true,
 };
@@ -70,11 +69,11 @@ function render() {
     text.color[1] - 20,
     text.color[2] - 50,
   ]));
-  for (i = 0; i < data.text.d; i++) {
+  for (i = 0; i < data.text.shadow; i++) {
     ctx.fillText(
-      text.msg,
+      data.text.msg,
       (canvas.width / 2) + i,
-      (canvas.height / 10).setBorder(fontSize, canvas.height) + i,
+      ((canvas.height / 10).setBorder(fontSize, canvas.height) * data.text.offsetY) + i,
     );
   }
   ctx.shadowColor = "black";
@@ -82,16 +81,16 @@ function render() {
   ctx.shadowBlur = 7;
   ctx.lineWidth = 3;
   ctx.strokeText(
-    text.msg,
+    data.text.msg,
     canvas.width / 2,
-    (canvas.height / 10).setBorder(fontSize, canvas.height),
+    (canvas.height / 10).setBorder(fontSize, canvas.height) * data.text.offsetY,
   );
   ctx.shadowBlur = 0;
   ctx.fillStyle = F.getColor(F.hsv_rgb(text.color));
   ctx.fillText(
-    text.msg,
+    data.text.msg,
     canvas.width / 2,
-    (canvas.height / 10).setBorder(fontSize, canvas.height),
+    (canvas.height / 10).setBorder(fontSize, canvas.height) * data.text.offsetY,
   );
 
   ctx.drawImage(
@@ -100,6 +99,28 @@ function render() {
     (canvas.height / data.button.offsetY) - ((w * data.button.size) / 2),
     w * data.button.size,
     w * data.button.size,
+  );
+
+  ctx.font = "{0}px Arial".format(data.footer.size);
+  ctx.fillStyle = data.footer.color;
+  textWidth = ctx.measureText(data.footer.msg).width;
+  ctx.fillRoundRect(
+    canvas.width - 20 - textWidth - data.footer.padding,
+    canvas.height - 20 - data.footer.size - data.footer.padding + 3,
+    textWidth + (data.footer.padding * 2),
+    data.footer.size + (data.footer.padding * 2),
+    10,
+  );
+  ctx.fillStyle = F.getColor(F.hsv_rgb([
+    (bg[0] + 180).wrap(0, 360),
+    50,
+    100,
+  ]));
+  ctx.textAlign = "right";
+  ctx.fillText(
+    data.footer.msg,
+    canvas.width - 20,
+    canvas.height - 20,
   );
 }
 
@@ -110,9 +131,11 @@ function main() {
   requestAnimationFrame(main);
 }
 function update(mod) {
+  doc.body.style.cursor = "default";
   var keysDown = F.getKeyCodes(controls);
   button.w = button.dw * (canvas.width / 512);
   button.h = button.dh * (canvas.width / 512);
+  w = Math.min(canvas.width.setBorder(300, 3000), canvas.height.setBorder(100, 3000));
 
   if (gameState == "play") {
     bg[0] += data.bg.speed / 100;
@@ -131,33 +154,94 @@ function update(mod) {
     ) {
       text.color[0] += data.text.colorDiff;
     }
+    if (
+      F.collide({
+        x: F.mouse.x,
+        y: F.mouse.y,
+        r: 1,
+      }, {
+        x: (canvas.width / 2),
+        y: (canvas.height / data.button.offsetY),
+        r: (w * data.button.size) / 2,
+        }, true, true)
+      || F.collide({
+        x: F.touch.x,
+        y: F.touch.y,
+        r: 1,
+      }, {
+        x: (canvas.width / 2),
+        y: (canvas.height / data.button.offsetY),
+        r: (w * data.button.size) / 2,
+      }, true, true)
+    ) {
+      doc.body.style.cursor = "pointer";
+    }
+    textWidth = ctx.measureText(data.footer.msg).width;
+    if (
+      F.collide({
+        x: F.mouse.x + 11,
+        y: F.mouse.y + 11,
+        w: 1,
+        h: 1,
+      }, {
+        x: canvas.width - 20 - textWidth - data.footer.padding,
+        y: canvas.height - 20 - data.footer.size - data.footer.padding + 3,
+        w: textWidth + (data.footer.padding * 2),
+        h: data.footer.size + (data.footer.padding * 2),
+      })
+      || F.collide({
+        x: F.touch.x + 11,
+        y: F.touch.y + 11,
+        w: 1,
+        h: 1,
+      }, {
+        x: canvas.width - 20 - textWidth - data.footer.padding,
+        y: canvas.height - 20 - data.footer.size - data.footer.padding + 3,
+        w: textWidth + (data.footer.padding * 2),
+        h: data.footer.size + (data.footer.padding * 2),
+      })
+    ) {
+      doc.body.style.cursor = "pointer";
+      if (
+        F.buttonDown(0)
+        || F.touch.down
+      ) {
+        window.open("https://github.com/darccman", "_blank");
+      }
+    }
     
     let held = (
       (
         F.buttonDown(0)
         && F.mouse.onCanvas
-        && F.collide({
-          x: F.mouse.x,
-          y: F.mouse.y,
-          r: 1,
-        }, {
-          x: ((canvas.width / 2) - (button.w / 2)) + (button.w / 2),
-          y: (((canvas.height * data.button.offset) / 2) - (button.h / 2)) + (button.h / 2),
-          r: (w * data.button.size) / 2,
-        }, true, true)
+        && (
+          !data.button.collide
+          || F.collide({
+            x: F.mouse.x,
+            y: F.mouse.y,
+            r: 1,
+          }, {
+            x: (canvas.width / 2),
+            y: (canvas.height / data.button.offsetY),
+            r: (w * data.button.size) / 2,
+          }, true, true)
+        )
       )
       || keysDown.includes("play")
       || (
         F.touch.down
-        && F.collide({
-          x: F.touch.x,
-          y: F.touch.y,
-          r: 1,
-        }, {
-          x: ((canvas.width / 2) - (button.w / 2)) + (button.w / 2),
-          y: (((canvas.height * data.button.offset) / 2) - (button.h / 2)) + (button.h / 2),
-          r: button.w / 2
-        }, true, true)
+        && (
+          !data.button.collide
+          || F.collide({
+            x: F.touch.x,
+            y: F.touch.y,
+            r: 1,
+          }, {
+            x: (canvas.width / 2),
+            y: (canvas.height / data.button.offsetY),
+            r: (w * data.button.size) / 2,
+          }, true, true)
+        )
       )
     );
 

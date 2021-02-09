@@ -6,8 +6,8 @@ var data = {
     cooldown: 200,
     lift: true,
     glow: 1.4,
-    offset: 1.15,
     offsetY: 1.8,
+    collide: true,
   },
   bg: {
     speed: 10,
@@ -15,13 +15,21 @@ var data = {
     flashFade: 150,
   },
   text: {
+    msg: "PRESS FOR BRUH",
     size: 100,
+    offsetY: 1.1,
     speed: 10,
     strobeSpeed: 360,
     stopStrobe: 1000,
     flash: 20,
-    d: 15,
-    colorDiff: 120,
+    shadow: 15,
+    colorDiff: 100,
+  },
+  footer: {
+    msg: "Made by Darcy",
+    size: 20,
+    padding: 7,
+    color: "#10101080",
   },
 };
 var controls = {
