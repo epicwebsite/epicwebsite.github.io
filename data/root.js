@@ -1,3 +1,3 @@
 var rootData = {
-  splash: "<i>YOU</i> try doing the CSS.",
+  splash: "Look! The columns are not broken!",
 };

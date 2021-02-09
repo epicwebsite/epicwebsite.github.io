@@ -39,9 +39,11 @@ function showLinks(showHidden) {
       content += [
         '<article class="link {noImage}">',
         '  {img}',
-        '  <a href="{href}" id="{id}" title="Go to: {dir}{href}">',
-        '    {name}',
-        '  </a>',
+        '  <section>',
+        '    <a href="{href}" id="{id}" title="Go to: {dir}{href}">',
+        '      {name}',
+        '    </a>',
+        '  </section>',
         '</article>',
       ].join("").format({
         img,

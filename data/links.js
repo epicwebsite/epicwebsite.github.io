@@ -2,7 +2,7 @@ var links = {
   page: {
     name: "Pages",
     local: true,
-    image: "./p/{0}/image/favicon.png",
+    image: "p/{0}/image/favicon.png",
     items: [
       {
         id: "custom-tab",

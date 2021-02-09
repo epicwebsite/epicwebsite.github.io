@@ -2,13 +2,13 @@
 
 @font-face {
   font-family: "Comic Sans MS";
-  src: url("../source/font/ComicSansMS.ttf");
+  src: url("../source/font/ComicSansMS.woff2");
 }
 
 html {
   @color1: #202030;
   @color2: #1E1E2E;
-  @cubesize: 80px;
+  @cubesize: 120px;
   display: block;
   margin: 0;
   width: 100%;
@@ -47,7 +47,7 @@ body {
 
 * {
   color: #fafafa;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Candara, Arial, sans-serif;
 }
 
 .top {
@@ -122,25 +122,39 @@ a {
 
   .content {
     column-count: 3;
+    @media (max-width: 750px) {
+      column-count: 1;
+    }
+    @media (max-width: 1050px) {
+      column-count: 2;
+    }
     column-fill: auto;
+    margin-top: -10px;
     padding: 5px;
     font-size: 18px;
-    margin-top: -20px;
     
     .link {
+      @img-size: 30px;
       break-inside: avoid;
       margin: 5px 0;
 
+      &:first-of-type {
+        margin-top: -1px;
+      }
 
-      a {
+      section {
         padding: 5px;
-        border-radius: 5px;
-        background-color: #0004;
+        
+        a {
+          padding: 5px;
+          border-radius: 5px;
+
+          background-color: #0004;
+        }
       }
 
       .icon_img {
-        @img-size: 30px;
-        display: inline-block;
+        float: left;
         width: @img-size;
         height: @img-size;
         margin-bottom: -5px;
@@ -148,7 +162,13 @@ a {
       }
 
       &.noImage {
-        margin-top: 12px;
+        // margin-top: 12px;
+
+        &.link {
+          &:first-of-type {
+            margin-top: 0px;
+          }
+        }
       }
     }
   }
