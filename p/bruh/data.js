@@ -25,12 +25,6 @@ var data = {
     shadow: 15,
     colorDiff: 100,
   },
-  footer: {
-    msg: "Made by Darcy",
-    size: 20,
-    padding: 7,
-    color: "#10101080",
-  },
 };
 var controls = {
   keys: {

@@ -101,27 +101,11 @@ function render() {
     w * data.button.size,
   );
 
-  ctx.font = "{0}px Arial".format(data.footer.size);
-  ctx.fillStyle = data.footer.color;
-  textWidth = ctx.measureText(data.footer.msg).width;
-  ctx.fillRoundRect(
-    canvas.width - 20 - textWidth - data.footer.padding,
-    canvas.height - 20 - data.footer.size - data.footer.padding + 3,
-    textWidth + (data.footer.padding * 2),
-    data.footer.size + (data.footer.padding * 2),
-    10,
-  );
-  ctx.fillStyle = F.getColor(F.hsv_rgb([
+  doc.id("footer").style.color = F.getColor(F.hsv_rgb([
     (bg[0] + 180).wrap(0, 360),
     50,
     100,
   ]));
-  ctx.textAlign = "right";
-  ctx.fillText(
-    data.footer.msg,
-    canvas.width - 20,
-    canvas.height - 20,
-  );
 }
 
 function main() {
@@ -175,39 +159,6 @@ function update(mod) {
       }, true, true)
     ) {
       doc.body.style.cursor = "pointer";
-    }
-    textWidth = ctx.measureText(data.footer.msg).width;
-    if (
-      F.collide({
-        x: F.mouse.x + 11,
-        y: F.mouse.y + 11,
-        w: 1,
-        h: 1,
-      }, {
-        x: canvas.width - 20 - textWidth - data.footer.padding,
-        y: canvas.height - 20 - data.footer.size - data.footer.padding + 3,
-        w: textWidth + (data.footer.padding * 2),
-        h: data.footer.size + (data.footer.padding * 2),
-      })
-      || F.collide({
-        x: F.touch.x + 11,
-        y: F.touch.y + 11,
-        w: 1,
-        h: 1,
-      }, {
-        x: canvas.width - 20 - textWidth - data.footer.padding,
-        y: canvas.height - 20 - data.footer.size - data.footer.padding + 3,
-        w: textWidth + (data.footer.padding * 2),
-        h: data.footer.size + (data.footer.padding * 2),
-      })
-    ) {
-      doc.body.style.cursor = "pointer";
-      if (
-        F.buttonDown(0)
-        || F.touch.down
-      ) {
-        window.open("https://github.com/darccman", "_blank");
-      }
     }
     
     let held = (

@@ -13,3 +13,22 @@ canvas {
   width: 512;
   height: 512;
 }
+
+footer {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  padding: 5px 10px;
+  font-size: 15px;
+  border-radius: 100px;
+  backdrop-filter: blur(5px);
+  background-color: #1118;
+  cursor: pointer;
+  z-index: 99999;
+  color: white;
+  font-family: Arial;
+  font-size: 20px;
+}
+footer:hover {
+  text-decoration: underline;
+}
