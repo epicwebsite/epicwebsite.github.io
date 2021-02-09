@@ -6,7 +6,7 @@ var data = {
     cooldown: 200,
     lift: true,
     glow: 1.4,
-    offsetY: 1.8,
+    offsetY: 1.7,
     collide: true,
   },
   bg: {
