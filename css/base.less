@@ -122,11 +122,11 @@ a {
 
   .content {
     column-count: 3;
-    @media (max-width: 750px) {
-      column-count: 1;
-    }
     @media (max-width: 1050px) {
       column-count: 2;
+    }
+    @media (max-width: 750px) {
+      column-count: 1;
     }
     column-fill: auto;
     margin-top: -10px;
@@ -148,7 +148,6 @@ a {
         a {
           padding: 5px;
           border-radius: 5px;
-
           background-color: #0004;
         }
       }
@@ -162,8 +161,6 @@ a {
       }
 
       &.noImage {
-        // margin-top: 12px;
-
         &.link {
           &:first-of-type {
             margin-top: 0px;
