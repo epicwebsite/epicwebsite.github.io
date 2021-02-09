@@ -13,11 +13,13 @@ var button = {
   pressed: false,
   img1: new Image(),
   img2: new Image(),
+  glow: new Image(),
   val: false,
   sound: new F.Sound("audio/bruh.mp3", "audio_contain"),
 };
 button.img1.src = "image/button1.png";
 button.img2.src = "image/button2.png";
+button.glow.src = "image/glow.png";
 var bg = [];
 var text = {
   msg: "press for bruh".upper(),
@@ -45,33 +47,22 @@ function reset() {
 }
 
 function render() {
+  doc.id("favicon").href = "image/button{0}.png".format(button.held ? "1" : "2");
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   let rgb = F.hsv_rgb(bg);
   ctx.fillCanvas(F.getColor(rgb));
+  w = Math.min(canvas.width.setBorder(300, 3000), canvas.height.setBorder(100, 3000));
 
-  let grd = ctx.createRadialGradient(
-    canvas.width / 2,
-    canvas.height / 2,
-    0,
-    canvas.width / 2,
-    canvas.height / 2,
-    button.w * data.button.shine,
+  ctx.drawImage(
+    button.glow,
+    (canvas.width / 2) - ((w * data.button.size * data.button.glow) / 2),
+    (canvas.height / data.button.offsetY) - ((w * data.button.size * data.button.glow) / 2),
+    w * data.button.size * data.button.glow,
+    w * data.button.size * data.button.glow,
   );
-  grd.addColorStop(0, F.getColor([255, 255, 255, 0.5]));
-  grd.addColorStop(1, F.getColor([255, 255, 255, 0]));
-  ctx.fillStyle = grd;
-  ctx.beginPath();
-  ctx.ellipse(
-    canvas.width / 2,
-    (canvas.height * data.button.offset) / 2,
-    button.w,
-    button.h,
-    0, 0, 2 * Math.PI
-  );
-  ctx.fill();
 
-  let fontSize = button.w * data.text.size / 100;
+  let fontSize = data.text.size;
   ctx.font = "{0}px Impact".format(fontSize);
   ctx.textAlign = "center";
   ctx.fillStyle = F.getColor(F.hsv_rgb([
@@ -105,10 +96,10 @@ function render() {
 
   ctx.drawImage(
     button.pressed || button.held ? button.img1 : button.img2,
-    (canvas.width / 2) - (button.w / 2),
-    ((canvas.height * data.button.offset) / 2) - (button.h / 2),
-    button.w,
-    button.h,
+    (canvas.width / 2) - ((w * data.button.size) / 2),
+    (canvas.height / data.button.offsetY) - ((w * data.button.size) / 2),
+    w * data.button.size,
+    w * data.button.size,
   );
 }
 
@@ -136,9 +127,9 @@ function update(mod) {
 
     if (
       !text.strobe
-      && F.diff(text.color[0], bg[0]) < 30
+      && F.diff(text.color[0], bg[0]) < data.text.colorDiff
     ) {
-      text.color[0] += 30;
+      text.color[0] += data.text.colorDiff;
     }
     
     let held = (
@@ -152,7 +143,7 @@ function update(mod) {
         }, {
           x: ((canvas.width / 2) - (button.w / 2)) + (button.w / 2),
           y: (((canvas.height * data.button.offset) / 2) - (button.h / 2)) + (button.h / 2),
-          r: button.w / 2
+          r: (w * data.button.size) / 2,
         }, true, true)
       )
       || keysDown.includes("play")
