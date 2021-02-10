@@ -26,8 +26,10 @@ ls.edit = function (func) {
 
 css = {};
 css.set = function () {
-  for (i = 0; i < ls.get().css.length; i++) {
-    css.add(ls.get().css[i], false);
+  if (ls.get().css) {
+    for (i = 0; i < ls.get().css.length; i++) {
+      css.add(ls.get().css[i], false);
+    }
   }
 }
 css.add = function (name, add) {

@@ -1,10 +1,8 @@
 function init() {
   ls.check();
+  css.set();
   showLinks();
   F.triggerOnload();
-  // doc.id("lightmode").checked = ls.get().lightmode;
-  // changeStyle();
-  css.set();
   doc.id("splash").innerHTML = rootData.splash;
   doc.body.style.visibility = "visible";
 }
