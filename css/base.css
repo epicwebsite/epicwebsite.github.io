@@ -31,22 +31,6 @@ body {
   font-size: 25px;
   font-weight: 500;
 }
-.button {
-  background-color: #f0f0f0;
-  border: 2px solid gray;
-  min-width: 80px;
-  min-height: 30px;
-  font-size: 15px;
-}
-.button:hover {
-  background-color: #dcdcdc;
-}
-.button:active {
-  background-color: #c8c8c8;
-}
-.button:focus {
-  outline: none;
-}
 .lightmode_contain {
   position: absolute;
   right: 20px;
@@ -62,10 +46,10 @@ body {
   position: absolute;
   right: 0px;
 }
-#crashBtn {
+.top-right {
   position: absolute;
   right: 20px;
-  top: 80px;
+  top: 20px;
 }
 a {
   text-decoration: none;

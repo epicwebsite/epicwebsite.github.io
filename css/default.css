@@ -73,6 +73,22 @@
   -moz-user-select: none;
   -ms-user-select: none;
 }
+.ew.button {
+  background-color: #f0f0f0;
+  border: 2px solid gray;
+  min-width: 80px;
+  min-height: 30px;
+  font-size: 15px;
+}
+.ew.button:hover {
+  background-color: #dcdcdc;
+}
+.ew.button:active {
+  background-color: #c8c8c8;
+}
+.ew.button:focus {
+  outline: none;
+}
 code {
   font-family: 'Courier New', Courier, monospace;
 }

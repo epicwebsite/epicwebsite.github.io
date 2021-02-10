@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lightmode="false" css="center-header">
+<html lightmode="false" css="">
   <head>
     <title>EpicWebsite</title>
     <script type="text/javascript" src="js/jquery.js"></script>
@@ -13,13 +13,13 @@
     <link rel="shortcut icon" href="./source/image/favicon.png">
   </head>
   <body onload="init()" style="visibility:hidden;">
-    <section class="lightmode_contain">
+    <!-- <section class="lightmode_contain">
       <label class="label">Light mode</label>
       <label class="ew switch" title="Switch Theme">
         <input type="checkbox" id="lightmode" onchange="changeStyle()">
         <span class="slider round"></span>
       </label>
-    </section>
+    </section> -->
     <div class="top">
       <header>Welcome to <em>EpicWebsite</em></header>
       <h1 id="splash">There is a bunch of different sites</h1>
@@ -27,7 +27,10 @@
     <hr>
     <section id="links">
     </section>
-    <button onclick="crash()" title="Come on, press it, whats the worst that can happen??" id="crashBtn" class="button">Crash your Tab!</button>
+    <section class="top-right">
+      <button onclick="crash()" title="Come on, press it, whats the worst that can happen??" id="crash" class="ew button">Crash your Tab!</button>
+      <button onclick="location.href = './settings.html'" title="Go to settings page" class="ew button">Settings</button>
+    </section>
     <h5>And that is it</h5>
     <footer onclick="location.href='https://github.com/DarccMan'" class="ew footer">Made by <span title="That's Me!">Darcy</span></footer>
   </body>
