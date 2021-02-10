@@ -29,10 +29,7 @@ var data = {
 var controls = {
   keys: {
     "play": [
-      87,
-      38,
       32,
-      13,
     ],
   },
   buttons: {},
