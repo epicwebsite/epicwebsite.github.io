@@ -1,4 +1,6 @@
 @import "default.css";
+@import "light.css";
+@import "setting.css";
 @font-face {
   font-family: "Comic Sans MS";
   src: url("../source/font/ComicSansMS.woff2");
@@ -12,16 +14,6 @@ html {
   border: 10px solid #10101040;
   box-sizing: border-box;
   background-color: #202030;
-  background-image: linear-gradient(45deg, #1E1E2E 25%, transparent 25%), linear-gradient(-45deg, #1E1E2E 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #1E1E2E 75%), linear-gradient(-45deg, transparent 75%, #1E1E2E 75%);
-  background-size: 120px 120px;
-  background-position: 0 0, 0 60px, 60px -60px, -60px 0px;
-}
-html[lightmode=true] {
-  background-color: #505085;
-  background-image: none;
-}
-html[lightmode=true] * {
-  font-family: "Comic Sans MS";
 }
 body {
   padding: 10px;
@@ -29,7 +21,7 @@ body {
 }
 * {
   color: #fafafa;
-  font-family: Candara, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .top header {
   font-size: 40px;

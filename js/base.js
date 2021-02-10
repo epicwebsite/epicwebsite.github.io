@@ -15,6 +15,7 @@ ls.get = function () {
 ls.reset = function () {
   F.ls("settings", JSON.stringify({
     lightmode: false,
+    css: [],
   }));
 }
 ls.edit = function (func) {

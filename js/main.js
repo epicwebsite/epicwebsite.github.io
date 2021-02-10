@@ -68,6 +68,9 @@ function showLinks(showHidden) {
       content: content,
     });
   }
+  for (i = 0; i < ls.get().css.length; i++) {
+    cssAdd(ls.get().css[i], false);
+  }
 }
 function unhide() {
   showLinks(true);
@@ -90,5 +93,24 @@ function crash() {
   console.log("Look out! *crash*");
   while (true) {
     alert("You idiot!");
+  }
+}
+
+function cssAdd(name, add) {
+  if (name) {
+    attr = doc.html.getAttribute("css");
+    if (attr == null) {
+      attr = "";
+    }
+    attr = attr.split(" ");
+    if (!attr.includes(name)) {
+      attr.push(name);
+      doc.html.setAttribute("css", attr.join(""));
+      if (add !== false) {
+        ls.edit(d => {
+          d.css = attr;
+        });
+      }
+    }
   }
 }
