@@ -38,7 +38,7 @@ var links = {
           "progress",
         ],
         image: true,
-      },  
+      },
       {
         id: "keys",
         name: "Get key codes",
@@ -234,6 +234,11 @@ var links = {
       {
         id: "aerune",
         name: "Aerune Translator",
+        image: true,
+      },
+      {
+        id: "minesweep",
+        name: "MineSweep",
         image: true,
       },
     ]
