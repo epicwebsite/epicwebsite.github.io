@@ -172,7 +172,7 @@ function search() {
         hover: groups[v][i] ? "hover" : "",
         title: groups[v][i] && groups[v][i].tags && groups[v][i].tags.length > 0 && groups[v][i].tags[0] ? "Search Terms: " + groups[v][i].tags.join(", ").capWords() : "",
         subtitle: groups[v][i] && groups[v][i].subtitle ? groups[v][i].subtitle : "",
-        name: groups[v][i] ? groups[v][i].name : "", 
+        name: groups[v][i] ? groups[v][i].name : "",
       });
     }
     doc.id("output").innerHTML += el + '</tr>';
@@ -222,8 +222,12 @@ function clickItem(el) {
     '<h2>',
     '  {subtitle}',
     '</h2>',
-    '<p>',
+    '<p title="Sourced directly from Google">',
     '  {desc}',
+    '</p>',
+    '<br>',
+    '<p title="NOT SCIENTIFIC INFORMATION - What my dog likes">',
+    '  {critic}',
     '</p>',
     '<a href="https://www.google.com/search?q=can dog eat {link}" target="_blank">',
     '  Search google for \'{name}\'',
@@ -234,6 +238,7 @@ function clickItem(el) {
     link: item.name.lower(),
     subtitle: item.subtitle ? item.subtitle : "",
     desc: item.desc ? item.desc : "No information",
+    critic: answer[0].lower() == "n" ? "" : (item.critic ? "Critic's verdict: " + item.critic : "No critic information"),
   });
   doc.id("desc").innerHTML = el;
 }

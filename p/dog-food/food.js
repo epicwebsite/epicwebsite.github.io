@@ -11,6 +11,7 @@ var food = [
           "core",
         ],
         desc: "Apple slices make a delicious, healthy snack for your dog and can help keep your dog's teeth clean and their breath fresh. However, the core of the apple and the apple seeds especially can be harmful to dogs.",
+        critic: "",
       },
       {
         name: "Banana",
@@ -20,6 +21,7 @@ var food = [
           "fruit",
         ],
         desc: "Yes, dogs can have bananas. They may not get all the nutritional benefits humans get from this fruit, but bananas make a good—and motivating—treat. If you're wondering 'Can puppies eat bananas?', check with your veterinarian. ... Added calories from bananas and other fruits could interfere.",
+        critic: "",
       },
       {
         name: "Beans",
@@ -30,6 +32,7 @@ var food = [
           "baked",
         ],
         desc: "They are rich in fiber and have some protein, too. Dogs can have beans as a treat. That means they should never be more than 10 percent of your dog's daily calorie intake. Since beans can be high in calories, you should not be feeding him many.",
+        critic: "",
       },
       {
         name: "Blackberries",
@@ -41,6 +44,7 @@ var food = [
           "fruit",
         ],
         desc: "If you want to give your dog a sweet, healthy treat, there's good news. Blackberries are safe for dogs to eat. ... You can feed your dog strawberries, blueberries and raspberries as well. These berries are soft and easy for dogs to chew and don't contain any ingredients that are toxic to canines.",
+        critic: "",
       },
       {
         name: "Blueberries",
@@ -52,6 +56,7 @@ var food = [
           "fruit",
         ],
         desc: "Yes, blueberries are a great low-calorie treat for dogs. They also contain antioxidants, fiber and vitamins C and K. These nutrients support the immune system and contribute to overall health. Adding blueberries to your dog's diet is a great way to help keep him happy and healthy.",
+        critic: "Likes blueberries",
       },
       {
         name: "Bread",
@@ -62,6 +67,7 @@ var food = [
           "loaf",
         ],
         desc: "The short answer to the question 'can dogs eat bread?” is yes. Dogs can safely eat bread in much the same way as humans—in moderation. Plain white and wheat bread is generally safe for dogs to eat, provided they don't have any allergies, and it usually does not cause any stomach upset.",
+        critic: "Likes bread a little bit",
       },
       {
         name: "Broccoli",
@@ -82,6 +88,7 @@ var food = [
           "vege",
         ],
         desc: "Like many other fruits and vegetables, dogs can have carrots. In fact, every part of this vegetable, from the carrot itself to the leafy green tops are safe for dogs to eat.",
+        critic: "Doesn't really like carrots",
       },
       {
         name: "Celery",
@@ -99,6 +106,7 @@ var food = [
           "meat",
         ],
         desc: "Considering how many dog foods contain chicken as an ingredient, it's a safe bet that you can feed your dog chicken. In fact, it's a good source of protein, and cooked chicken can even be substituted for or added to his regular meal.",
+        critic: "Loves chicken",
       },
       {
         name: "Chickpea",
@@ -133,6 +141,7 @@ var food = [
           "vege",
         ],
         desc: "Your dog can have a healthy snack of carrot sticks, green beans, cucumber slices, or zucchini slices. Even a plain baked potato is OK. Don't let your dog eat any raw potatoes or any potato plants from your pantry or garden.",
+        critic: "Likes cucumbers somewhat but not the skin",
       },
       {
         name: "Eggs",
@@ -152,6 +161,7 @@ var food = [
           "seafood",
         ],
         desc: "Absolutely. There are many varieties of fish that are good for dogs. 'Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,' says Dempsey. ... And fish isn't just healthy for dogs—they like the taste of fish, too. Skin is good for the coat too.",
+        critic: "Loves fish including salmon",
       },
       {
         name: "Lentils",
@@ -168,6 +178,7 @@ var food = [
           "fruit",
         ],
         desc: "Yes, dogs can eat mango. It's a sweet and tasty treat and the soft flesh is easy for dogs to eat. Like many other fruits and berries, mangos are a safe people food for your pup.",
+        critic: "Does not like mango",
       },
       {
         name: "Meat",
@@ -180,6 +191,7 @@ var food = [
           "lamb",
         ],
         desc: "Most dogs are fine eating lean cuts of meat that have been cooked well. Take off all visible fat -- including the skin on poultry. Be sure that there are no bones in the meat before you give it to your dog.",
+        critic: "Loves meat obviously",
       },
       {
         name: "Oats / Oatmeal",
@@ -188,6 +200,7 @@ var food = [
           "oat",
         ],
         desc: "Generally, you can feed your dog one tablespoon of cooked oatmeal for every 20 pounds of his weight. Don't give your dog too much oatmeal at once because it contains a lot of carbohydrates and is relatively high in calories.",
+        critic: "Likes a bit of oats",
       },
       {
         name: "Pasta",
@@ -205,6 +218,7 @@ var food = [
           "nut",
         ],
         desc: "Yes, dogs can eat peanut butter as long as it is fed in moderation and does not contain xylitol, so get out that peanut butter jar and share the good news.",
+        critic: "Likes peanut butter, but not too much",
       },
       {
         name: "Peas",
@@ -223,7 +237,8 @@ var food = [
           "corn",
           "vege",
         ],
-        desc: "Yes and no. Plain, air-popped popcorn is safe for dogs to eat in small quantities. Buttered popcorn or popcorn with other toppings is not safe for your dog on a regular basis, although eating a few dropped pieces here and there probably won't hurt him.",
+        desc: "Yes and no. Plain, air-popped popcorn is safe for dogs to eat in small quantities. Buttered popcorn or popcorn with other toppings is not safe for your dog on a regular basis, although eating a few dropped pieces here and there probably won't hurt him. Try not to give them hard pieces.",
+        critic: "Loves popcorn",
       },
       {
         name: "Potato",
@@ -267,6 +282,7 @@ var food = [
           "",
         ],
         desc: "Safe: Cooked White Rice and Pasta. Dogs can eat plain white rice or pasta after it's cooked. And, a serving of plain white rice with some boiled chicken can sometimes make your dog feel better when they are having stomach problems.",
+        critic: "Likes rice.",
       },
       {
         name: "Strawberries",
@@ -304,6 +320,7 @@ var food = [
           "",
         ],
         desc: "Yes, dogs can eat yogurt. It contains calcium and protein—plus, it's tasty! Make sure it does not contain xylitol",
+        critic: "Loves greek yogurt",
       },
     ],
   },
@@ -327,6 +344,7 @@ var food = [
           "nut",
         ],
         desc: "Can my dog eat cashew nuts? Yes, cashews are generally safe for dogs to eat. Unlike macadamia nuts, cashews are not toxic to dogs.",
+        critic: "Likes cashews",
       },
       {
         name: "Cheese",
@@ -337,6 +355,7 @@ var food = [
           "milk",
         ],
         desc: "While cheese can be safe to feed to your dog, there are some things to remember. Cheese is high in fat, and feeding too much to your dog regularly can cause weight gain and lead to obesity. Even more problematic, it could lead to pancreatitis, a serious and potentially fatal illness in dogs.",
+        critic: "Loves cheese",
       },
       {
         name: "Cherries",
@@ -347,6 +366,7 @@ var food = [
           "fruit",
         ],
         desc: "The flesh of a cherry is safe for dogs to eat. Cherries contain vitamins A and C, fiber and antioxidants, which are good for dogs. ... This is toxic to dogs if ingested in large enough quantities. A single cherry pit and stem often isn't enough to cause cyanide poisoning, but there's no reason to take the risk.",
+        critic: "Does not like cherries",
       },
       {
         name: "Ginger",
@@ -400,6 +420,7 @@ var food = [
           "peach",
         ],
         desc: "Rich in vitamins A and C, magnesium, potassium, and dietary fiber, nectarines are a sweet and nutritious summer fruit.",
+        critic: "Does not like nectarine",
       },
       {
         name: "Peanuts",
@@ -408,6 +429,7 @@ var food = [
           "nut",
         ],
         desc: "Dry-roasted (or raw), unsalted peanuts are the only peanuts that are actually safe for dogs to eat, although your dog will probably be fine if he manages to scoop up a salted peanut or two from the floor. ... Peanuts also contain high levels of fat.",
+        critic: "Likes peanuts",
       },
       {
         name: "Pineapple",
@@ -416,6 +438,7 @@ var food = [
           "fruit",
         ],
         desc: "Yes. Raw pineapple, in small amounts, is an excellent snack for dogs. Canned pineapple, on the other hand, should be avoided. The syrup in canned fruits contains too much sugar for most dogs’ digestive tracts to handle. A few chunks of raw pineapple are usually enough for most dogs, provided they are peeled and sliced into bite-sized pieces. Plus, frozen pieces of fresh pineapple make a delicious treat in the summer.",
+        critic: "Likes peanuts",
       },
       {
         name: "Raw meat",
@@ -440,6 +463,7 @@ var food = [
           "",
         ],
         desc: "Eating too much salt can make your dog seriously thirsty. That means a lot of trips to the fire hydrant and it could lead to sodium ion poisoning. Symptoms of too much salt include vomiting, diarrhea, depression, tremors, high temperature, and seizures. It may even cause death.",
+        critic: "Loves salty meats obviously",
       },
       {
         name: "Sausage",
@@ -448,6 +472,7 @@ var food = [
           "meat",
         ],
         desc: "Pork sausage is not a recommended source of protein for your dog given it's high in fat and salt, and it may be processed with seasonings that are unsafe for your dog. ... In addition, sausage that contains onion or garlic powder is not safe for your dog. Dogs that eat onion or garlic in any form are at risk for anemia.",
+        critic: "Loves sausage obviously",
       },
       {
         name: "Tomato",
@@ -468,6 +493,7 @@ var food = [
           "weetbix",
         ],
         desc: "The answer overall is yes, dogs can eat some cereal, but much like for us humans, there are several types that are less healthy than others for dogs. ... While dogs can eat many types of cereal, they should only have it as an occasional treat. Cereal should also never replace the food you feed your dog as their main diet.",
+        critic: "Loves WeetBix",
       },
     ],
   },
