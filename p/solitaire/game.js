@@ -36,6 +36,15 @@ function reset() {
       deck = deck.s(1, -1);
     }
     up = [deck[0]];
+    if (c == 3) {
+      up = ["3-D"];
+    }
+    if (c == 4) {
+      up = ["4-C"];
+    }
+    if (c == 2) {
+      up = ["5-H"];
+    }
     deck = deck.s(1, -1);
     cards.table.push({
       down,
