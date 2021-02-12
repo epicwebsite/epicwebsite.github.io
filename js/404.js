@@ -25,7 +25,7 @@ function init() {
           F.url.queryRaw.length > 0 ? "?" + F.url.queryRaw : ""
         );
         doc.id("header").innerText = "Redirecting...";
-        doc.id("text").innerHTML = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(decodeURI(link));
+        doc.id("text").innerHTML = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(link);
         location.href = link;
         redirected = true;
         break;
@@ -34,7 +34,7 @@ function init() {
   }
 
   if (!redirected) {
-    doc.id("text").innerHTML = 'Try typing in the URL properly instead of <em>{0}</em>'.format(path ? path : "whatever that is");
+    doc.id("text").innerHTML = 'Try typing in the URL properly instead of <em>{0}</em>'.format(path ? decodeURI(path) : "whatever that is");
     doc.id("header").innerText = "404 - The funny not found";
   }
 }
