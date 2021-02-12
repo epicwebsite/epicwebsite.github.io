@@ -131,6 +131,7 @@ function update(mod) {
                   vals.button = false;
                   grid[x][y].t = 1;
                   c = [{v: 0, x, y}];
+                  replaceAmount = 0;
                   for (i = 0; i < c.length; i++) {
                     if (grid[x][y].n == 0) {
                       for (c[i]; c[i].v < cs.length; c[i].v++) {
@@ -159,8 +160,12 @@ function update(mod) {
                           }
                           if (first) {
                             if (grid[x2][y2].n == -1) {
-                              grid[x2][y2].n = 0;
-                              c.push({v: 0, x: x2, y: y2});
+                              if (replaceAmount <= 8) {
+                                grid[x2][y2].n = 0;
+                                replaceAmount++;
+                                c.push({v: 0, x: x2, y: y2});
+                              }
+                              grid[x2][y2].n = 1;
                             }
                             updateNumbers();
                           }
