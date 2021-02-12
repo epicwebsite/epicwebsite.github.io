@@ -41,7 +41,7 @@ function render() {
 
   ctx.strokeStyle = color.stroke;
   ctx.lineWidth = 3;
-  ctx.font = "bold 24px Arial";
+  ctx.font = "bold 20px Arial";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   for (x = 0; x < data.size.x; x++) {

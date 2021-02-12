@@ -1,7 +1,7 @@
 var data = {
   size: {
-    x: 16,
-    y: 16,
+    x: 20,
+    y: 20,
   },
   bombs: 40,
 };
