@@ -225,21 +225,48 @@ var links = {
         id: "hacker",
         name: "Hacker Typing (Web)",
         image: true,
+        alias: [
+          "hack",
+          "type",
+          "typer",
+          "hack-type",
+          "hacktype",
+          "hacker-type",
+          "hackertype",
+          "hack-typer",
+          "hacktyper",
+          "hacker-typer",
+          "hackertyper",
+        ],
       },
       {
         id: "blackjack",
         name: "BlackJack Game",
         hidden: true,
+        alias: [
+          "black-jack",
+          "21",
+        ],
       },
       {
         id: "aerune",
         name: "Aerune Translator",
         image: true,
+        alias: [
+          "airune",
+        ],
       },
       {
         id: "minesweep",
         name: "MineSweep",
         image: true,
+        alias: [
+          "mine",
+          "sweep",
+          "mine-sweep",
+          "minesweeper",
+          "mine-sweeper",
+        ],
       },
     ]
   },
