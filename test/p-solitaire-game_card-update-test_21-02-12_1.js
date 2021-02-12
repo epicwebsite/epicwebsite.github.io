@@ -7,7 +7,19 @@ doc.id("canvas_contain").appendChild(canvas);
 var ctx = canvas.getContext("2d");
 
 var gameState = "start";
-var cards = {};
+var cards = null;
+
+class Card {
+  constructor(value, suit) {
+    this.vn = value;
+    this.sn = suit;
+    this.vc = data.values[value];
+    this.sc = "DHCS"[suit];
+    this.scs = data.suits[this.sc];
+    this.si = data.suits[this.sc];
+    this.b = suit > 1;
+  }
+}
 
 function reset() {
   cards = {
@@ -20,12 +32,9 @@ function reset() {
     selected: null,
   };
   deck = [];
-  for (s = 0; s < 4; s++) {
-    for (v = 1; v < 14; v++) {
-      deck.push("{0}-{1}".format(
-        v,
-        "DHSC"[s],
-      ));
+  for (v = 1; v < 14; v++) {
+    for (s = 0; s < 4; s++) {
+      deck.push(new Card(v, s));
     }
   }
   deck = deck.shuffle();
@@ -36,6 +45,13 @@ function reset() {
       deck = deck.s(1, -1);
     }
     up = [deck[0]];
+    // Reset
+    if (c == 3) {
+      up = [new Card(4, 1)];
+    }
+    if (c == 2) {
+      up = [new Card(3, 2)];
+    }
     deck = deck.s(1, -1);
     cards.table.push({
       down,
@@ -347,7 +363,7 @@ function update(mod) {
               cards.drop = false;
 
               x1 = parseInt(cards.selected.stack.split("-")[1]);
-              c1 = cards.table[x1].up[cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2])].split("-");
+              c1 = cards.table[x1].up[cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2])];
 
               if (
                 F.mouse.x < 20
@@ -360,29 +376,45 @@ function update(mod) {
                 }
               }
 
+              // Drop
               if (F.mouse.x < (canvas.width / (data.columns + 1) - 2) * data.columns) {
                 x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
                 c2 = cards.table[x2].up.s(-1);
-                if (c2 && c2.length > 0) {
+                /* if (c2 && c2.length > 0) {
                   c2 = c2.split("-");
-                }
+                } */
+                /* console.log(c2);
+                console.log(c1);
+                console.log(c2.vn - 1, c1.vn);
+                console.log(
+                  cards.table[x2].up.length == 0
+                  , cards.table[x2].down.length == 0
+                  , c1.vn == 13
+                  ,
+                  c2
+                  , F.operate.logic.xor(
+                    "DH".split("").includes(c1.sc),
+                    "DH".split("").includes(c2.sc),
+                  )
+                  , parseInt(c2.vn) - 1 == c1.vn
+                ); */
 
                 if (
                   (
                     cards.table[x2].up.length == 0
                     && cards.table[x2].down.length == 0
-                    && c1[0] == 13
+                    && c1.vn == 13
                   )
                   || (
                     c2
                     && F.operate.logic.xor(
-                      "DH".split("").includes(c1[1]),
-                      "DH".split("").includes(c2[1]),
+                      "DH".split("").includes(c1.sc),
+                      "DH".split("").includes(c2.sc),
                     )
-                    && parseInt(c2[0]) - 1 == c1[0]
+                    && c2.vn - 1 == c1.vn
                   )
                 ) {
-                  cards.table[x2].up = F.joinArray(cards.table[x2].up, F.toArray(cards.table[x1].up.s(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)));
+                  cards.table[x2].up = F.joinArray([JSON.parse(cards.table[x2].up)], F.toArray(cards.table[x1].up.s(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)));
                   cards.table[x1].up = F.toArray(cards.table[x1].up.s(0, cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2])));
                   if (cards.table[x1].up == undefined) {
                     cards.table[x1].up = [];
@@ -416,9 +448,9 @@ function update(mod) {
                   ) / 100
                 ).round().setBorder(0, 3);
                 c2 = cards.aces[x2].s(-1);
-                if (c2 && c2.length > 0) {
+                /* if (c2 && c2.length > 0) {
                   c2 = c2.split("-");
-                }
+                } */
 
                 if (
                   F.toArray(cards.table[x1].up.s(cards.table[x1].up.length - parseInt(cards.selected.stack.split("-")[2]), -1)).length == 1 && (
@@ -428,8 +460,8 @@ function update(mod) {
                     )
                     || (
                       c2
-                      && c1[1] == c2[1]
-                      && parseInt(c2[0]) + 1 == c1[0]
+                      && c1.s == c2.s
+                      && parseInt(c2.vn) + 1 == c1.vn
                     )
                   )
                 ) {
@@ -467,23 +499,23 @@ function update(mod) {
                 if (F.mouse.y < canvas.height - (width * 0.8 * data.card_ratio) - 30) {
                   x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
                   c2 = cards.table[x2].up.s(-1);
-                  if (c2 && c2.length > 0) {
+                  /* if (c2 && c2.length > 0) {
                     c2 = c2.split("-");
-                  }
+                  } */
 
                   if (
                     (
                       cards.table[x2].up.length == 0
                       && cards.table[x2].down.length == 0
-                      && c1[0] == 13
+                      && c1.vn == 13
                     )
                     || (
                       c2
                       && F.operate.logic.xor(
-                        "DH".split("").includes(c1[1]),
-                        "DH".split("").includes(c2[1]),
+                        "DH".split("").includes(c1.sc),
+                        "DH".split("").includes(c2.sc),
                       )
-                      && parseInt(c2[0]) - 1 == c1[0]
+                      && parseInt(c2.vn) - 1 == c1.vn
                     )
                   ) {
                     cards.table[x2].up = F.joinArray(cards.table[x2].up, F.toArray(cards.deck.up.s(-1)));
@@ -517,19 +549,19 @@ function update(mod) {
                   ) / 100
                 ).round().setBorder(0, 3);
                 c2 = cards.aces[x2].s(-1);
-                if (c2 && c2.length > 0) {
+                /* if (c2 && c2.length > 0) {
                   c2 = c2.split("-");
-                }
+                } */
 
                 if (
                   (
                     cards.aces[x2].length == 0
-                    && c1[0] == 1
+                    && c1.vn == 1
                   )
                   || (
                     c2
-                    && c1[1] == c2[1]
-                    && parseInt(c2[0]) + 1 == c1[0]
+                    && c1.s == c2.s
+                    && parseInt(c2.vn) + 1 == c1.vn
                   )
                 ) {
                   cards.aces[x2] = F.joinArray(cards.aces[x2], F.toArray(cards.deck.up.s(-1)));
@@ -550,7 +582,7 @@ function update(mod) {
               cards.drop = false;
 
               x1 = parseInt(cards.selected.stack.split("-")[1]);
-              c1 = cards.aces[x1].s(-1).split("-");
+              c1 = cards.aces[x1].s(-1);
 
               if (
                 F.mouse.x < 20
@@ -565,21 +597,21 @@ function update(mod) {
 
               x2 = ((F.mouse.x - cards.selected.rx) / (canvas.width / (data.columns + 1) - 2)).round().setBorder(0, data.columns - 1);
               c2 = cards.table[x2].up.s(-1);
-              if (c2 && c2.length > 0) {
+              /* if (c2 && c2.length > 0) {
                 c2 = c2.split("-");
-              }
+              } */
 
               if (
                 (
                   cards.table[x2].up.length == 0
                   && cards.table[x2].down.length == 0
-                  && c1[0] == 13
+                  && c1.vn == 13
                 )
                 || (
                   c2
                   && F.operate.logic.xor(
-                    "DH".split("").includes(c1[1]),
-                    "DH".split("").includes(c2[1]),
+                    "DH".split("").includes(c1.sc),
+                    "DH".split("").includes(c2.sc),
                   )
                   && parseInt(c2[0]) - 1 == c1[0]
                 )
@@ -809,9 +841,9 @@ function drawCard(x, y, card, style) {
       4,
     );
 
-    suit = data.suits[card.split("-")[1]];
-    value = data.values[card.split("-")[0]];
-    ctx.fillStyle = "DH".includes(card.split("-")[1]) ? color.suit_red : color.suit_black;
+    suit = card.scs;
+    value = card.vc;
+    ctx.fillStyle = "DH".includes(card.sc) ? color.suit_red : color.suit_black;
     ctx.font = "bold 16px Arial";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";

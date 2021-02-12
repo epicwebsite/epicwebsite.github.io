@@ -186,7 +186,6 @@ function update(mod) {
                 if (grid[x][y].t == 0) {
                   grid[x][y].t = 2;
                 } else if (grid[x][y].t == 2) {
-                  console.log(1);
                   grid[x][y].t = 0;
                 }
               }
