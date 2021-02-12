@@ -1,7 +1,7 @@
 function init() {
   ls.check();
   doc.id("stylesheet").href = "https://epicwebsite.github.io/css/{0}.css".format(ls.get().lightmode ? "light" : "dark");
-  
+
   doc.id("link").href = "https://epicwebsite.github.io".format(
     F.url.online ? "" : "/index.html"
   );
@@ -21,7 +21,7 @@ function init() {
           )
         )
       ) {
-        link = "https://epicwebsite.github.io/p/{1}{2}".format(
+        link = "https://epicwebsite.github.io/p/{0}{1}".format(
           links.values()[o].items[l].id,
           F.url.queryRaw.length > 0 ? "?" + F.url.queryRaw : ""
         );
