@@ -1,6 +1,5 @@
 function init() {
   ls.check();
-  doc.id("stylesheet").href = "https://epicwebsite.github.io/css/{0}.css".format(ls.get().lightmode ? "light" : "dark");
 
   doc.id("link").href = "https://epicwebsite.github.io".format(
     F.url.online ? "" : "/index.html"
@@ -26,7 +25,7 @@ function init() {
           F.url.queryRaw.length > 0 ? "?" + F.url.queryRaw : ""
         );
         doc.id("header").innerText = "Redirecting...";
-        doc.id("text").innerText = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(link);
+        doc.id("text").innerHTML = "If that doesn't work, go to <a href='{0}'><em>this link</em></a>".format(decodeURI(link));
         location.href = link;
         redirected = true;
         break;
@@ -35,6 +34,7 @@ function init() {
   }
 
   if (!redirected) {
-    doc.id("path").innerText = "'{0}'".format(path);
+    doc.id("text").innerHTML = 'Try typing in the URL properly instead of <em>{0}</em>'.format(path ? path : "whatever that is");
+    doc.id("header").innerText = "404 - The funny not found";
   }
 }
