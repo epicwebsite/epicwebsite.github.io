@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>New Tab</title>
+    <title id="title">New Tab</title>
     <link rel="stylesheet" href="../../css/default.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,16 +15,20 @@
   </head>
 
   <body onload="init()">
-    <header class="ew center">
-      <h1>
-        New tab
-      </h1>
-    </header>
+    <div id="fallback">An error has occured.</div>
+    <div id="content" style="visibility:hidden;">
 
-    <div class="content">
-      <section id="sc_contain"></section>
+      <header class="ew center" onclick="header.change()">
+        <h1 id="header">New Tab</h1>
+      </header>
+
+      <div class="content">
+        <section id="sc_contain"></section>
+      </div>
 
     </div>
+
+    <footer onclick="location.href='https://github.com/DarccMan'" class="ew footer">Made by <span title="That's Me!">Darcy</span></footer>
 
   </body>
 
