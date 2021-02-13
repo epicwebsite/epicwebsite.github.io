@@ -148,10 +148,12 @@ sc.edit = function (el) {
       sc.init();
     }
   } else {
-    ls.set(d => {
-      delete d.sc[num];
-    });
-    sc.init();
+    if (href == "") {
+      ls.set(d => {
+        delete d.sc[num];
+      });
+      sc.init();
+    }
   }
 }
 
@@ -183,7 +185,9 @@ header.change = function () {
       d.header = text;
     });
   } else {
-    header.reset();
+    if (text == "") {
+      header.reset();
+    }
   }
   header.init();
 }
