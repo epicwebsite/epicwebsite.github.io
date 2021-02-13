@@ -19,7 +19,7 @@
   &.center {
     text-align: center;
   }
-  
+
   &.switch {
     position: relative;
     display: inline-block;
@@ -121,4 +121,25 @@ input {
 
 button {
   cursor: pointer;
+}
+
+body,
+html {
+  &:not(.no-default) {
+    @color1: #202038;
+    background-color: @color1;
+  }
+}
+
+* {
+  color: #fafafa;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

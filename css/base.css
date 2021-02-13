@@ -13,15 +13,10 @@ html {
   padding: 0;
   border: 10px solid #10101040;
   box-sizing: border-box;
-  background-color: #202030;
 }
 body {
   padding: 10px;
   margin-bottom: 100px;
-}
-* {
-  color: #fafafa;
-  font-family: Arial, Helvetica, sans-serif;
 }
 .top header {
   font-size: 40px;
@@ -50,12 +45,6 @@ body {
   position: absolute;
   right: 20px;
   top: 20px;
-}
-a {
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
 }
 #links h2 {
   font-size: 30px;
