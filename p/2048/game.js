@@ -8,6 +8,7 @@ var ctx = canvas.getContext("2d");
 
 var gameState = "start";
 var grid = null;
+var vals = {};
 
 function reset() {
   grid = [];
@@ -17,15 +18,8 @@ function reset() {
       grid[x][y] = 0;
     }
   }
-  for (i = 0; i < 3; i++) {
-    for (j = 0; j < 1000; j++) {
-      x = F.randomInt(0, grid.length - 1);
-      y = F.randomInt(0, grid[x].length - 1);
-      if (grid[x][y] == 0) {
-        grid[x][y] = i + 1;
-        break;
-      }
-    }
+  for (i = 0; i < 2; i++) {
+    spawn();
   }
 
   gameState = "play";
@@ -36,7 +30,6 @@ function render() {
 
   ctx.lineWidth = 10;
   ctx.strokeStyle = color.stroke;
-  ctx.font = "bold 80px Arial";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   for (x = 0; x < grid.length; x++) {
@@ -60,6 +53,7 @@ function render() {
       );
 
       if (grid[x][y]) {
+        ctx.font = "bold {0}px Arial".format(grid[x][y] < 7 ? 80 : grid[x][y] < 10 ? 70 : 50);
         ctx.fillStyle = color.text;
         ctx.fillText(
           2 ** grid[x][y],
@@ -80,26 +74,138 @@ function main() {
 function update(mod) {
   var keysDown = F.getKeyCodes(controls);
   if (gameState == "play") {
-    x = 0;
-    y = 0;
-    switch (F.bool_bin(keysDown.includes("move_up"), keysDown.includes("move_right"), keysDown.includes("move_down"), keysDown.includes("move_left"))) {
-      case "1000": {
-        y = -1;
-      }; break;
-      case "0100": {
-        x = 1;
-      }; break;
-      case "0010": {
-        y = 1;
-      }; break;
-      case "0001": {
-        x = -1;
-      }; break;
+    bin = F.bool_bin(keysDown.includes("move_up"), keysDown.includes("move_right"), keysDown.includes("move_down"), keysDown.includes("move_left"));
+    if (bin.replaceAll("0", "")) {
+      if (vals.move) {
+        vals.move = false;
+        createNew = true;
+
+        switch (bin) {
+          case "1000": {
+            for (x = 0; x < grid.length; x++) {
+              for (y = 1; y < grid[0].length; y++) {
+                if (grid[x][y]) {
+                  Y2: for (y2 = 0; y2 < Math.min(y, grid[0].length); y2++) {
+                    if (y == y2) {
+                      continue;
+                    }
+                    if (!grid[x][y2]) {
+                      grid[x][y2] = grid[x][y];
+                      grid[x][y] = 0;
+                      break Y2;
+                    } else if (grid[x][y2] === grid[x][y]) {
+                      grid[x][y2]++;
+                      grid[x][y] = 0;
+                      break Y2;
+                    }
+                  }
+                }
+              }
+            }
+          }; break;
+          case "0100": {
+            for (y = 0; y < grid[0].length; y++) {
+              for (x = grid.length - 2; x >= 0; x--) {
+                if (grid[x][y]) {
+                  X2: for (x2 = Math.max(x, grid[0].length) - 1; x2 >= 0; x2--) {
+                    if (x == x2) {
+                      continue;
+                    }
+                    if (!grid[x2][y]) {
+                      grid[x2][y] = grid[x][y];
+                      grid[x][y] = 0;
+                      break X2;
+                    } else if (grid[x2][y] === grid[x][y]) {
+                      grid[x2][y]++;
+                      grid[x][y] = 0;
+                      break X2;
+                    }
+                  }
+                }
+              }
+            }
+          }; break;
+          case "0010": {
+            for (x = 0; x < grid.length; x++) {
+              for (y = grid[0].length - 2; y >= 0; y--) {
+                if (grid[x][y]) {
+                  Y2: for (y2 = Math.max(y, grid[0].length) - 1; y2 >= 0; y2--) {
+                    if (y == y2) {
+                      continue;
+                    }
+                    if (!grid[x][y2]) {
+                      grid[x][y2] = grid[x][y];
+                      grid[x][y] = 0;
+                      break Y2;
+                    } else if (grid[x][y2] === grid[x][y]) {
+                      grid[x][y2]++;
+                      grid[x][y] = 0;
+                      break Y2;
+                    }
+                  }
+                }
+              }
+            }
+          }; break;
+          case "0001": {
+            for (y = 0; y < grid[0].length; y++) {
+              for (x = 1; x < grid.length; x++) {
+                if (grid[x][y]) {
+                  X2: for (x2 = 0; x2 < Math.min(x, grid[0].length); x2++) {
+                    if (x == x2) {
+                      continue;
+                    }
+                    if (!grid[x2][y]) {
+                      grid[x2][y] = grid[x][y];
+                      grid[x][y] = 0;
+                      break X2;
+                    } else if (grid[x2][y] === grid[x][y]) {
+                      grid[x2][y]++;
+                      grid[x][y] = 0;
+                      break X2;
+                    }
+                  }
+                }
+              }
+            }
+          }; break;
+          default: {
+            createNew = false;
+          }
+        }
+
+        if (createNew) {
+          spawn();
+        }
+      }
+    } else {
+      vals.move = true;
     }
-    console.log(keysDown);
   }
 }
 
 var then = Date.now();
 reset();
 main();
+
+function spawn() {
+  val = false;
+  for (x = 0; x < grid.length; x++) {
+    for (y = 0; y < grid[x].length; y++) {
+      if (!grid[x][y]) {
+        val = true;
+      }
+    }
+  }
+  if (!val) {
+    return (false);
+  }
+  for (j = 0; j < 1000; j++) {
+    x = F.randomInt(0, grid.length - 1);
+    y = F.randomInt(0, grid[x].length - 1);
+    if (grid[x][y] == 0) {
+      grid[x][y] = 1;
+      return (true);
+    }
+  }
+}
