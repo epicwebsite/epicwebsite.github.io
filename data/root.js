@@ -1,3 +1,3 @@
 var rootData = {
-  splash: "Look! The columns are not broken!",
+  splash: "80% of the bugs in a balanced diet.",
 };
