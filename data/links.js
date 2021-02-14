@@ -268,6 +268,23 @@ var links = {
           "mine-sweeper",
         ],
       },
+      {
+        id: "mc-pixel",
+        name: "Minecraft Block Pixels",
+        image: true,
+        alias: [
+          "pixel",
+          "pixels",
+          "mcpixel",
+          "mcpixels",
+          "color",
+          "colors",
+          "mc-color",
+          "mc-colors",
+          "mccolor",
+          "mccolors",
+        ],
+      },
     ]
   },
   media: {
