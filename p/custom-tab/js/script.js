@@ -191,3 +191,26 @@ header.change = function () {
   }
   header.init();
 }
+
+
+/* Search */
+function search(e) {
+  text = doc.id("search").value;
+
+  if (text && text.replaceAll(" ", "")) {
+    if (e.key == "Enter") {
+      url = "https://www.google.com/search?q={0}".format(text);
+      if (text.isURL()) {
+        url = text;
+      }
+      if (("https://" + text).isURL()) {
+        url = "https://" + text;
+      }
+      if (e.ctrlKey) {
+        open(url, "_blank");
+      } else {
+        location.href = url;
+      }
+    }
+  }
+}

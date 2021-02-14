@@ -1,3 +1,4 @@
+/* Header */
 header {
   position: fixed;
   left: 0;
@@ -12,11 +13,10 @@ header h1 {
   font-size: 60px;
   font-weight: 500;
 }
-.content {
-  margin-top: 150px;
-}
+/* Shortcuts */
 #sc_contain {
   column-count: 6;
+  margin-top: 140px;
   column-gap: 10px;
 }
 @media (max-width: 900px) {
@@ -97,4 +97,22 @@ header h1 {
 }
 #fallback {
   font-size: 30px;
+}
+/* Search */
+.search input {
+  height: 40px;
+  min-width: 200px;
+  width: 20%;
+  padding: 0 15px;
+  font-size: 20px;
+  border: none;
+  border-radius: 100px;
+  transition: 0.3s ease-in-out;
+  transition-property: width, min-width;
+}
+.search input:focus,
+.search input:hover {
+  min-width: 500px;
+  width: 40%;
+  outline: none;
 }
