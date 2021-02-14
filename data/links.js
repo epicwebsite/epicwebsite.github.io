@@ -285,6 +285,12 @@ var links = {
           "mccolors",
         ],
       },
+      {
+        id: "2048",
+        name: "2048 Clone",
+        image: true,
+        alias: [],
+      },
     ]
   },
   media: {
