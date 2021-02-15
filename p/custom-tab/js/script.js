@@ -142,7 +142,7 @@ sc.init = function () {
       '</article>',
     ].join("").format({
       href,
-      name,
+      name: name.truncate(15, "..."),
       unknown,
       num: i,
     });
