@@ -1,10 +1,38 @@
 /* Top */
 function init() {
+  handle.startTimeout();
+  handle.hide();
   ls.check();
   sc.init();
   header.init();
   doc.id("content").style.visibility = "visible";
-  doc.id("fallback").style.display = "none";
+  handle.stopTimeout();
+}
+
+
+/* Error Handling */
+onerror = (msg) => {
+  handle.error(msg);
+};
+var handle = {};
+handle.error = function (msg) {
+  console.error(msg);
+  doc.id("error_code").innerHTML += "<br>" + msg;
+  handle.show();
+}
+handle.startTimeout = function () {
+  handle.timeout = setTimeout(() => {
+    handle.error("Timeout of 2000 milliseconds");
+  }, 2000);
+}
+handle.stopTimeout = function () {
+  clearInterval(handle.timeout);
+}
+handle.hide = function () {
+  doc.id("error").style.display = "none";
+}
+handle.show = function () {
+  doc.id("error").style.display = "block";
 }
 
 
@@ -75,7 +103,7 @@ sc.reset = function () {
   ls.set(d => {
     d.sc = {};
   });
-  // init();
+  init();
 }
 
 sc.init = function () {

@@ -95,8 +95,13 @@ header h1 {
 #sc_contain .sc button.edit i:hover {
   color: #FFF;
 }
-#fallback {
+#error {
   font-size: 30px;
+}
+#error,
+#error * {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
 }
 /* Search */
 .search input {
