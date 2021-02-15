@@ -27,3 +27,8 @@ body {
   height: 500px;
   float: left;
 }
+
+#loading {
+  color: white;
+  font-size: 40px;
+}

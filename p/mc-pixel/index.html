@@ -9,9 +9,14 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
   </head>
   <body onload="init()">
-    <label id="label" for="hex"></label>
-    <input id="hex" type="color" oninput="calculate()">
-    <img id="img">
+    <section id="loading">
+      Loading<span id="ellipse"></span>
+    </section>
+    <section id="content" style="visibility:hidden;">
+      <label id="label" for="hex"></label>
+      <input id="hex" type="color" oninput="calculate()">
+      <img id="img">
+    </section>
 
     <script type="text/javascript" src="https://fnctjs.github.io/index.js"></script>
     <script type="text/javascript" src="averages.js"></script>

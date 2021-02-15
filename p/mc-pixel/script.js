@@ -3,10 +3,22 @@ function init() {
   doc.id("hex").value = F.randomHex();
   calculate();
   // roll();
+  setInterval(() => {
+    changeEllipse();
+  }, 300);
 }
 
 var images = {};
 var old = {};
+
+function changeEllipse() {
+  text = doc.id("ellipse").innerText;
+  text += ".";
+  if (text.length > 3) {
+    text = "";
+  }
+  doc.id("ellipse").innerText = text;
+}
 
 function loadAll() {
   for (i = 0; i < averages.keys().length; i++) {
@@ -14,7 +26,9 @@ function loadAll() {
     images[averages.keys()[i]].src = "./blocks/{0}".format(averages.keys()[i]);
     if (i + 1 >= averages.keys().length) {
       images[averages.keys()[i]].onload = () => {
-        console.log(1);
+        doc.id("loading").style.display = "none";
+        clearInterval(changeEllipse);
+        doc.id("content").style.visibility = "visible";
       }
     }
   }
