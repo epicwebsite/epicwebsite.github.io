@@ -7,7 +7,6 @@ function init() {
   header.init();
   // uncomment_for_error;
   handle.continue();
-  handle.stopTimeout();
 }
 
 
@@ -27,6 +26,7 @@ handle.startTimeout = function () {
   }, 2000);
 }
 handle.stopTimeout = function () {
+  console.log(1);
   clearInterval(handle.timeout);
 }
 handle.hide = function () {
@@ -108,7 +108,6 @@ sc.reset = function () {
   ls.set(d => {
     d.sc = {};
   });
-  init();
 }
 
 sc.init = function () {
