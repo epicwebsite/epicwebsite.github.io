@@ -5,7 +5,8 @@ function init() {
   ls.check();
   sc.init();
   header.init();
-  doc.id("content").style.visibility = "visible";
+  // uncomment_for_error;
+  handle.continue();
   handle.stopTimeout();
 }
 
@@ -33,6 +34,11 @@ handle.hide = function () {
 }
 handle.show = function () {
   doc.id("error").style.display = "block";
+}
+handle.continue = function () {
+  handle.hide();
+  doc.id("content").style.visibility = "visible";
+  handle.stopTimeout();
 }
 
 
