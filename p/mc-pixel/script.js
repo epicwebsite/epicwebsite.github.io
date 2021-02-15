@@ -1,10 +1,19 @@
 function init() {
+  loadAll();
   doc.id("hex").value = F.randomHex();
   calculate();
   // roll();
 }
 
+var images = {};
 var old = {};
+
+function loadAll() {
+  for (i = 0; i < averages.keys().length; i++) {
+    images[averages.keys()[i]] = new Image();
+    images[averages.keys()[i]].src = "./blocks/{0}".format(averages.keys()[i]);
+  }
+}
 
 function calculate() {
   hex = doc.id("hex").value;
