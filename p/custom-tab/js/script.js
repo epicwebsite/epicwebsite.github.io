@@ -46,7 +46,6 @@ handle.continue = function () {
 var ls = {};
 
 ls.check = function () {
-  return;
   if (!ls.get(true)) {
     ls.reset();
   }
