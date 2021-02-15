@@ -12,6 +12,11 @@ function loadAll() {
   for (i = 0; i < averages.keys().length; i++) {
     images[averages.keys()[i]] = new Image();
     images[averages.keys()[i]].src = "./blocks/{0}".format(averages.keys()[i]);
+    if (i + 1 >= averages.keys().length) {
+      images[averages.keys()[i]].onload = () => {
+        console.log(1);
+      }
+    }
   }
 }
 
