@@ -291,6 +291,13 @@ var links = {
         image: true,
         alias: [],
       },
+      {
+        id: "golad",
+        name: "Conways Game of Life",
+        // image: true,
+        hidden: true,
+        alias: [],
+      },
     ]
   },
   media: {
