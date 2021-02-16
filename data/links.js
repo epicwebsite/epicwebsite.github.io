@@ -294,9 +294,19 @@ var links = {
       {
         id: "golad",
         name: "Conways Game of Life",
-        // image: true,
-        hidden: true,
-        alias: [],
+        image: true,
+        alias: [
+          "cgol",
+          "cgolad",
+          "gol",
+          "gameof",
+          "game-of-life",
+          "gameoflife",
+          "game-of-life-and-death",
+          "gameoflifeanddeath",
+          "conway",
+          "conways",
+        ],
       },
     ]
   },

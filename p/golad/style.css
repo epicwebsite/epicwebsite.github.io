@@ -7,9 +7,6 @@ body {
 }
 #canvas_contain {
   float: left;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 canvas {
   background-color: rgba(60, 60, 60);
