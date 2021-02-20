@@ -36,15 +36,6 @@ function reset() {
       deck = deck.s(1, -1);
     }
     up = [deck[0]];
-    if (c == 3) {
-      up = ["3-D"];
-    }
-    if (c == 4) {
-      up = ["4-C"];
-    }
-    if (c == 2) {
-      up = ["5-H"];
-    }
     deck = deck.s(1, -1);
     cards.table.push({
       down,
@@ -58,6 +49,26 @@ function reset() {
 
   gameUpdate();
   gameState = "play";
+
+  all = {};
+  for (i = 0; i < cards.table.length; i++) {
+    for (k = 0; k < cards.table[i].keys().length; k++) {
+      for (j = 0; j < cards.table[i].values()[k].length; j++) {
+        v = cards.table[i].values()[k][j];
+        if (all[v]) {
+          all[v]++;
+        } else {
+          all[v] = 1;
+        }
+      }
+    }
+  }
+  for (i = 0; i < all.keys().length; i++) {
+    if (all.values()[i] > 1) {
+      console.log(all.keys()[i]);
+      reset();
+    }
+  }
 }
 
 function render() {
