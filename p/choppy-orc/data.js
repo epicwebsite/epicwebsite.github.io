@@ -1,36 +1,33 @@
-var canvas = doc.create("canvas");
-canvas.id = "canvas";
-canvas.width = 512;
-canvas.height = 512;
-canvas.setAttribute("oncontextmenu", "return(false);");
-doc.id("canvas_contain").appendChild(canvas);
-var ctx = canvas.getContext("2d");
+var data = {
 
-var gameState = "start";
-
-function reset() {
-
-  gameState = "play";
-}
-
-function render() {
-  ctx.fillCanvas();
-
-}
-
-function main() {
-  update((Date.now() - then) / 1000);
-  render();
-  then = Date.now();
-  requestAnimationFrame(main);
-}
-function update(mod) {
-  /* var keysDown = F.getKeyCodes(controls); */
-  if (gameState == "play") {
-
-  }
-}
-
-var then = Date.now();
-reset();
-main();
+};
+var controls = {
+  keys: {
+    "player_up": [
+      87,
+      38,
+    ],
+    "player_down": [
+      83,
+      40,
+    ],
+    "player_left": [
+      65,
+      37,
+    ],
+    "player_right": [
+      68,
+      39,
+    ],
+    "player_axe": [
+      32,
+    ],
+    "debug_main": [
+      16,
+    ],
+    "game_reset": [
+      82,
+    ],
+  },
+  buttons: {},
+};
