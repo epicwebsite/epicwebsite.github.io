@@ -3,6 +3,18 @@ console.log("%c._. Hello", {
   "font-size": "25px",
 }.output(":", ";"));
 
+defaults = {};
+defaults.nice = function () {
+  if (F.url.query.nice) {
+    els = doc.query("*");
+    for (i = 0; i < els.length; i++) {
+      if (els[i].childNodes.length == 1) {
+        els[i].innerText = "Nice";
+      }
+    }
+  }
+}
+
 var ls = {};
 ls.check = function () {
   if (!F.ls("settings")) {

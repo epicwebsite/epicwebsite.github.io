@@ -5,6 +5,10 @@ function init() {
   F.triggerOnload();
   doc.id("splash").innerHTML = rootData.splash;
   doc.body.style.visibility = "visible";
+  defaults.nice();
+  if (F.url.query.header) {
+    doc.id("header_name").innerText = F.url.query.header;
+  }
 }
 
 function showLinks(showHidden) {

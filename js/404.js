@@ -37,4 +37,6 @@ function init() {
     doc.id("text").innerHTML = 'Try typing in the URL properly instead of <em>{0}</em>'.format(path ? decodeURI(path).htmlEscape() : "whatever that is");
     doc.id("header").innerText = "404 - The funny not found";
   }
+
+  defaults.nice();
 }

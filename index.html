@@ -3,7 +3,8 @@
   <head>
   <title>EpicWebsite</title>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="https://fnctjs.github.io/index.js"></script>
+    <script type="text/javascript" src="C:/Users/darcy/OneDrive/Documents/.other/code/js/fnctjs/index.js"></script>
+    <!-- <script type="text/javascript" src="https://fnctjs.github.io/index.js"></script> -->
     <script type="text/javascript" src="./data/root.js"></script>
     <script type="text/javascript" src="./data/links.js"></script>
     <script type="text/javascript" src="./data/icons.js"></script>
@@ -16,11 +17,11 @@
     <section class="top-right">
       <button onclick="crash()" title="Come on, press it, whats the worst that can happen??" id="crash"
         class="ew button">Crash your Tab!</button>
-      <button onclick="location.href = './settings' + (F.url.online ? '' : '.html')" title="Go to settings page"
+      <button onclick="q = F.url.queryRaw; location.href = './settings' + (F.url.online ? '' : '.html') + (q ? '?' + q : '')" title="Go to settings page"
         class="ew button">Settings</button>
     </section>
     <div class="top">
-      <header>Welcome to <em>EpicWebsite</em></header>
+      <header>Welcome to <em id="header_name">EpicWebsite</em></header>
       <h1 id="splash">There is a bunch of different sites</h1>
     </div>
     <hr>

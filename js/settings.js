@@ -2,6 +2,7 @@ function init() {
   ls.check();
   css.set();
   showSettings();
+  defaults.nice();
   doc.body.style.visibility = "visible";
 }
 
@@ -32,6 +33,6 @@ function showSettings() {
 
 function settingsChange(el) {
   ls.edit(d => {
-    d[el.id.split(" ").sub(1, -1).join(" ")] = el.checked;  
+    d[el.id.split(" ").sub(1, -1).join(" ")] = el.checked;
   });
 }
