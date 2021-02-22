@@ -1,7 +1,7 @@
-console.log("%c._. Hello", {
+console.log("%c._. Hello", ({
   "color": "white",
   "font-size": "25px",
-}.output(":", ";"));
+}).output(":", ";"));
 
 defaults = {};
 defaults.nice = function () {
