@@ -160,7 +160,7 @@ main();
 
 function change(el) {
   if (el) {
-    el.value = el.value.replace(/[^0-9 ]/g, '');
+    el.value = el.value.replace(/[^0-9 ]/g, "");
   }
 
   number = doc.id("input").value;
@@ -168,6 +168,7 @@ function change(el) {
     if (number) {
       doc.id("notation").innerText = toWords(number, doc.id("convert").checked);
       doc.id("notation").href = "../letter/{0}?str={1}".format(F.url.online ? "" : "index.html", toWords(number, doc.id("convert").checked, true));
+      // doc.id("temp").innerText = toWords(number, doc.id("convert").checked, true);
     } else {
       doc.id("notation").innerText = "";
     }
@@ -182,24 +183,52 @@ function addNum() {
 change();
 
 function toWords(s, h, p) {
-  var th = ["", "kil", "meg", "gig", "ter", "pet", "ex"];
-  var dg = ["zil", "on", "to", "tre", "for", "vi", "hex", "sep", "oc", "nie", "dec", "al", "tee", "ad", "et", "fe"];
-  if (p) {
-    th = ["", "'k'i'l'o'", "'m'e'ga'", "'g'i'ga'", "'t'e'r'uh'", "'p'e't'", "'e'k's'"];
-    dg = ["'z'i'l'", "'o'n'", "'t'oa'", "'ch'r'e'", "'f'or'", "'v'ee'", "'h'e'ks'", "'s'e'p'", "'o'k'", "'n'iy'", "'d'e'k'", "'a'l'", "'t'ee'", "'a'd'", "'e't'", "'f'e'"];
-  }
+  var tx = [
+    ["ten", "t e n "],
+    ["gund", "g u n d "],
+    ["il", "i l "],
+    ["en", "e n "],
+    ["ud", "u d "],
+  ];
+  var th = [
+    ["", ""],
+    ["kil", "k i l "],
+    ["meg", "m e g "],
+    ["gig", "g i g "],
+    ["ter", "t er "],
+    ["pet", "p e t "],
+    ["ex", "e k s "],
+  ];
+  var dg = [
+    ["zil", "z i l "],
+    ["on", "o n "],
+    ["to", "t oa "],
+    ["tre", "ch r e "],
+    ["for", "f or "],
+    ["vi", "v ee "],
+    ["hex", "h e k s "],
+    ["sep", "s e p "],
+    ["oc", "o k "],
+    ["nie", "n iy "],
+    ["dec", "d e k "],
+    ["el", "a l "],
+    ["tai", "t ai "],
+    ["ad", "a d "],
+    ["et", "e t "],
+    ["fai", "f ay "],
+  ];
 
   s = parseInt(s)?.toString(h ? 16 : 10);
   s = s?.replace(/[\, ]/g, "");
   if (s == 0) {
-    return (p ? "'z'i'l'" : "zil");
+    return (p ? "z i l " : "zil");
   }
   x = s.indexOf(".");
   if (x == -1) {
     x = s.length;
   }
   if (x > (th.length * 3) - 1) {
-    return ("Too Big");
+    return (p ? "n u l" : "Too Big");
   }
   n = s.split("");
   for (i = 0; i < n.length; i++) {
@@ -207,40 +236,42 @@ function toWords(s, h, p) {
   }
   str = "";
   sk = 0;
+  ex = "";
   for (i = 0; i < x; i++) {
     if ((x - i) % 3 == 2) {
       if (n[i] != 0) {
-        str += dg[n[i]];
+        str += dg[n[i]][p ? 1 : 0];
         if ((x - i) % 3 == 2) {
-          str += p ? "t'e'n' " : "ten ";
-        } else {
-          str += " ";
+          if (i + 2 >= x) {
+            str += tx[0][p ? 1 : 0];
+            str += p ? "_ " : " ";
+            ex = "";
+          } else {
+            ex = tx[3][p ? 1 : 0];
+          }
         }
         sk = 1;
       }
     } else if (n[i] != 0) {
-      str += dg[n[i]];
+      str += dg[n[i]][p ? 1 : 0];
       if ((x - i) % 3 == 0) {
-        str += p ? "g'u'n'd' " : "gund ";
-      } else {
-        str += " "
+        if (i + 3 >= x) {
+          str += tx[1][p ? 1 : 0];
+          str += p ? "_ " : " ";
+          ex = "";
+        } else {
+          ex = tx[4][p ? 1 : 0];
+        }
       }
       sk = 1;
     }
     if ((x - i) % 3 == 1) {
       if (sk) {
-        str += th[(x - i - 1) / 3] + " ";
+        str += th[(x - i - 1) / 3][p ? 1 : 0] + (ex ? ex : ((x - i - 1) / 3 > 0 ? tx[2][p ? 1 : 0] : "")) + (p ? "_ " : " ");
+        ex = "";
       }
       sk = 0;
     }
   }
-
-  if (x != s.length) {
-    y = s.length;
-    str += p ? "d'o't' " : "dot";
-    for (i = x + 1; i < y; i++) {
-      str += dg[n[i]] + " ";
-    }
-  }
-  return (str.replace(/\s+/g, ' ').s(0, -2));
+  return (str.replace(/\s+/g, " ").s(0, p ? -4 : -2));
 }

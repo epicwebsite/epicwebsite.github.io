@@ -20,7 +20,7 @@ function render() {
   ctx.fillCanvas(F.getColor(210));
 
   letters = doc.id("input").value.lower();
-  if (letters.s(0) == "'") {
+  if (letters.s(0) == " ") {
     letters = letters.s(1, -1);
   }
   w = 50;
@@ -28,7 +28,10 @@ function render() {
   padding = 5;
   lineMax = 10;
   if (letters && letters.length > 0) {
-    letters = letters.split("'");
+    letters = letters.split(" ");
+    for (i = 0; i < letters.length; i++) {
+      letters[i] = letters[i].replaceAll("_", " ");
+    }
     ctx.lineWidth = 3;
     ctx.lineCap = "round";
     for (d = 0; d < letters.length; d++) {
