@@ -5,6 +5,9 @@ canvas.height = 512;
 canvas.setAttribute("oncontextmenu", "return(false);");
 doc.id("canvas_contain").appendChild(canvas);
 var ctx = canvas.getContext("2d");
+if (F.url.query.num) {
+  doc.id("input").value = decodeURI(F.url.query.num);
+}
 
 var gameState = "start";
 
