@@ -7,9 +7,6 @@ body {
 }
 #canvas_contain {
   float: left;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 canvas {
   background-color: rgba(60, 60, 60);
@@ -23,4 +20,15 @@ select, input, button, textarea {
 textarea {
   width: 300px;
   height: 300px;
+}
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

@@ -10,12 +10,17 @@
   <body>
     <div id="canvas_contain"></div>
     <section>
-      <input id="input"  placeholder="Input Number" type="text" autocomplete="off" value="106" oninput="change(this)" autofocus title="Input">
-      <button onclick="minusNum()" title="Subtract">-</button>
-      <button onclick="addNum()" title="Add">+</button>
-      <input id="convert" type="checkbox" title="Convert Decimal to Hexadecimal">
+      <input id="input"  placeholder="Input Number" type="text" autocomplete="off" value="256" oninput="change(this)" autofocus title="Input">
+      <button onclick="minusNum(); change()" title="Subtract">-</button>
+      <button onclick="addNum(); change()" title="Add">+</button>
+      <input id="convert" onchange="change()" type="checkbox" title="Convert Decimal to Hexadecimal">
       <input id="decimal" placeholder="Hexadecimal" type="text" autocomplete="off" title="Hexadecimal Number" disabled>
-      <span id="binary"></span>
+      <br>
+      <br>
+      <a id="notation" title="View in Aerune" target="_blank"></a>
+      <br>
+      <br>
+      <code id="binary"></code>
     </section>
     <!-- <script type="text/javascript" src="C:/Users/darcy/OneDrive/Documents/.other/code/js/fnctjs/index.js"></script> -->
     <script type="text/javascript" src="https://fnctjs.github.io/index.js"></script>

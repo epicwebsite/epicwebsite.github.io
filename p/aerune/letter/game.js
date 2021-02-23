@@ -5,6 +5,9 @@ canvas.height = 512;
 canvas.setAttribute("oncontextmenu", "return(false);");
 doc.id("canvas_contain").appendChild(canvas);
 var ctx = canvas.getContext("2d");
+if (F.url.query.str) {
+  doc.id("input").value = decodeURI(F.url.query.str);
+}
 
 var gameState = "start";
 
@@ -17,6 +20,9 @@ function render() {
   ctx.fillCanvas(F.getColor(210));
 
   letters = doc.id("input").value.lower();
+  if (letters.s(0) == "'") {
+    letters = letters.s(1, -1);
+  }
   w = 50;
   margin = 5;
   padding = 5;
@@ -46,7 +52,7 @@ function render() {
         );
         ctx.strokeStyle = "black";
       }
-      
+
       drawLetter(letter);
     }
   }
