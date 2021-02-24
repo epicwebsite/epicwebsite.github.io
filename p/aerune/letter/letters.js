@@ -151,8 +151,8 @@ function drawLetter(letter) {
       ctx.ellipse(
         margin + (x + 0.5) * w,
         margin + (y + 0.5) * w,
-        (w / 2.3) - padding,
-        (w / 2.3) - padding,
+        (w / 1.9) - padding,
+        (w / 1.9) - padding,
         0, 0, 2 * Math.PI,
       );
       ctx.moveTo(
@@ -276,35 +276,31 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "ai": {
+    case "ay": {
       ctx.beginPath();
       ctx.moveTo(
-        margin - padding + (x + 1) * w,
-        margin + padding + (y) * w,
-      );
-      ctx.lineTo(
-        margin - padding + (x + 1) * w,
-        margin - padding + (y + 1) * w,
-      );
-      ctx.lineTo(
         margin + padding + (x) * w,
         margin + padding + (y) * w,
       );
       ctx.lineTo(
-        margin + padding + (x) * w,
+        margin - padding + (x + 1) * w,
         margin - padding + (y + 1) * w,
       );
       ctx.moveTo(
-        margin + padding + (x + 0.25) * w,
-        margin - padding + (y + 0.75) * w,
+        margin + (x + 0.5) * w,
+        margin + (y + 0.5) * w,
       );
       ctx.lineTo(
-        margin + padding + (x + 0.55) * w,
-        margin - padding + (y + 0.45) * w,
+        margin - padding + (x + 1) * w,
+        margin + padding + (y) * w,
+      );
+      ctx.lineTo(
+        margin + (x + 0.5) * w,
+        margin + padding + (y) * w,
       );
       ctx.stroke();
     }; break;
-    case "oi": {
+    case "oy": {
       ctx.beginPath();
       ctx.moveTo(
         margin - padding + (x + 0.85) * w,
@@ -330,24 +326,29 @@ function drawLetter(letter) {
     }; break;
     case "iy": {
       ctx.beginPath();
-      ctx.ellipse(
-        margin + (x + 0.5) * w,
-        margin + (y + 0.5) * w,
-        (w / 2.3) - padding,
-        (w / 2.3) - padding,
-        0, 0, 2 * Math.PI,
+      ctx.moveTo(
+        margin - padding + (x + 1) * w,
+        margin + padding + (y) * w,
+      );
+      ctx.lineTo(
+        margin - padding + (x + 1) * w,
+        margin - padding + (y + 1) * w,
+      );
+      ctx.lineTo(
+        margin + padding + (x) * w,
+        margin + padding + (y) * w,
+      );
+      ctx.lineTo(
+        margin + padding + (x) * w,
+        margin - padding + (y + 1) * w,
       );
       ctx.moveTo(
-        margin + padding + (x + 0.2) * w,
-        margin + (y + 0.25) * w,
+        margin + padding + (x + 0.25) * w,
+        margin - padding + (y + 0.75) * w,
       );
       ctx.lineTo(
-        margin + (x + 0.5) * w,
-        margin - padding + (y + 0.9) * w,
-      );
-      ctx.lineTo(
-        margin - padding + (x + 0.8) * w,
-        margin + (y + 0.25) * w,
+        margin + padding + (x + 0.55) * w,
+        margin - padding + (y + 0.45) * w,
       );
       ctx.stroke();
     }; break;

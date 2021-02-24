@@ -20,6 +20,7 @@ function render() {
   ctx.fillCanvas(F.getColor(210));
 
   letters = doc.id("input").value.lower();
+  letters = letters.replaceAll("\n", " ");
   if (letters.s(0) == " ") {
     letters = letters.s(1, -1);
   }
