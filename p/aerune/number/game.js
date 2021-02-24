@@ -185,8 +185,8 @@ change();
 function toWords(s, h, p) {
   var tx = [
     ["ten", "t e n "],
-    ["gund", "g u n d "],
-    ["il", "i l "],
+    ["gud", "g u d "],
+    ["ak", "a k "],
     ["en", "e n "],
     ["ud", "u d "],
   ];
@@ -195,13 +195,13 @@ function toWords(s, h, p) {
     ["kil", "k i l "],
     ["meg", "m e g "],
     ["gig", "g i g "],
-    ["ter", "t er "],
+    ["ter", "t e r "],
     ["pet", "p e t "],
     ["ex", "e k s "],
   ];
   var dg = [
     ["zil", "z i l "],
-    ["on", "o n "],
+    ["un", "u n "],
     ["to", "t oa "],
     ["tre", "ch r e "],
     ["for", "f or "],
@@ -228,7 +228,7 @@ function toWords(s, h, p) {
     x = s.length;
   }
   if (x > (th.length * 3) - 1) {
-    return (p ? "n u l" : "Too Big");
+    return (p ? "t oo _ b i g , s i l ee" : "Too Big");
   }
   n = s.split("");
   for (i = 0; i < n.length; i++) {
