@@ -1,0 +1,10 @@
+body {
+  background-color: rgba(50, 50, 50);
+}
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#output {
+  width: 300px;
+}
