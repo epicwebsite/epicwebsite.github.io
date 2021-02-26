@@ -49,6 +49,31 @@ function change() {
 
   doc.id("output_h").value = "{0} : {1} : {2} . {3}".format(h, m, s, Math.round(l / 10));
 
+
+  h = hn * (16 / 24);
+  ho = h - Math.floor(h);
+  h -= ho;
+
+  m = mn + ho;
+  m *= (64 / 60);
+  mo = m - Math.floor(m);
+  m -= mo;
+
+  s = sn + mo * 60;
+  s *= (64 / 60);
+  so = s - Math.floor(s);
+  s -= so;
+
+  l = so * 1000;
+
+  h = h.toString(16).upper();
+  m = m.toString(16).upper();
+  s = s.toString(16).upper();
+  m = m.toString(16).upper();
+
+  doc.id("output_h2").value = "{0} : {1} : {2} . {3}".format(h, m, s, Math.round(l / 10));
+
+
   h = hn * (10 / 24);
   ho = h - Math.floor(h);
   h -= ho;
