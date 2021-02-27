@@ -89,6 +89,9 @@
 .ew.button:focus {
   outline: none;
 }
+.ew.hidden {
+  visibility: hidden;
+}
 code {
   font-family: 'Courier New', Courier, monospace;
 }
