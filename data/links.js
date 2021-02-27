@@ -104,9 +104,10 @@ var links = {
       {
         id: "word-search",
         name: "Word Search Generator",
-        hidden: true,
         alias: [
           "wordsearch",
+          "search",
+          "words",
         ],
       },
       {

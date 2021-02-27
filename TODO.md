@@ -1,10 +1,5 @@
-# Fixed
-## Confirmed fix
-- Fixed font in DownloadRAM page
-- Added binary time in time page
-- Added How to use section in DownloadRAM page
-## Apparent fix
-- Fixed jQuery loading for most pages
+<!-- # Fixed -->
+<!-- ## Confirmed fix -->
 
 <!-- # Doing at the moment -->
 <!-- -  -->
