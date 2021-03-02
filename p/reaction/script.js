@@ -1,7 +1,9 @@
+var calc = (t) => t.setBorder(1, Infinity);
+var minTime = 800;
+var maxTime = 3000;
 var stopper = null;
 var then = null;
 var lastAmount = 5;
-var calc = (t) => t.setBorder(1, Infinity);
 var avs = [];
 var earlies = 0;
 var hs = Infinity;
@@ -42,7 +44,7 @@ var els = {
 doc.id("click").innerHTML = els.start.join("").format();
 
 function start() {
-  stopper = setTimeout(stop, F.randomInt(500, 1000));
+  stopper = setTimeout(stop, F.randomInt(minTime, maxTime));
 
   doc.id("click").setAttribute("color", "wait");
   doc.id("click").innerHTML = els.wait.join("").format();
