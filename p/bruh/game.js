@@ -101,11 +101,13 @@ function render() {
     w * data.button.size,
   );
 
-  doc.id("footer").style.color = F.getColor(F.hsv_rgb([
+  color = F.getColor(F.hsv_rgb([
     (bg[0] + 180).wrap(0, 360),
     50,
     100,
   ]));
+  doc.id("footer").style.color = color;
+  doc.id("footer").childNodes[1].style.color = color;
 }
 
 function main() {
@@ -147,7 +149,7 @@ function update(mod) {
         x: (canvas.width / 2),
         y: (canvas.height / data.button.offsetY),
         r: (w * data.button.size) / 2,
-        }, true, true)
+      }, true, true)
       || F.collide({
         x: F.touch.x,
         y: F.touch.y,
@@ -160,7 +162,7 @@ function update(mod) {
     ) {
       doc.body.style.cursor = "pointer";
     }
-    
+
     let held = (
       (
         F.buttonDown(0)
