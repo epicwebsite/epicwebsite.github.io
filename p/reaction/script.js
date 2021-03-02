@@ -4,6 +4,8 @@ var lastAmount = 5;
 var calc = (t) => t.setBorder(1, Infinity);
 var avs = [];
 var earlies = 0;
+var hs = Infinity;
+var hack = false;
 
 var els = {
   start: [
@@ -26,9 +28,11 @@ var els = {
     '<h1>{time}ms</h1>',
     '<h2>Click or press space to continue...</h2>',
     '<h3>',
-    '  Total Average: {total}',
+    '  Total Average: {total}ms{comment}',
     '  <p></p>',
-    '  Last 5 Average: {last}',
+    '  Last 5 Average: {last}ms',
+    '  <p></p>',
+    '  High Score: {score}ms{new}',
     '  <p></p>',
     '  Amount of Earlies: {earlies}',
     '</h3>',
@@ -53,6 +57,9 @@ async function stop() {
 }
 
 function early() {
+  if (Date.now() < then + 100) {
+    return;
+  }
   doc.id("click").setAttribute("color", "early");
   doc.id("click").innerHTML = els.early.join("").format();
   stopper = null;
@@ -60,7 +67,7 @@ function early() {
 }
 
 function success() {
-  time = calc(Date.now() - then);
+  time = hack ? F.randomInt(8, 35) : calc(Date.now() - then);
   avs.push(time);
   total = 0;
   for (i = 0; i < avs.length; i++) {
@@ -70,12 +77,20 @@ function success() {
   for (i = 0; i < Math.min(lastAmount, avs.length); i++) {
     last += avs[avs.length - i - 1];
   }
+  newHs = false;
+  if (time < hs) {
+    newHs = true;
+    hs = time;
+  }
   doc.id("click").setAttribute("color", "next");
   doc.id("click").innerHTML = els.success.join("").format({
     time,
+    comment: time > 1000 ? " <a href=\"https://www.epicgames.com/store/en-US/product/fortnite/home\">(cringe)</a>" : "",
     total: (total / avs.length).round(2),
     last: (last / Math.min(lastAmount, avs.length)).round(2),
     earlies,
+    score: hs,
+    new: newHs ? " NEW!" : "",
   });
 }
 
