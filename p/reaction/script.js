@@ -1,5 +1,5 @@
 var calc = (t) => t.setBorder(1, Infinity);
-var minTime = 800;
+var minTime = 1000;
 var maxTime = 3000;
 var stopper = null;
 var then = null;
@@ -119,9 +119,9 @@ onkeydown = function (e) {
   }
 };
 
-function main() {
+function resize() {
   doc.id("click").width = window.innerWidth;
   doc.id("click").height = window.innerHeight;
-  requestAnimationFrame(main);
 }
-main();
+onresize = resize;
+resize();

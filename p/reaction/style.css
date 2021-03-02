@@ -1,4 +1,4 @@
-body {
+body, #click {
   margin: 0px;
   padding: 0px;
   margin: 0px;
@@ -34,19 +34,25 @@ body {
 }
 
 #click h1 {
-  font-size: 50px;
-  padding-top: 220px;
+  font-size: 9vmin;
+  padding-top: 35vmin;
 }
 
 #click h2 {
-  font-size: 30px;
-  padding-top: 30px;
+  font-size: 5vmin;
+  padding-top: 5vmin;
 }
 
 #click h3 {
-  font-size: 20px;
-  padding-top: 20px;
+  font-size: 3vmin;
+  padding-top: 2vmin;
 }
 #click h3 p {
-  margin-top: 10px;
+  margin-top: 1vmin;
+}
+
+footer {
+  z-index: 999;
+  font-size: 2.5vmin !important;
+  padding: 0.7vmin 2vmin 0.5vmin 2vmin !important;
 }
