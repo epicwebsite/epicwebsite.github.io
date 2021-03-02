@@ -1,0 +1,52 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  height: 100vh;
+}
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#click {
+  margin: 0px;
+  background-color: #4AF;
+  cursor: pointer;
+  user-select: none;
+}
+
+#click[color="start"], #click[color="next"] {
+  background-color: #4AF;
+}
+#click[color="wait"] {
+  background-color: #D33;
+}
+#click[color="early"] {
+  background-color: #900;
+}
+#click[color="go"] {
+  background-color: #2D2;
+}
+
+#click h1, h2 {
+  margin: auto;
+}
+
+#click h1 {
+  font-size: 50px;
+  padding-top: 220px;
+}
+
+#click h2 {
+  font-size: 30px;
+  padding-top: 30px;
+}
+
+#click h3 {
+  font-size: 20px;
+  padding-top: 20px;
+}
+#click h3 p {
+  margin-top: 10px;
+}

@@ -309,6 +309,18 @@ var links = {
           "conways",
         ],
       },
+      {
+        id: "reaction",
+        name: "Test Reaction Time",
+        image: true,
+        alias: [
+          "react",
+          "reacttime",
+          "react-time",
+          "reactiontime",
+          "reaction-time",
+        ],
+      },
     ]
   },
   media: {
