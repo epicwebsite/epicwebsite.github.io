@@ -12,6 +12,23 @@ var hack = false;
 var lastClick = 0;
 var vals = {};
 
+var audio = {
+  names: {
+    early: ["fart"],
+    next: ["ding"],
+  },
+  files: {},
+};
+
+audio.init = function () {
+  for (i = 0; i < audio.names.keys().length; i++) {
+    for (j = 0; j < audio.names.values()[i].length; j++) {
+      new F.Sound("audio/{0}.mp3".format(audio.names.values()[i][j]), "audio_contain");
+    }
+  }
+}
+audio.init();
+
 var els = {
   start: [
     '<h1>Test your Reaction Time</h1>',
@@ -98,17 +115,19 @@ function success() {
 }
 
 function clicked() {
+  color = doc.id("click").getAttribute("color");
   if (vals.button == false || vals.key == false) {
     return;
   }
   if (
-    doc.id("click").getAttribute("color") != "go"
+    color != "go"
     && Date.now() < lastClick + cooldown
   ) {
     return;
   }
   lastClick = Date.now();
-  switch (doc.id("click").getAttribute("color")) {
+
+  switch (color) {
     case ("wait"): {
       early();
     }; break;
@@ -121,6 +140,11 @@ function clicked() {
     default: {
       start();
     };
+  }
+
+  color = doc.id("click").getAttribute("color");
+  if (audio.names[color]) {
+    (new F.Sound("audio/{0}.mp3".format(F.randomChoice(audio.names[color]))))?.play();
   }
 }
 
