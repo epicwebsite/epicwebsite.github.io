@@ -1,13 +1,16 @@
 var calc = (t) => t.setBorder(1, Infinity);
 var minTime = 1000;
 var maxTime = 3000;
+var lastAmount = 5;
+var cooldown = 200;
 var stopper = null;
 var then = null;
-var lastAmount = 5;
 var avs = [];
 var earlies = 0;
 var hs = Infinity;
 var hack = false;
+var lastClick = 0;
+var vals = {};
 
 var els = {
   start: [
@@ -59,16 +62,14 @@ async function stop() {
 }
 
 function early() {
-  if (Date.now() < then + 100) {
-    return;
-  }
   doc.id("click").setAttribute("color", "early");
   doc.id("click").innerHTML = els.early.join("").format();
-  stopper = null;
+  clearInterval(stopper);
   earlies++;
 }
 
 function success() {
+  doc.id("click").getAttribute("color");
   time = hack ? F.randomInt(8, 35) : calc(Date.now() - then);
   avs.push(time);
   total = 0;
@@ -97,6 +98,16 @@ function success() {
 }
 
 function clicked() {
+  if (vals.button == false || vals.key == false) {
+    return;
+  }
+  if (
+    doc.id("click").getAttribute("color") != "go"
+    && Date.now() < lastClick + cooldown
+  ) {
+    return;
+  }
+  lastClick = Date.now();
   switch (doc.id("click").getAttribute("color")) {
     case ("wait"): {
       early();
@@ -116,6 +127,22 @@ function clicked() {
 onkeydown = function (e) {
   if (e.code == "Space") {
     clicked();
+    vals.key = false;
+  }
+};
+onkeyup = function (e) {
+  if (e.code == "Space") {
+    vals.key = true;
+  }
+};
+onmousedown = function (e) {
+  if (e.button == 0) {
+    vals.button = false;
+  }
+};
+onmouseup = function (e) {
+  if (e.button == 0) {
+    vals.button = true;
   }
 };
 
