@@ -1438,23 +1438,23 @@ function drawLetter(letter) {
         margin + padding + (y) * w,
       );
       ctx.moveTo(
-        margin - padding + (x + 1) * w,
+        margin + padding + (x) * w,
         margin + (y + 0.5) * w,
       );
       ctx.lineTo(
-        margin + padding + (x) * w,
+        margin + (x + 0.5) * w,
         margin + (y + 0.5) * w,
+      );
+      ctx.moveTo(
+        margin - padding + (x + 1) * w,
+        margin - padding + (y + 1) * w,
       );
       ctx.lineTo(
         margin + padding + (x) * w,
         margin - padding + (y + 1) * w,
       );
       ctx.lineTo(
-        margin - padding + (x + 1) * w,
-        margin - padding + (y + 1) * w,
-      );
-      ctx.lineTo(
-        margin - padding + (x + 1) * w,
+        margin + padding + (x) * w,
         margin + padding + (y) * w,
       );
       ctx.lineTo(
