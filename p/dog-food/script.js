@@ -200,6 +200,18 @@ function search() {
   doc.id("noResults").style.display = (length < 1 && text.replaceAll(" ", "").length > 0) ? "block" : "none";
 }
 
+function redirect(e) {
+  if (e.code == "Enter" && e.ctrlKey) {
+    url = F.url.queryRaw ? F.url.href.s(0, -2 - F.url.queryRaw.length) : F.url.href;
+    q = F.url.query;
+    if (q.length < 1) {
+      q = {};
+    }
+    q.search = doc.id("search").value;
+    location.href = url + (q.keys().length > 0 && q.search ? "?" + q.output("=", "&") : "");
+  }
+}
+
 function clickItem(el) {
   el = el.parentNode;
   item = el.id.split("_");
