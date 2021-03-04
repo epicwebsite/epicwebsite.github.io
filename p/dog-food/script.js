@@ -37,7 +37,7 @@ function setTable() {
     for (v = 0; v < food.length; v++) {
       el += [
         '<td title="{title}" id="{id}">',
-        '  <button {onclick} class="tableButton {hover}">',
+        '  <button {onclick} class="tableButton {empty}">',
         '    {name}',
         '    <br>',
         '    <span class="subtitle">',
@@ -48,10 +48,10 @@ function setTable() {
       ].join("").format({
         id: "t_" + v + "_" + i,
         onclick: food[v].items[i] ? 'onclick="clickItem(this);"' : "",
-        hover: food[v].items[i] ? "hover" : "",
-        title: food[v].items[i] && food[v].items[i].tags && food[v].items[i].tags.length > 0 && food[v].items[i].tags[0] ? "Search Terms: " + food[v].items[i].tags.join(", ").capWords() : "",
-        subtitle: food[v].items[i] && food[v].items[i].subtitle ? food[v].items[i].subtitle : "",
-        name: food[v].items[i] && food[v].items[i].name ? food[v].items[i].name : "",
+        empty: food[v].items[i] ? "" : "empty",
+        title: food[v].items[i]?.tags?.[0] ? "Search Terms: " + food[v].items[i].tags.join(", ").capWords() : "",
+        subtitle: food[v].items[i]?.subtitle || "",
+        name: food[v].items[i]?.name || "",
       });
     }
     doc.id("table").innerHTML += el + '</tr>';
@@ -63,7 +63,7 @@ function search() {
   if (text.replaceAll(" ", "").length > 0) {
     doc.id("link").style.display = "block";
     doc.id("link").href = "https://www.google.com/search?q=can%20dog%20eat%20{0}".format(text.replaceAll(" ", "%20"));
-    doc.id("link_text").innerHTML = text.capWords();
+    doc.id("link_text").innerText = text.capWords().truncate(40, "...");
   } else {
     doc.id("link").style.display = "none";
   }
@@ -158,7 +158,7 @@ function search() {
     for (v = 0; v < groups.length; v++) {
       el += [
         '<td title="{title}" id="{id}">',
-        '  <button {onclick} class="tableButton {hover}">',
+        '  <button {onclick} class="tableButton {empty}">',
         '   {name}',
         '   <br>',
         '   <span class="subtitle">',
@@ -169,10 +169,10 @@ function search() {
       ].join("").format({
         id: groups[v][i] && "search_" + groups[v][i].v + "_" + groups[v][i].i,
         onclick: groups[v][i] && 'onclick="clickItem(this);"',
-        hover: groups[v][i] ? "hover" : "",
-        title: groups[v][i] && groups[v][i].tags && groups[v][i].tags.length > 0 && groups[v][i].tags[0] ? "Search Terms: " + groups[v][i].tags.join(", ").capWords() : "",
-        subtitle: groups[v][i] && groups[v][i].subtitle ? groups[v][i].subtitle : "",
-        name: groups[v][i] ? groups[v][i].name : "",
+        empty: groups[v][i] ? "" : "empty",
+        title: groups[v][i]?.tags?.[0] ? "Search Terms: " + groups[v][i].tags.join(", ").capWords() : "",
+        subtitle: groups[v][i]?.subtitle || "",
+        name: groups[v][i]?.name || "",
       });
     }
     doc.id("output").innerHTML += el + '</tr>';
@@ -236,8 +236,8 @@ function clickItem(el) {
     name: item.name,
     answer,
     link: item.name.lower(),
-    subtitle: item.subtitle ? item.subtitle : "",
-    desc: item.desc ? item.desc : "No information",
+    subtitle: item.subtitle || "",
+    desc: item.desc || "No information",
     critic: answer[0].lower() == "n" ? "" : (item.critic ? "Critic's verdict: " + item.critic : "No critic information"),
   });
   doc.id("desc").innerHTML = el;

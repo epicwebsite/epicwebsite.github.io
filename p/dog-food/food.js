@@ -20,7 +20,7 @@ var food = [
           "peel",
           "fruit",
         ],
-        desc: "Yes, dogs can have bananas. They may not get all the nutritional benefits humans get from this fruit, but bananas make a good—and motivating—treat. If you're wondering 'Can puppies eat bananas?', check with your veterinarian. ... Added calories from bananas and other fruits could interfere.",
+        desc: "Yes, dogs can have bananas. They may not get all the nutritional benefits humans get from this fruit, but bananas make a good-and motivating-treat. If you're wondering 'Can puppies eat bananas?', check with your veterinarian. ... Added calories from bananas and other fruits could interfere.",
         critic: "",
       },
       {
@@ -32,7 +32,7 @@ var food = [
           "baked",
         ],
         desc: "They are rich in fiber and have some protein, too. Dogs can have beans as a treat. That means they should never be more than 10 percent of your dog's daily calorie intake. Since beans can be high in calories, you should not be feeding him many.",
-        critic: "",
+        critic: "Likes baked beans",
       },
       {
         name: "Blackberries",
@@ -66,7 +66,7 @@ var food = [
           "gluten",
           "loaf",
         ],
-        desc: "The short answer to the question 'can dogs eat bread?” is yes. Dogs can safely eat bread in much the same way as humans—in moderation. Plain white and wheat bread is generally safe for dogs to eat, provided they don't have any allergies, and it usually does not cause any stomach upset.",
+        desc: "The short answer to the question 'can dogs eat bread?' is yes. Dogs can safely eat bread in much the same way as humans-in moderation. Plain white and wheat bread is generally safe for dogs to eat, provided they don't have any allergies, and it usually does not cause any stomach upset.",
         critic: "Likes bread a little bit",
       },
       {
@@ -79,6 +79,7 @@ var food = [
           "vege",
         ],
         desc: "Yes, dogs can eat broccoli. Dogs can eat both cooked and raw broccoli, as long as there are no seasonings or oils added. However, this vegetable should always be given in very small quantities, especially because the florets contain isothiocyanates, which can cause gastric irritation in dogs.",
+        critic: "Does not really care for broccoli",
       },
       {
         name: "Carrots",
@@ -97,6 +98,7 @@ var food = [
           "vege",
         ],
         desc: "In general, celery is considered to be a safe food for dogs. However, there are some minor caveats. For example, it may pose a choking hazard to young or small dogs, so it's important to cut it into small-enough pieces before you share it with them.",
+        critic: "Likes celery a little bit. Likes to play with it",
       },
       {
         name: "Chicken",
@@ -132,7 +134,7 @@ var food = [
         tags: [
           "vege",
         ],
-        desc: "Is corn bad for dogs and just 'filler” in dog food? No, corn is not harmful to dogs and is certainly not a filler. In fact, it has nutritional benefits.",
+        desc: "Is corn bad for dogs and just 'filler' in dog food? No, corn is not harmful to dogs and is certainly not a filler. In fact, it has nutritional benefits.",
       },
       {
         name: "Cucumbers",
@@ -151,6 +153,7 @@ var food = [
           "poultry",
         ],
         desc: "Are eggs good for dogs? Yes. Eggs are good for dogs to eat. Of course, they are rich in protein, but aside from that eggs are also a good source of linoleic acid and fat-soluble vitamins like Vitamin A.",
+        critic: "Likes eggs a little bit",
       },
       {
         name: "Fish",
@@ -160,7 +163,7 @@ var food = [
           "salmon",
           "seafood",
         ],
-        desc: "Absolutely. There are many varieties of fish that are good for dogs. 'Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,' says Dempsey. ... And fish isn't just healthy for dogs—they like the taste of fish, too. Skin is good for the coat too.",
+        desc: "Absolutely. There are many varieties of fish that are good for dogs. 'Tuna, salmon, whitefish, cod and whiting (also known as hank) are all good fish for dogs to eat,' says Dempsey. ... And fish isn't just healthy for dogs-they like the taste of fish, too. Skin is good for the coat too.",
         critic: "Loves fish including salmon",
       },
       {
@@ -210,6 +213,7 @@ var food = [
           "noodles",
         ],
         desc: "Dogs can eat plain white rice or pasta after it's cooked. And, a serving of plain white rice with some boiled chicken can sometimes make your dog feel better when they are having stomach problems.",
+        critic: "Likes a bit of cooked pasta",
       },
       {
         name: "Peanut butter",
@@ -258,6 +262,7 @@ var food = [
           "seafood",
         ],
         desc: "Yes, dogs can eat prawns provided they are cooked and peeled. Don't feed your dog whole prawns with the shell on, and never feed them raw prawns that haven't been frozen. ... However, you should always feed seafood to your pooch in moderation and introduce any new foods, even treats, slowly into your dog's diet.",
+        critic: "Like prawn meat",
       },
       {
         name: "Pumpkin",
@@ -266,6 +271,7 @@ var food = [
           "vege",
         ],
         desc: "Pumpkin. Dogs will eat almost anything, so a pumpkin isn't out of the question, particularly since tiny pumpkins and gourds may resemble a toy or ball. ... Lobos, 'Canned pumpkin (NOT canned pumpkin pie mix, which contains sugar and spices) is a fabulous source of fiber and can even help with digestive upset.",
+        critit: "Doesn't really like cooked pumpkin",
       },
       {
         name: "Quinoa",
@@ -273,16 +279,28 @@ var food = [
         tags: [
           "",
         ],
-        desc: "But, can dogs eat quinoa? The answer is generally yes. The edible seed is actually an ingredient in some high-quality dry dog foods. Its strong nutritional profile makes it a healthy alternative to corn, wheat, and soy — starches that are often used to make kibble.",
+        desc: "But, can dogs eat quinoa? The answer is generally yes. The edible seed is actually an ingredient in some high-quality dry dog foods. Its strong nutritional profile makes it a healthy alternative to corn, wheat, and soy - starches that are often used to make kibble.",
       },
       {
         name: "Rice",
         subtitle: "Cooked",
         tags: [
-          "",
+          "sushi",
+          "grain",
         ],
         desc: "Safe: Cooked White Rice and Pasta. Dogs can eat plain white rice or pasta after it's cooked. And, a serving of plain white rice with some boiled chicken can sometimes make your dog feel better when they are having stomach problems.",
         critic: "Likes rice.",
+      },
+      {
+        name: "Seaweed",
+        subtitle: "",
+        tags: [
+          "seafood",
+          "sushi",
+          "nori",
+        ],
+        desc: "All seaweed strains are considered edible for dogs, but you do want to be careful how you feed it to your dog. Processed seaweed such as nori is fine in small amounts, but most sources recommend ground seaweed as the preferred way to add it to your dog's diet.",
+        critic: "Likes sushi seaweed sort of",
       },
       {
         name: "Strawberries",
@@ -319,7 +337,7 @@ var food = [
         tags: [
           "",
         ],
-        desc: "Yes, dogs can eat yogurt. It contains calcium and protein—plus, it's tasty! Make sure it does not contain xylitol",
+        desc: "Yes, dogs can eat yogurt. It contains calcium and protein-plus, it's tasty! Make sure it does not contain xylitol",
         critic: "Loves greek yogurt",
       },
     ],
@@ -374,8 +392,10 @@ var food = [
         tags: [
           "root",
           "vege",
+          "pickled",
         ],
         desc: "Ginger is safe for your dog to eat in small doses. It contains many antioxidants that can support dogs with motion sickness, blood circulation, nausea, gastrointestinal problems, and bloat. Ginger is anti-inflammatory and also help dogs with arthritis.",
+        critic: "Likes pickled ginger (in sushi) a little bit",
       },
       {
         name: "Honey",
@@ -423,6 +443,14 @@ var food = [
         critic: "Does not like nectarine",
       },
       {
+        name: "Passionfruit",
+        subtitle: "",
+        tags: [
+          "fruit",
+        ],
+        desc: "Now you know why the topic of passion fruit safety for dogs is a complicated one. In small, careful servings that contain no rind or seeds, ripe passion fruit is okay for your dog to eat.\nBut because it is a challenge to get rid of all of the seeds, it doesn't make for a convenient treat. That's why we recommend sticking with safer fruits for your dog.",
+      },
+      {
         name: "Peanuts",
         subtitle: "",
         tags: [
@@ -437,7 +465,7 @@ var food = [
         tags: [
           "fruit",
         ],
-        desc: "Yes. Raw pineapple, in small amounts, is an excellent snack for dogs. Canned pineapple, on the other hand, should be avoided. The syrup in canned fruits contains too much sugar for most dogs’ digestive tracts to handle. A few chunks of raw pineapple are usually enough for most dogs, provided they are peeled and sliced into bite-sized pieces. Plus, frozen pieces of fresh pineapple make a delicious treat in the summer.",
+        desc: "Yes. Raw pineapple, in small amounts, is an excellent snack for dogs. Canned pineapple, on the other hand, should be avoided. The syrup in canned fruits contains too much sugar for most dogs' digestive tracts to handle. A few chunks of raw pineapple are usually enough for most dogs, provided they are peeled and sliced into bite-sized pieces. Plus, frozen pieces of fresh pineapple make a delicious treat in the summer.",
         critic: "Likes peanuts",
       },
       {
@@ -447,6 +475,7 @@ var food = [
           "",
         ],
         desc: "Yes, dogs can eat raw meat. Should dogs eat raw meat, though? Dr. RuthAnn Lobos, a Purina veterinarian, says feeding a diet consisting primarily of raw meat may not provide the complete and balanced nutrition your dog needs.",
+        critic: "Likes raw mince",
       },
       {
         name: "Salt",
@@ -515,7 +544,7 @@ var food = [
         tags: [
           "meds",
         ],
-        desc: "Just like chocolate and onions, alcohol is toxic to dogs. Even small amounts of alcohol — not only in drinks but also in syrups and raw bread dough — can have ingredients that are poisonous for them.",
+        desc: "Just like chocolate and onions, alcohol is toxic to dogs. Even small amounts of alcohol - not only in drinks but also in syrups and raw bread dough - can have ingredients that are poisonous for them.",
       },
       {
         name: "Avocado",
