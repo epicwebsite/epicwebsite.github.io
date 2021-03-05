@@ -9,6 +9,81 @@ if (F.url.query.str) {
   doc.id("input").value = decodeURI(F.url.query.str);
 }
 
+var codes = {
+  i: "400",
+  ee: "401",
+  oo: "402",
+  ooh: "403",
+  e: "404",
+  er: "405",
+  uh: "406",
+  or: "407",
+  a: "408",
+  u: "409",
+  o: "40A",
+  ar: "40B",
+  air: "40D",
+  ay: "40C",
+  oy: "40E",
+  iy: "40F",
+  ear: "410",
+  ooa: "411",
+  oa: "412",
+  ou: "413",
+  p: "414",
+  b: "415",
+  f: "416",
+  v: "417",
+  th: "418",
+  the: "419",
+  t: "41A",
+  d: "41B",
+  s: "41C",
+  z: "41D",
+  sh: "41E",
+  zh: "41F",
+  ch: "420",
+  j: "421",
+  k: "422",
+  g: "423",
+  m: "424",
+  n: "425",
+  ng: "426",
+  h: "427",
+  w: "428",
+  l: "429",
+  r: "42A",
+  y: "42B",
+  0: "42C",
+  1: "42D",
+  2: "42E",
+  3: "42F",
+  4: "430",
+  5: "431",
+  6: "432",
+  7: "433",
+  8: "434",
+  9: "435",
+  10: "436",
+  11: "437",
+  12: "438",
+  13: "439",
+  14: "43A",
+  15: "43B",
+  " ": "43C",
+  ".": "43D",
+  ",": "43E",
+  "!": "43F",
+  "?": "440",
+  "!?": "441",
+  ":": "442",
+  "(": "443",
+  ")": "444",
+  "\"(": "445",
+  "\")": "446",
+  "-": "447",
+  "...": "448",
+};
 var gameState = "start";
 
 function reset() {
@@ -30,6 +105,7 @@ function render() {
   lineMax = 10;
   if (letters && letters.length > 0) {
     letters = letters.split(" ");
+
     for (i = 0; i < letters.length; i++) {
       letters[i] = letters[i].replaceAll("_", " ");
     }
@@ -71,3 +147,80 @@ function main() {
 var then = Date.now();
 reset();
 main();
+
+function copy() {
+  F.copy(doc.id("output").innerHTML);
+}
+
+function change() {
+  letters = doc.id("input").value.lower();
+  letters = letters.replaceAll("\n", " ");
+  if (letters.s(0) == " ") {
+    letters = letters.s(1, -1);
+  }
+  doc.id("output").innerHTML = "";
+  doc.id("num-alert").style.display = "none";
+  if (letters && letters.length > 0) {
+    letters = letters.split(" ");
+
+    for (i = 0; i < letters.length; i++) {
+      letters[i] = letters[i].replaceAll("_", " ");
+
+      if (parseInt(letters[i])) {
+        doc.id("num-alert").style.display = "block";
+      }
+    }
+
+    trls = [];
+    for (i = 0; i < letters.length; i++) {
+      if (letters[i]) {
+        trls.push(codes[letters[i]] ? "&#x" + codes[letters[i]] + ";" : "?");
+      }
+    }
+    doc.id("output").innerHTML = trls.join("");
+  }
+}
+change();
+
+keyboard = {};
+keyboard.init = function () {
+  row = 8;
+  keys = codes.keys();
+  for (y = 0; y < Math.floor(keys.length / 8); y++) {
+    el = [
+      '<div class="row">',
+    ].join("");
+    for (x = 0; x < 8; x++) {
+      name = keys[y * 8 + x];
+      symbol = codes[keys[y * 8 + x]];
+      if (!name) {
+        continue;
+      }
+      name = name == " " ? "_" : name;
+      el += [
+        '<button class="key" name="{name}" onclick="keyboard.click(this)" title="Insert \'{name}\'">',
+        '  <h1 class="font">&#x{symbol}</h1>',
+        '  <h2>{name}</h2>',
+        '</button>',
+      ].join("").format({
+        symbol,
+        name,
+      });
+    }
+    doc.id("keyboard").innerHTML += el + '</div>';
+  }
+}
+keyboard.init();
+
+keyboard.click = function (el) {
+  doc.id("input").innerHTML += " " + el.name;
+  change();
+}
+keyboard.backspace = function () {
+  doc.id("input").innerHTML = doc.id("input").innerHTML.split(" ").s(0, -2).join(" ");
+  change();
+}
+keyboard.clear = function () {
+  doc.id("input").innerHTML = "";
+  change();
+}

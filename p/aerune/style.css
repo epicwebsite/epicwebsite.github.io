@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Aerune;
+  src: url("../../source/font/aerune-regular.ttf");
+}
+
 body {
   background-color: rgba(50, 50, 50);
 }
@@ -5,6 +10,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   font-size: 30px;
+}
+button {
+  cursor: pointer;
 }
 #canvas_contain {
   float: left;
@@ -45,4 +53,47 @@ label {
 input[type="checkbox"] {
   transform: scale(2);
   cursor: pointer;
+}
+
+.font {
+  font-family: Aerune;
+}
+
+#keyboard {
+  display: table;
+  width: 1000px;
+}
+.row {
+  display: table-row;
+}
+.key {
+  display: table-cell;
+  width: 12.5%;
+  height: 50px;
+  padding: 5px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background: #1C1C1C;
+  color: white;
+}
+.key:focus {
+  outline: none;
+}
+.key:active {
+  background: #111;
+}
+
+.key h1 {
+  margin: 0;
+  margin-top: -5px;
+  font-size: 25px;
+}
+.key h2 {
+  margin: 0;
+  font-size: 15px;
+  color: #AAA;
+}
+.key.other {
+  width: 100px;
+  float: left;
 }
