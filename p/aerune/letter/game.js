@@ -22,10 +22,10 @@ var codes = {
   u: "409",
   o: "40A",
   ar: "40B",
-  air: "40D",
+  air: "40F",
   ay: "40C",
-  oy: "40E",
-  iy: "40F",
+  iy: "40E",
+  oy: "40D",
   ear: "410",
   ooa: "411",
   oa: "412",
@@ -186,14 +186,14 @@ keyboard = {};
 keyboard.init = function () {
   row = 8;
   keys = codes.keys();
-  for (y = 0; y < Math.floor(keys.length / 8); y++) {
+  for (y = 0; y < keys.length / 8; y++) {
     el = [
       '<div class="row">',
     ].join("");
     for (x = 0; x < 8; x++) {
       name = keys[y * 8 + x];
       symbol = codes[keys[y * 8 + x]];
-      if (!name) {
+      if (!name || name == "undefined") {
         continue;
       }
       name = name == " " ? "_" : name;
