@@ -440,9 +440,13 @@ function drawLetter(letter) {
         margin - padding + (x + 1) * w,
         margin - padding + (y + 1) * w,
       );
+      ctx.moveTo(
+        margin + padding + (x) * w,
+        margin - padding + (y + 0.9) * w,
+      );
       ctx.lineTo(
-        margin + padding + (x + 0.15) * w,
-        margin + (y + 0.25) * w,
+        margin - padding + (x + 1) * w,
+        margin - padding + (y + 0.9) * w,
       );
       ctx.moveTo(
         margin + padding + (x) * w,
