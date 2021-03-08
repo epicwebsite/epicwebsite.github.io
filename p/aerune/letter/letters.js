@@ -352,7 +352,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "ir": {
+    case "ae": {
       ctx.beginPath();
       ctx.moveTo(
         margin - padding + (x + 0.7) * w,
