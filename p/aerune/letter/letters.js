@@ -52,7 +52,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "oo": {
+    case "u": {
       ctx.beginPath();
       ctx.moveTo(
         margin + padding + (x) * w,
@@ -79,7 +79,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "ooh": {
+    case "uu": {
       ctx.beginPath();
       ctx.moveTo(
         margin + padding + (x) * w,
@@ -146,7 +146,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "uh": {
+    case "oh": {
       ctx.beginPath();
       ctx.ellipse(
         margin + (x + 0.5) * w,
@@ -217,7 +217,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "u": {
+    case "uh": {
       ctx.beginPath();
       ctx.moveTo(
         margin + padding + (x) * w,
@@ -352,7 +352,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "air": {
+    case "ir": {
       ctx.beginPath();
       ctx.moveTo(
         margin - padding + (x + 0.7) * w,
@@ -380,7 +380,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "ear": {
+    case "ir": {
       ctx.beginPath();
       ctx.moveTo(
         margin - padding + (x + 1) * w,
@@ -423,7 +423,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "ooa": {
+    case "ua": {
       ctx.beginPath();
       ctx.moveTo(
         margin + padding + (x) * w,
@@ -603,7 +603,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "the": {
+    case "dh": {
       ctx.beginPath();
       ctx.moveTo(
         margin + padding + (x) * w,
@@ -823,7 +823,7 @@ function drawLetter(letter) {
       );
       ctx.stroke();
     }; break;
-    case "ch": {
+    case "q": {
       ctx.beginPath();
       ctx.moveTo(
         margin + padding + (x) * w,
