@@ -1,6 +1,6 @@
 @font-face {
-  font-family: Aerune;
-  src: url("../../source/font/aerune-old.ttf");
+  font-family: Aeruun;
+  src: url("../../source/font/aeruun-old.ttf");
 }
 
 body {
@@ -56,7 +56,7 @@ input[type="checkbox"] {
 }
 
 .font {
-  font-family: Aerune;
+  font-family: Aeruun;
 }
 
 #keyboard {

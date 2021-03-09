@@ -250,14 +250,6 @@ var links = {
         ],
       },
       {
-        id: "aerune",
-        name: "Aerune Translator",
-        image: true,
-        alias: [
-          "airune",
-        ],
-      },
-      {
         id: "minesweep",
         name: "MineSweep",
         image: true,
@@ -373,6 +365,10 @@ var links = {
       {
         id: "https://snickdog.github.io/",
         name: "Awesome Dog!",
+      },
+      {
+        id: "https://darccman.github.io/aeruun",
+        name: "Aeruun",
       },
     ],
   },
