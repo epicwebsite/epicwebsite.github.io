@@ -368,7 +368,8 @@ var links = {
         name: "Awesome Dog!",
       },
       {
-        id: "https://darccman.github.io/aeruun",
+        // id: "https://darccman.github.io/aeruun",
+        id: "https://github.com/darccman/aeruun",
         name: "Aeruun",
         image: "https://darccman.github.io/aeruun/image/favicon.png",
       },
