@@ -17,8 +17,14 @@ function showLinks(showHidden) {
     content = '';
     for (i = 0; i < links.values()[t].items.length; i++) {
       if (
-        links.values()[t].items[i].hidden
-        && !showHidden
+        !(
+          links.values()[t].items[i].show === undefined
+          || links.values()[t].items[i].show === 2
+          || (
+            links.values()[t].items[i].show === 1
+            && showHidden
+          )
+        )
       ) {
         continue;
       }
@@ -34,10 +40,16 @@ function showLinks(showHidden) {
         );
       };
       let img = "";
-      if (links.values()[t].image) {
+      if (links.values()[t].image?.constructor == String) {
         img = '<img src="{0}" class="icon_img" onerror="unloadImage(this)">'.format(
           links.values()[t].items[i].image ? links.values()[t].image.format(links.values()[t].items[i].id) : ""
         );
+      } else if (links.values()[t].image == 1) {
+        if (links.values()[t].items[i].image) {
+          img = '<img src="{0}" class="icon_img" onerror="unloadImage(this)">'.format(
+            links.values()[t].items[i].image
+          );
+        }
       }
       content += [
         '<article class="link {noImage}">',

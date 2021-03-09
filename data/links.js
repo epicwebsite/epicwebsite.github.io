@@ -113,7 +113,7 @@ var links = {
       {
         id: "3d",
         name: "3D Ray tracing",
-        hidden: true,
+        show: 1,
         alias: [
           "raytrace",
           "ray-trace",
@@ -134,12 +134,12 @@ var links = {
       {
         id: "joystick",
         name: "Joystick Test",
-        hidden: true,
+        show: 0,
       },
       {
         id: "pattern",
         name: "Pattern Generator",
-        hidden: true,
+        show: 1,
         alias: [
           "pattern-generator",
           "patterngenerator",
@@ -150,7 +150,7 @@ var links = {
       {
         id: "population",
         name: "Population Simulator",
-        hidden: true,
+        show: 1,
       },
       {
         id: "connect4",
@@ -163,7 +163,7 @@ var links = {
       {
         id: "snake",
         name: "Snake Knockoff Old",
-        hidden: true,
+        show: 1,
       },
       {
         id: "snake2",
@@ -243,7 +243,7 @@ var links = {
       {
         id: "blackjack",
         name: "BlackJack Game",
-        hidden: true,
+        show: 1,
         alias: [
           "black-jack",
           "21",
@@ -328,7 +328,7 @@ var links = {
         id: "block",
         name: "block.zip",
         icon: "folder",
-        hidden: true,
+        show: 1,
       },
       {
         id: "hack-game",
@@ -345,6 +345,7 @@ var links = {
   online: {
     name: "Online",
     local: false,
+    image: 1,
     items: [
       {
         id: "https://newsorg.github.io/",
@@ -369,6 +370,7 @@ var links = {
       {
         id: "https://darccman.github.io/aeruun",
         name: "Aeruun",
+        image: "https://darccman.github.io/aeruun/image/favicon.png",
       },
     ],
   },
