@@ -369,7 +369,7 @@ var links = {
       },
       {
         // id: "https://darccman.github.io/aeruun",
-        id: "https://github.com/darccman/aeruun",
+        id: "https://github.com/darccman/aeruun/#aeruun",
         name: "Aeruun",
         image: "https://darccman.github.io/aeruun/image/favicon.png",
       },
