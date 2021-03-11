@@ -7,6 +7,10 @@ doc.id("canvas_contain").appendChild(canvas);
 var ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
+onbeforeunload = function () {
+  return ("Are you sure??");
+}
+
 var gameState = "start";
 var board = [];
 var selected = null;

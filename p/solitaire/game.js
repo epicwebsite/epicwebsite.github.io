@@ -6,6 +6,10 @@ canvas.setAttribute("oncontextmenu", "return(false);");
 doc.id("canvas_contain").appendChild(canvas);
 var ctx = canvas.getContext("2d");
 
+onbeforeunload = function () {
+  return ("Are you sure??");
+}
+
 var gameState = "start";
 var cards = {};
 
